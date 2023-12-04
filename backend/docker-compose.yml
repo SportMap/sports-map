@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/yourdbname
+#      SPRING_DATASOURCE_USERNAME: yourdbuser
+#      SPRING_DATASOURCE_PASSWORD: yourdbpassword
+    volumes:
+      - ./build/libs:/app/build/libs
+      - ./src:/app/src
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: dbname
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
