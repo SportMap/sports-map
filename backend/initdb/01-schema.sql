@@ -45,7 +45,7 @@ CREATE TABLE event (
                        FOREIGN KEY (object_id) REFERENCES object(id)
 );
 
-CREATE TABLE user (
+CREATE TABLE users (
                       id SERIAL PRIMARY KEY,
                       nickname VARCHAR(255) NOT NULL,
                       email VARCHAR(255) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE user_event (
                             id SERIAL PRIMARY KEY,
                             user_id INT NOT NULL,
                             event_id INT NOT NULL,
-                            FOREIGN KEY (user_id) REFERENCES user(id),
+                            FOREIGN KEY (user_id) REFERENCES users(id),
                             FOREIGN KEY (event_id) REFERENCES event(id)
 );
 
@@ -67,5 +67,5 @@ CREATE TABLE review (
                         object_id INT NOT NULL,
                         user_id INT NOT NULL,
                         FOREIGN KEY (object_id) REFERENCES object(id),
-                        FOREIGN KEY (user_id) REFERENCES user(id)
+                        FOREIGN KEY (user_id) REFERENCES users(id)
 );

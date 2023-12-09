@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.edu.pja.sportsmap.persistence.model.Event;
-import pl.edu.pja.sportsmap.persistence.model.User;
 
 @Entity
 @Table(name = "user_event")
@@ -20,7 +18,7 @@ public class UserEvent {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
