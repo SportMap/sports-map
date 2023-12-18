@@ -1,10 +1,9 @@
-FROM openjdk:21-bookworm
-EXPOSE 8080 5005
+FROM postgres:14
 
-WORKDIR /app
-RUN apt update && apt install -y inotify-tools
+WORKDIR /docker-entrypoint-initdb.d/
 
-COPY . /app
-RUN chmod +x /app/gradlew /app/watch-and-restart.sh
+COPY /initdb/01-schema.sql .
 
-ENTRYPOINT ["/app/watch-and-restart.sh"]
+ENV POSTGRES_DB dbname
+ENV POSTGRES_USER user
+ENV POSTGRES_PASSWORD password
