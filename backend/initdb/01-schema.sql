@@ -1,75 +1,71 @@
-CREATE TABLE adres (
+CREATE TABLE address (
+                         id SERIAL PRIMARY KEY,
+                         street VARCHAR(255),
+                         postal_code VARCHAR(10),
+                         building_number VARCHAR(10),
+                         apartment_number VARCHAR(10),
+                         city VARCHAR(255)
+);
+
+CREATE TABLE object (
+                        id SERIAL PRIMARY KEY,
+                        name CHAR(255) NOT NULL,
+                        description TEXT,
+                        website VARCHAR(255),
+                        surface VARCHAR(255),
+                        category VARCHAR(255),
+                        coordinates VARCHAR(255),
+                        address_id INT NOT NULL,
+                        FOREIGN KEY (address_id) REFERENCES address(id)
+);
+
+CREATE TABLE opening_hours (
+                               id SERIAL PRIMARY KEY,
+                               opening_time TIME,
+                               closing_time TIME,
+                               open_24_7 BOOLEAN,
+                               object_id INT NOT NULL,
+                               monday BOOLEAN NOT NULL,
+                               tuesday BOOLEAN NOT NULL,
+                               wednesday BOOLEAN NOT NULL,
+                               thursday BOOLEAN NOT NULL,
+                               friday BOOLEAN NOT NULL,
+                               saturday BOOLEAN NOT NULL,
+                               sunday BOOLEAN NOT NULL,
+                               FOREIGN KEY (object_id) REFERENCES object(id)
+);
+
+CREATE TABLE event (
                        id SERIAL PRIMARY KEY,
-                       ulica VARCHAR(255),
-                       kod_pocztowy VARCHAR(10),
-                       nr_budynku VARCHAR(10),
-                       nr_lokalu VARCHAR(10),
-                       miasto VARCHAR(255)
+                       description TEXT,
+                       object_id INT NOT NULL,
+                       category VARCHAR(255),
+                       start_time TIMESTAMP,
+                       end_time TIMESTAMP,
+                       FOREIGN KEY (object_id) REFERENCES object(id)
 );
 
-
-CREATE TABLE obiekt (
-                        id SERIAL PRIMARY KEY,
-                        nazwa CHAR(255) NOT NULL,
-                        opis TEXT,
-                        strona VARCHAR(255),
-                        nawierzchnia VARCHAR(255),
-                        kategoria VARCHAR(255),
-                        koordynaty VARCHAR(255),
-                        adres_id INT NOT NULL,
-                        FOREIGN KEY (adres_id) REFERENCES adres(id)
+CREATE TABLE user (
+                      id SERIAL PRIMARY KEY,
+                      nickname VARCHAR(255) NOT NULL,
+                      email VARCHAR(255) NOT NULL,
+                      password VARCHAR(255) NOT NULL,
+                      salt CHAR(16) NOT NULL
 );
 
-CREATE TABLE godziny_otwarcia (
-                                  id SERIAL PRIMARY KEY,
-                                  godzina_otwarcia TIME,
-                                  godzina_zamkniecia TIME,
-                                  otwarte_24_7 BOOLEAN,
-                                  obiekt_id INT NOT NULL,
-                                  poniedzialek BOOLEAN NOT NULL,
-                                  wtorek BOOLEAN NOT NULL,
-                                  sroda BOOLEAN NOT NULL,
-                                  czwartek BOOLEAN NOT NULL,
-                                  piatek BOOLEAN NOT NULL,
-                                  sobota BOOLEAN NOT NULL,
-                                  niedziela BOOLEAN NOT NULL,
-                                  FOREIGN KEY (obiekt_id) REFERENCES obiekt(id)
-);
-
-CREATE TABLE wydarzenie (
+CREATE TABLE user_event (
                             id SERIAL PRIMARY KEY,
-                            opis TEXT,
-                            obiekt_id INT NOT NULL,
-                            kategoria VARCHAR(255),
-                            data_rozpoczecia TIMESTAMP,
-                            data_zakonczenia TIMESTAMP,
-                            FOREIGN KEY (obiekt_id) REFERENCES obiekt(id)
+                            user_id INT NOT NULL,
+                            event_id INT NOT NULL,
+                            FOREIGN KEY (user_id) REFERENCES user(id),
+                            FOREIGN KEY (event_id) REFERENCES event(id)
 );
 
-
-CREATE TABLE uzytkownik (
-                            id SERIAL PRIMARY KEY,
-                            nickname VARCHAR(255) NOT NULL,
-                            email VARCHAR(255) NOT NULL,
-                            haslo VARCHAR(255) NOT NULL,
-                            sol CHAR(16) NOT NULL
-);
-
-
-CREATE TABLE uzytkownik_wydarzenie (
-                                       id SERIAL PRIMARY KEY,
-                                       uzytkownik_id INT NOT NULL,
-                                       wydarzenie_id INT NOT NULL,
-                                       FOREIGN KEY (uzytkownik_id) REFERENCES uzytkownik(id),
-                                       FOREIGN KEY (wydarzenie_id) REFERENCES wydarzenie(id)
-);
-
-
-CREATE TABLE opinia (
+CREATE TABLE review (
                         id SERIAL PRIMARY KEY,
-                        tresc TEXT,
-                        obiekt_id INT NOT NULL,
-                        uzytkownik_id INT NOT NULL,
-                        FOREIGN KEY (obiekt_id) REFERENCES obiekt(id),
-                        FOREIGN KEY (uzytkownik_id) REFERENCES uzytkownik(id)
+                        content TEXT,
+                        object_id INT NOT NULL,
+                        user_id INT NOT NULL,
+                        FOREIGN KEY (object_id) REFERENCES object(id),
+                        FOREIGN KEY (user_id) REFERENCES user(id)
 );
