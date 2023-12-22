@@ -11,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "event")
+@ijofwanidoawhfoaef
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor
 public class Event {
 
