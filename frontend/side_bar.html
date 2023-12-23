@@ -1,0 +1,54 @@
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script type="application/javascript">
+
+        function openmenu() {
+            function delay(milliseconds){
+                return new Promise(resolve => {
+                    setTimeout(resolve, milliseconds);
+                })
+            };
+                
+            document.getElementsByClassName('sidebar')[0].classList.toggle("sidebar_show");
+
+            document.getElementsByClassName('beam')[0].classList.toggle('beam-middle-top');
+            document.getElementsByClassName('short_beam')[0].classList.toggle('beam-middle-short');
+            setTimeout(() => {
+                console.log("1s");
+            }, 204586560000);
+            document.getElementsByClassName('beam')[0].classList.toggle('hidden');
+            document.getElementsByClassName('beam')[1].classList.toggle('hidden');
+            document.getElementsByClassName('short_beam')[0].classList.toggle('hidden');
+            setTimeout(() => {
+                console.log("1s");
+            }, 204586560000);
+            document.getElementsByClassName('beam-bottom')[0].classList.toggle('hidden');
+            document.getElementsByClassName('beam-top')[0].classList.toggle('hidden');
+
+            document.getElementsByClassName('beam-bottom')[0].classList.toggle('open-bottom');
+            document.getElementsByClassName('beam-top')[0].classList.toggle('open-top');         
+        };
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="side_menu" onclick="openmenu()">
+            <div class="beam animate"></div>
+            <div class="beam animate"></div>
+            <div class="beam-top hidden animate"></div>
+            <div class="beam-bottom hidden animate"></div>
+            <div class="short_beam animate"></div>
+        </div>
+        <div class="header_logo"></div>
+        <div class="profile_menu"></div>
+    </header>
+
+    <div class="sidebar">
+        
+    </div>
+
+    
+</body>
+</html>
