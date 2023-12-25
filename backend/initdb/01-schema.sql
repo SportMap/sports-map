@@ -7,7 +7,7 @@ CREATE TABLE address (
                          city VARCHAR(255)
 );
 
-CREATE TABLE object (
+CREATE TABLE sport_complexes (
                         id SERIAL PRIMARY KEY,
                         name CHAR(255) NOT NULL,
                         description TEXT,
@@ -16,33 +16,27 @@ CREATE TABLE object (
                         category VARCHAR(255),
                         coordinates VARCHAR(255),
                         address_id INT NOT NULL,
+                        open_24_7 BOOLEAN,
                         FOREIGN KEY (address_id) REFERENCES address(id)
 );
 
 CREATE TABLE opening_hours (
                                id SERIAL PRIMARY KEY,
+                               day_of_week INT NOT NULL,
                                opening_time TIME,
                                closing_time TIME,
-                               open_24_7 BOOLEAN,
-                               object_id INT NOT NULL,
-                               monday BOOLEAN NOT NULL,
-                               tuesday BOOLEAN NOT NULL,
-                               wednesday BOOLEAN NOT NULL,
-                               thursday BOOLEAN NOT NULL,
-                               friday BOOLEAN NOT NULL,
-                               saturday BOOLEAN NOT NULL,
-                               sunday BOOLEAN NOT NULL,
-                               FOREIGN KEY (object_id) REFERENCES object(id)
+                               sport_complex_id INT NOT NULL,
+                               FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id)
 );
 
-CREATE TABLE event (
+CREATE TABLE events (
                        id SERIAL PRIMARY KEY,
                        description TEXT,
-                       object_id INT NOT NULL,
+                       sport_complex_id INT NOT NULL,
                        category VARCHAR(255),
                        start_time TIMESTAMP,
                        end_time TIMESTAMP,
-                       FOREIGN KEY (object_id) REFERENCES object(id)
+                       FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id)
 );
 
 CREATE TABLE users (
@@ -53,19 +47,19 @@ CREATE TABLE users (
                       salt CHAR(16) NOT NULL
 );
 
-CREATE TABLE user_event (
+CREATE TABLE users_events (
                             id SERIAL PRIMARY KEY,
                             user_id INT NOT NULL,
                             event_id INT NOT NULL,
                             FOREIGN KEY (user_id) REFERENCES users(id),
-                            FOREIGN KEY (event_id) REFERENCES event(id)
+                            FOREIGN KEY (event_id) REFERENCES events(id)
 );
 
-CREATE TABLE review (
+CREATE TABLE reviews (
                         id SERIAL PRIMARY KEY,
                         content TEXT,
-                        object_id INT NOT NULL,
+                        sport_complex_id INT NOT NULL,
                         user_id INT NOT NULL,
-                        FOREIGN KEY (object_id) REFERENCES object(id),
+                        FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id),
                         FOREIGN KEY (user_id) REFERENCES users(id)
 );

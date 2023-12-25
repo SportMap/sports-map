@@ -10,7 +10,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "event")
+@Table(name = "events")
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor
 public class Event {
 
@@ -18,21 +18,18 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "description")
+    @Column
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "object_id")
-    private SportObject object;
+    private SportComplex sportComplex;
 
     @Column(name = "category")
     private String category;
 
-    @Column(name = "start_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
 
-    @Column(name = "end_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
 

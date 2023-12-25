@@ -6,11 +6,11 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "object")
+@Table(name = "sport_complexes")
 @Getter
 @Setter
 @NoArgsConstructor
-public class SportObject {
+public class SportComplex {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +34,9 @@ public class SportObject {
     @Column
     private String coordinates;
 
+    @Column
+    private String open247;
+
     @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
-    private SportObjectAddress adress;
-
-
+    private Address address;
 }
