@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "review")
+@Table(name = "reviews")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,10 +20,10 @@ public class Review {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "object_id", nullable = false)
-    private SportObject object;
+    @JoinColumn(nullable = false)
+    private SportComplex sportComplex;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    @JoinColumn(nullable = false)
+    private User user;
 }

@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Time;
+import java.time.DayOfWeek;
 
 
 @Entity
-@Table(name = "opening_hours")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,39 +19,16 @@ public class OpeningHours {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "opening_time")
+    @Column
     private Time openingTime;
 
-    @Column(name = "closing_time")
+    @Column
     private Time closingTime;
 
-    @Column(name = "open_24_7")
-    private boolean open24_7;
+    @Column
+    @Enumerated
+    private DayOfWeek dayOfWeek;
 
     @ManyToOne
-    @JoinColumn(name = "object_id")
-    private SportObject object;
-
-    @Column(name = "monday")
-    private boolean monday;
-
-    @Column(name = "tuesday")
-    private boolean tuesday;
-
-    @Column(name = "wednesday")
-    private boolean wednesday;
-
-    @Column(name = "thursday")
-    private boolean thursday;
-
-    @Column(name = "friday")
-    private boolean friday;
-
-    @Column(name = "saturday")
-    private boolean saturday;
-
-    @Column(name = "sunday")
-    private boolean sunday;
-
-    // Getters and setters
+    private SportComplex sportComplex;
 }

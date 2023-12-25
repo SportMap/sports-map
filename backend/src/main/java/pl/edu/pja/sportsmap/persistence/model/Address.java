@@ -5,11 +5,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "address")
 @Getter
 @Setter
 @NoArgsConstructor
-public class SportObjectAddress {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,18 +16,15 @@ public class SportObjectAddress {
     @Column
     private String street;
 
-    @Column(name = "postal_code")
+    @Column
     private String postalCode;
 
-    @Column(name = "building_number")
+    @Column
     private String buildingNumber;
 
-    @Column(name = "apartment_number")
+    @Column
     private String apartmentNumber;
 
     @Column
     private String city;
-
-
-
 }
