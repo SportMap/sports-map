@@ -26,16 +26,21 @@ public class SportComplex {
     private String website;
 
     @Column
-    private String surface;
+    @Enumerated(EnumType.STRING)
+    private SportComplexSurface surface;
 
     @Column
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private SportComplexCategory category;
 
     @Column
-    private String coordinates;
+    private Double latitude;
 
     @Column
-    private String open247;
+    private Double longitude;
+
+    @Column(name = "open_24_7")
+    private boolean isOpen247;
 
     @ManyToOne
     private Address address;

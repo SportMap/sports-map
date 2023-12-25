@@ -9,12 +9,13 @@ CREATE TABLE address (
 
 CREATE TABLE sport_complexes (
                         id SERIAL PRIMARY KEY,
-                        name CHAR(255) NOT NULL,
+                        name VARCHAR(255) NOT NULL,
                         description TEXT,
                         website VARCHAR(255),
                         surface VARCHAR(255),
                         category VARCHAR(255),
-                        coordinates VARCHAR(255),
+                        latitude DECIMAL(8,6),
+                        longitude DECIMAL(9,6),
                         address_id INT NOT NULL,
                         open_24_7 BOOLEAN,
                         FOREIGN KEY (address_id) REFERENCES address(id)
@@ -33,7 +34,6 @@ CREATE TABLE events (
                        id SERIAL PRIMARY KEY,
                        description TEXT,
                        sport_complex_id INT NOT NULL,
-                       category VARCHAR(255),
                        start_time TIMESTAMP,
                        end_time TIMESTAMP,
                        FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id)
