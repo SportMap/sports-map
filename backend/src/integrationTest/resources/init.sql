@@ -1,3 +1,81 @@
+CREATE TABLE "address" (
+                         id SERIAL PRIMARY KEY,
+                         street VARCHAR(255),
+                         postal_code VARCHAR(10),
+                         building_number VARCHAR(10),
+                         apartment_number VARCHAR(10),
+                         city VARCHAR(255)
+);
+
+CREATE TABLE sport_complexes (
+                                 id SERIAL PRIMARY KEY,
+                                 name VARCHAR(255) NOT NULL,
+                                 description TEXT,
+                                 website VARCHAR(255),
+                                 surface VARCHAR(255),
+                                 category VARCHAR(255),
+                                 latitude DECIMAL(8,6),
+                                 longitude DECIMAL(9,6),
+                                 address_id INT NOT NULL,
+                                 open_24_7 BOOLEAN,
+                                 FOREIGN KEY (address_id) REFERENCES address(id),
+                                 photo VARCHAR(255),
+                                 phone_number VARCHAR(15),
+                                 status VARCHAR(25)
+);
+
+CREATE TABLE opening_hours (
+                               id SERIAL PRIMARY KEY,
+                               day_of_week INT NOT NULL,
+                               opening_time TIME,
+                               closing_time TIME,
+                               sport_complex_id INT NOT NULL,
+                               FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id)
+);
+
+
+
+CREATE TABLE users (
+                       id SERIAL PRIMARY KEY,
+                       username VARCHAR(255) NOT NULL,
+                       email VARCHAR(255) NOT NULL,
+                       password VARCHAR(255) NOT NULL,
+                       authority CHAR(16) NOT NULL DEFAULT 'USER',
+                       avatar VARCHAR(255)
+);
+CREATE TABLE events (
+                        id SERIAL PRIMARY KEY,
+                        name VARCHAR(255) NOT NULL,
+                        description TEXT,
+                        sport_complex_id INT NOT NULL,
+                        start_time TIMESTAMP,
+                        end_time TIMESTAMP,
+                        photo VARCHAR(255),
+                        user_id INT NOT NULL,
+                        FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id),
+                        FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE users_events (
+                              id SERIAL PRIMARY KEY,
+                              user_id INT NOT NULL,
+                              event_id INT NOT NULL,
+                              FOREIGN KEY (user_id) REFERENCES users(id),
+                              FOREIGN KEY (event_id) REFERENCES events(id)
+);
+
+CREATE TABLE reviews (
+                         id SERIAL PRIMARY KEY,
+                         content TEXT,
+                         sport_complex_id INT NOT NULL,
+                         user_id INT NOT NULL,
+                         rate INT NOT NULL,
+                         review_date DATE NOT NULL,
+                         FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id),
+                         FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+
 INSERT INTO address (id, street, postal_code, building_number, apartment_number, city)
 VALUES
     (1, 'al. Grunwaldzka', '80-309', '411', '', 'Gdańsk'),
@@ -219,8 +297,8 @@ INSERT INTO events (name, description, sport_complex_id, start_time, end_time, p
 VALUES
     ('City Crossfit Challenge', 'An exciting crossfit competition in the city.', 1, '2023-07-15 14:00:00', '2023-07-15 17:00:00', 'city_crossfit_challenge.jpg', 1),
     ('aaaaa', 'asda.', 1, '2023-07-15 14:00:00', '2023-07-15 17:00:00', 'city_crossfit_challenge.jpg', 1),
-    ('itStartsInHolidays', 'asda.', 1, '2024-07-15 14:00:00', '2024-07-15 17:00:00', 'city_crossfit_challenge.jpg', 1),
-    ('shouldBeAvailableNow', 'asda.', 1, '2024-01-13 14:00:00', '2024-02-15 17:00:00', 'city_crossfit_challenge.jpg', 1),
+    ('itStartsInHolidays', 'asda.', 1, '2024-07-15 14:00:00', '2030-07-15 17:00:00', 'city_crossfit_challenge.jpg', 1),
+    ('shouldBeAvailableNow', 'asda.', 1, '2024-01-13 14:00:00', '2030-02-15 17:00:00', 'city_crossfit_challenge.jpg', 1),
     ('City Crossfit Challenge', 'An exciting crossfit competition in the city.', 1, '2023-07-15 14:00:00', '2023-07-15 17:00:00', 'city_crossfit_challenge.jpg', 1),
     ('National Gymnastics Competition', 'Watch the best gymnasts compete nationally.', 2, '2023-08-20 09:00:00', '2023-08-20 18:00:00', 'national_gymnastics_competition.jpg', 2),
     ('Urban Ice Skating Showdown', 'Experience thrilling ice skating performances.', 3, '2023-09-10 06:00:00', '2023-09-10 14:00:00', 'urban_ice_skating_showdown.jpg', 3),
@@ -228,15 +306,8 @@ VALUES
     ('Extreme Sports Expo 2023', 'Explore the latest trends in extreme sports.', 5, '2023-11-15 17:00:00', '2023-11-15 21:00:00', 'extreme_sports_expo_2023.jpg', 5);
 
 INSERT INTO users_events (user_id, event_id) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5);
-
--- Setup location in Gdańsk
-UPDATE sport_complexes SET latitude = 54.352025, longitude = 18.646638 WHERE id = 1; -- Central Gdańsk
-UPDATE sport_complexes SET latitude = 54.356805, longitude = 18.658322 WHERE id = 2; -- Near Oliwa Park
-UPDATE sport_complexes SET latitude = 54.341546, longitude = 18.649502 WHERE id = 3; -- Wrzeszcz district
-UPDATE sport_complexes SET latitude = 54.360686, longitude = 18.635629 WHERE id = 4; -- Near Brzeźno Beach
-UPDATE sport_complexes SET latitude = 54.348629, longitude = 18.676230 WHERE id = 5; -- Przymorze area
+                                                 (1, 1),
+                                                 (2, 2),
+                                                 (3, 3),
+                                                 (4, 4),
+                                                 (5, 5);

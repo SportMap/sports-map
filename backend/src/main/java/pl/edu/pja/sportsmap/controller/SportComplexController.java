@@ -53,7 +53,7 @@ public class SportComplexController {
     }
 
     @PostMapping()
-    public ResponseEntity<SportComplexDetailedDto> getSportComplex(@RequestBody AddSportComplexDto newSportComplex) {
+    public ResponseEntity<Void> addSportComplex(@RequestBody AddSportComplexDto newSportComplex) {
         SportComplex sportComplex = sportComplexService.createSportComplex(newSportComplex);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
