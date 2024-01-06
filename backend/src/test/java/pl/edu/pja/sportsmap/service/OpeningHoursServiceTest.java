@@ -6,15 +6,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.edu.pja.sportsmap.persistence.dao.OpeningHoursRepository;
-import pl.edu.pja.sportsmap.persistence.dao.SportComplexRepository;
 import pl.edu.pja.sportsmap.persistence.model.OpeningHours;
 import pl.edu.pja.sportsmap.persistence.model.SportComplex;
 
 import java.sql.Time;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static pl.edu.pja.sportsmap.service.OpeningHoursService.formatter;
