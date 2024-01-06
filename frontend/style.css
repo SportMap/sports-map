@@ -14,6 +14,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 5;
 }
 
 .side_menu {
@@ -25,6 +26,10 @@ header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+}
+
+.side_menu:hover {
+    cursor: pointer;
 }
 
 .animate {
@@ -112,7 +117,7 @@ header {
     box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.25);
 }
 
-.profile_menu {
+.profile_icon {
     width: 54px;
     height: 54px;
     flex-shrink: 0;
@@ -122,6 +127,70 @@ header {
     background-size: cover;
     box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.25);
     margin-right: 20px;
+    z-index: 20;
+}
+
+.profile_menu {
+    position: fixed;
+    border-radius: 36px;
+    background: #FFF;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.25);
+    width: 328px;
+    height: 223px;
+    right: 12px;
+    top:8px;
+    display:flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.profile_menu .text {
+    margin-top:10px;
+    height: 43px;
+    flex-shrink: 0;
+    text-align: center;
+    line-height:40px;
+}
+
+.profile_menu .text a {
+    color: #000;
+    text-decoration: none;
+    margin-right:3px;
+    margin-left:3px;
+}
+
+.profile_menu .name {
+    margin-top:20px;
+    color: #000;
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.profile_menu .button {
+    width: 184px;
+    height: 43px;
+    background-color: #DC1B77;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 43px;
+    border-radius:10px;
+}
+
+.profile_menu .button:hover {
+    cursor: pointer;
 }
 
 .sidebar {
@@ -133,8 +202,93 @@ header {
     bottom: 0;
     transform: translateX(-100%);
     transition: transform 0.7s ease-in-out;
+    z-index: 2;
 }
 
 .sidebar_show {
     transform: translateX(0);
+}
+
+
+/* Sekcja mapy */
+.map {
+    z-index: 1;
+    width:100%;
+    height:calc(100% - 84px);
+    margin-top:84px;
+}
+
+.leaflet-popup-content-wrapper {
+    width: 295px;
+    height: 300px;
+    flex-shrink: 0;
+    border-radius: 26px;
+    background: #FFF;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    padding: 0 !important;
+}
+
+.leaflet-popup-content {
+    margin:0 !important;
+}
+
+.popup-image {
+    height: 45%;
+    width: 100%;
+    background-color: black;
+}
+
+.popup-info {
+    width:100%;
+    height:55%;
+    display:flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: left;
+}
+
+.popup-info .title {
+    color: #000;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    margin:7px;
+}
+
+.popup-info .info {
+    color: #000;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    margin-left: 7px;
+}
+
+.popup-info img {
+    margin-right: 4px;
+}
+
+.popup-buttons-wrapper {
+    width:100%;
+    display:flex;
+    justify-content: space-around;
+}
+
+.popup-button {
+    width: 109px;
+    height: 32px;
+    background-color: #DC1B77;
+    color: #FFF;
+    border-radius:10px;
+    text-align: center;
+    line-height: 32px;
+    margin-bottom: 5px;
+}
+
+.popup-category {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
 }
