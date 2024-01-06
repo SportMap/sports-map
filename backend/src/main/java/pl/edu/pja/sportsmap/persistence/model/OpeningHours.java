@@ -13,6 +13,7 @@ import java.time.DayOfWeek;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "opening_hours")
 public class OpeningHours {
 
     @Id
@@ -26,9 +27,10 @@ public class OpeningHours {
     private Time closingTime;
 
     @Column
-    @Enumerated
+    @Enumerated(EnumType.ORDINAL)
     private DayOfWeek dayOfWeek;
 
     @ManyToOne
+    @JoinColumn(name = "sport_complex_id")
     private SportComplex sportComplex;
 }
