@@ -36,7 +36,38 @@ profile_menu.addEventListener("mouseleave", (event) => {
     profile_menu.classList.toggle("hidden");
 });
 
-// Sekcja obsłgi mapy
+function hideLoginBox() {
+    const blurred = document.getElementsByClassName("blur")[0];
+    blurred.removeEventListener("click", hideLoginBox);
+
+    document.getElementsByClassName("logon-container")[0].classList.toggle("hidden");
+    blurred.classList.toggle("blur");
+}
+
+function displayLoginBox() {
+    document.getElementsByClassName("logon-container")[0].classList.toggle("hidden");
+    const blur = document.getElementsByClassName("map")[0];
+    blur.classList.toggle("blur");
+    blur.addEventListener("click", hideLoginBox);
+}
+
+function hideRegisterBox() {
+    const register_blurred = document.getElementsByClassName("blur")[0];
+    register_blurred.removeEventListener("click", hideRegisterBox);
+
+    document.getElementsByClassName("register-container")[0].classList.toggle("hidden");
+    register_blurred.classList.toggle("blur");
+}
+
+function displayRegisterBox() {
+    document.getElementsByClassName("register-container")[0].classList.toggle("hidden");
+    const register_blur = document.getElementsByClassName("map")[0];
+    register_blur.classList.toggle("blur");
+    register_blur.addEventListener("click", hideRegisterBox);
+}
+
+//====================================================================================
+// Sekcja obsługi mapy
 
 var map = L.map('map').setView([54.35245, 18.64799], 16);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
