@@ -10,6 +10,7 @@ import pl.edu.pja.sportsmap.persistence.model.SportComplexCategory;
 @AllArgsConstructor
 public class SportComplexSimpleDto {
     private Long id;
+    private String name;
     private SportComplexCategory category;
     private Double latitude;
     private Double longitude;

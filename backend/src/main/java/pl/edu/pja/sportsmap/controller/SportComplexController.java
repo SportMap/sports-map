@@ -37,6 +37,7 @@ public class SportComplexController {
     private SportComplexSimpleDto convertEntityToDto(SportComplex sportComplex) {
         return SportComplexSimpleDto.builder()
                 .id(sportComplex.getId())
+                .name(sportComplex.getName())
                 .category(sportComplex.getCategory())
                 .latitude(sportComplex.getLatitude())
                 .longitude(sportComplex.getLongitude())
