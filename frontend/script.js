@@ -75,15 +75,40 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-var marker = L.marker([54.35245, 18.64799]).addTo(map);
-var custom_popup = "<div class='popup-image'></div> \
-                    <div class='popup-info'> \
-                    <a class='title'>Polsko Japońska Akademia Technik Komputerowych</a> \
-                    <a class='info'><img src='info.svg'> Uczelnia</a> \
-                    <a class='info'><img src='distance_ico.svg'> 10m</a> \
-                    <div class='popup-buttons-wrapper'> \
-                    <div class='popup-button'>Nawiguj</div> \
-                    <div class='popup-button'>Więcej</div> \
-                    <div class='popup-category'></div> \
-                    </div>";
-marker.bindPopup(custom_popup);
+var settings = {
+    'cache': false,
+    'dataType': "json", // Użyj "json" zamiast "jsonp" w przypadku CORS
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost:8080/sport-complexes",
+    "method": "GET",
+    "xhrFields": {
+        "withCredentials": true  // Dla obsługi cookies i innych danych uwierzytelniających
+    },
+    "headers": {
+        "Content-Type": "application/json",
+    }
+};
+
+$.ajax(settings).done(function (response) {
+    data = Object.values(response);
+    console.log(data);
+    for (var i = 0; i < data.length; i++){
+        var obj = data[i];
+        var marker = L.marker([obj['latitude'], obj['longitude']]).addTo(map);
+        var custom_popup = "<div class='popup-image'></div> \
+                        <div class='popup-info'> \
+                        <a class='title'>Polsko Japońska Akademia Technik Komputerowych</a> \
+                        <a class='info'><img src='info.svg'>"+obj['category']+"</a> \
+                        <a class='info'><img src='distance_ico.svg'> 10m</a> \
+                        <div class='popup-buttons-wrapper'> \
+                        <div class='popup-button'>Nawiguj</div> \
+                        <div class='popup-button'>Więcej</div> \
+                        <div class='popup-category'></div> \
+                        </div>";
+        marker.bindPopup(custom_popup);
+    }
+});
+
+
+
