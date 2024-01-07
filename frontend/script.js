@@ -91,10 +91,10 @@ var settings = {
 };
 
 $.ajax(settings).done(function (response) {
-    data = Object.values(response);
-    console.log(data);
-    for (var i = 0; i < data.length; i++){
-        var obj = data[i];
+    complexes = Object.values(response);
+    console.log(complexes);
+    for (var i = 0; i < complexes.length; i++){
+        var obj = complexes[i];
         var marker = L.marker([obj['latitude'], obj['longitude']]).addTo(map);
         var custom_popup = "<div class='popup-image'></div> \
                         <div class='popup-info'> \
@@ -110,5 +110,34 @@ $.ajax(settings).done(function (response) {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    var startPoint = L.latLng(54.361206, 18.658292);
+    var endPoint = L.latLng(54.348629, 18.659222);
 
+    // Pobierz trasę za pomocą openrouteservice
+    var url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf62483b4d3610616a4dd3b538024b1a3224cc&start=${startPoint.lng},${startPoint.lat}&end=${endPoint.lng},${endPoint.lat}`;
+    console.log(url);
 
+    fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Pobierz geometrię trasy
+        var routeGeometry = L.geoJSON(data.features[0].geometry);
+
+        // Dodaj trasę do mapy
+        routeGeometry.addTo(map);
+    })
+    .catch(error => console.error('Błąd pobierania trasy:', error));
+});
+
+map.locate({setView: true})
+    console.log()
+    .on('locationerror', function(e){
+        console.log(e);
+        alert("Location access has been denied.");
+    });
