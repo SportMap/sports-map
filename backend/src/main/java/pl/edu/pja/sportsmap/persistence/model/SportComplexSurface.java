@@ -1,14 +1,14 @@
 package pl.edu.pja.sportsmap.persistence.model;
 
 public enum SportComplexSurface {
-    GRASS,
-    ARTIFICIAL_TURF,
-    CLAY,
-    HARD_COURT,
-    WOODEN_FLOOR,
-    SYNTHETIC_TRACK,
-    ASPHALT,
-    SAND,
-    ICE,
-    ACRYLIC
+    TRAWA,
+    SZTUCZNA_TRAWA,
+    GLINA,
+    TWARDY_KORT,
+    DREWNIANA_PODŁOGA,
+    TARTAN,
+    ASFALT,
+    PIASEK,
+    LÓD,
+    AKRYL
 }
