@@ -1,27 +1,26 @@
 package pl.edu.pja.sportsmap.persistence.model;
 
 public enum SportComplexCategory {
-    RUNNING,
+
+    BIEGANIE,
     CROSSFIT,
     FITNESS,
-    GYMNASTICS,
-    BASKETBALL,
-    BOWLING,
-    ATHLETICS,
-    ICE_SKATING,
-    FOOTBALL,
-    HANDBALL,
-    SWIMMING,
-    VOLLEYBALL,
-    BEACH_VOLLEYBALL,
-    EXTREME_SPORTS,
-    STRENGTH_SPORTS,
-    MARTIAL_ARTS,
-    CHESS,
-    DANCE,
-    TABLE_TENNIS,
-    TENNIS,
-    CLIMBING
+    GIMNASTYKA,
+    KOSZYKÓWKA,
+    KRĘGLE,
+    LEKKOATLETYKA,
+    LYŻWIARSTWO,
+    PIŁKA_NOŻNA,
+    PIŁKA_RĘCZNA,
+    PŁYWANIE,
+    SIATKÓWKA,
+    SIATKÓWKA_PLAŻOWA,
+    SPORTY_EKSTREMALNE,
+    SPORTY_SIŁOWE,
+    SZTUKI_WALKI,
+    SZACHY,
+    TANIEC,
+    TENIS_STOŁOWY,
+    TENIS,
+    WSPINACZKA
 }
-
-
