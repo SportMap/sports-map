@@ -100,7 +100,7 @@ $.ajax(settings).done(function (response) {
                         <div class='popup-info'> \
                         <a class='title'>Polsko Japońska Akademia Technik Komputerowych</a> \
                         <a class='info'><img src='info.svg'>"+obj['category']+"</a> \
-                        <a class='info'><img src='distance_ico.svg'> 10m</a> \
+                        <a class='info'><img src='distance_ico.svg'>10m</a> \
                         <div class='popup-buttons-wrapper'> \
                         <div class='popup-button'>Nawiguj</div> \
                         <div class='popup-button'>Więcej</div> \

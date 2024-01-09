@@ -220,7 +220,7 @@ header {
 
 .leaflet-popup-content-wrapper {
     width: 295px;
-    height: 300px;
+    height: 260px;
     flex-shrink: 0;
     border-radius: 26px;
     background: #FFF;
@@ -263,7 +263,7 @@ header {
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    margin-left: 7px;
+    margin-left: 15px;
 }
 
 .popup-info img {
@@ -274,10 +274,11 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-around;
+    margin-top:10px;
 }
 
 .popup-button {
-    width: 109px;
+    width: 115px;
     height: 32px;
     background-color: #DC1B77;
     color: #FFF;
@@ -285,6 +286,10 @@ header {
     text-align: center;
     line-height: 32px;
     margin-bottom: 5px;
+}
+
+.popup-button:first-child {
+    margin-left: 5px;
 }
 
 .popup-category {
