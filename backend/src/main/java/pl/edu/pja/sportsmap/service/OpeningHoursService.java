@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.pja.sportsmap.persistence.dao.OpeningHoursRepository;
 import pl.edu.pja.sportsmap.persistence.model.OpeningHours;
 import pl.edu.pja.sportsmap.persistence.model.SportComplex;
+import pl.edu.pja.sportsmap.persistence.model.SportComplexCategory;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -41,5 +42,11 @@ public class OpeningHoursService {
 
         return now.isAfter(LocalDateTime.from(openingHours.getOpeningTime().toLocalTime().atDate(LocalDate.now()))) &&
                 now.isBefore(LocalDateTime.from(openingHours.getClosingTime().toLocalTime().atDate(LocalDate.now())));
+    }
+
+    public boolean isAnySportComplexOpenNow(List<SportComplex> sportComplexes, SportComplexCategory category) {
+        return sportComplexes.stream()
+                .filter(sportComplex -> sportComplex.getCategory() == category)
+                .anyMatch(this::isSportComplexOpenNow);
     }
 }
