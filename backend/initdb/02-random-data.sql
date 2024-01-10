@@ -7,11 +7,11 @@ VALUES ('123 Maple Street', '12345', '10', '2A', 'Springfield'),
 
 
 INSERT INTO sport_complexes (name, description, website, surface, category, latitude, longitude, address_id, open_24_7) VALUES
-('Olympia Arena', 'A large outdoor stadium suitable for various sports, including running and team sports.', 'www.olympiaarena.com', 'GRASS', 'ATHLETICS', 54.361206, 18.658292, 1, FALSE),
-('Aqua Sports Center', 'Indoor aquatic center with Olympic-size pools and diving facilities.', 'www.aquasportscenter.com', 'ARTIFICIAL_TURF', 'SWIMMING', 54.372158, 18.620951, 2, TRUE),
-('Mountain Bike Park', 'Outdoor complex with trails and tracks for mountain biking enthusiasts.', 'www.mountainbikepark.com', 'CLAY', 'STRENGTH_SPORTS', 54.380570, 18.598446, 3, FALSE),
-('Urban Fitness Hub', 'State-of-the-art fitness center with modern equipment and facilities.', 'www.urbanfitnesshub.com', 'WOODEN_FLOOR', 'FITNESS', 54.348629, 18.659222, 4, TRUE),
-('Green Field Soccer Complex', 'Spacious outdoor fields suitable for football and other team sports.', 'www.greenfieldsoccer.com', 'SYNTHETIC_TRACK', 'FOOTBALL', 54.352025, 18.646638, 5, FALSE);
+('Olympia Arena', 'A large outdoor stadium suitable for various sports, including running and team sports.', 'www.olympiaarena.com', 'TRAWA', 'LEKKOATLETYKA', 54.361206, 18.658292, 1, FALSE),
+('Aqua Sports Center', 'Indoor aquatic center with Olympic-size pools and diving facilities.', 'www.aquasportscenter.com', 'SZTUCZNA_TRAWA', 'PŁYWANIE', 54.372158, 18.620951, 2, TRUE),
+('Mountain Bike Park', 'Outdoor complex with trails and tracks for mountain biking enthusiasts.', 'www.mountainbikepark.com', 'GLINA', 'SPORTY_SIŁOWE', 54.380570, 18.598446, 3, FALSE),
+('Urban Fitness Hub', 'State-of-the-art fitness center with modern equipment and facilities.', 'www.urbanfitnesshub.com', 'DREWNIANA_PODŁOGA', 'FITNESS', 54.348629, 18.659222, 4, TRUE),
+('Green Field Soccer Complex', 'Spacious outdoor fields suitable for football and other team sports.', 'www.greenfieldsoccer.com', 'TARTAN', 'PIŁKA_NOŻNA', 54.352025, 18.646638, 5, FALSE);
 
 
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
