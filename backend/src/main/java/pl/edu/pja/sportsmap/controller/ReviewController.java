@@ -40,6 +40,7 @@ public class ReviewController {
                 .date(review.getReview_date())
                 .rate(review.getRate())
                 .content(review.getContent())
+                .avatar(userService.getAvatarById(review.getUser().getId()))
                 .build();
     }
 }

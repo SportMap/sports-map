@@ -20,4 +20,8 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findById(userId);
         return optionalUser.map(User::getNickname).orElse(null);
     }
+    public String getAvatarById(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        return optionalUser.map(User::getAvatar).orElse(null);
+    }
 }
