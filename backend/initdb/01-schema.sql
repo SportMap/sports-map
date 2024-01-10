@@ -60,6 +60,8 @@ CREATE TABLE reviews (
                         content TEXT,
                         sport_complex_id INT NOT NULL,
                         user_id INT NOT NULL,
+                        rate INT NOT NULL,
+                        review_date DATE NOT NULL,
                         FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id),
                         FOREIGN KEY (user_id) REFERENCES users(id)
 );
