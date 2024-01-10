@@ -31,13 +31,13 @@ VALUES
 
 
 
-INSERT INTO reviews (content, sport_complex_id, user_id)
+INSERT INTO reviews (content, sport_complex_id, user_id, rate, review_date)
 VALUES
-    ('Great facilities and well-maintained fields.', 1, 1),
-    ('The staff is friendly and the equipment is top-notch.', 2, 2),
-    ('Excellent location for swimming competitions, clean and accessible.', 3, 3),
-    ('The gym has a wide range of equipment and is rarely overcrowded.', 4, 4),
-    ('Perfect for weekend soccer games, the turf is in great condition.', 5, 5);
+    ('Great facilities and well-maintained fields.', 1, 1, 5, '2023-01-15'),
+    ('The staff is friendly and the equipment is top-notch.', 2, 2, 4, '2023-02-20'),
+    ('Excellent location for swimming competitions, clean and accessible.', 3, 3, 5, '2023-03-10'),
+    ('The gym has a wide range of equipment and is rarely overcrowded.', 4, 4, 4, '2023-04-05'),
+    ('Perfect for weekend soccer games, the turf is in great condition.', 5, 5, 5, '2023-05-15');
 
 INSERT INTO events (description, sport_complex_id, start_time, end_time)
 VALUES
