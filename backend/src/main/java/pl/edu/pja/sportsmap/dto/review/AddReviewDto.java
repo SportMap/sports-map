@@ -4,5 +4,5 @@ import lombok.Builder;
 
 
 @Builder
-public record AddReviewDto(String content, Integer rate, String nickName, Long sportComplexId) {
+public record AddReviewDto(String content, Integer rate, String nickname, Long sportComplexId) {
 }

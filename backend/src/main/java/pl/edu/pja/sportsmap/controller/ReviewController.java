@@ -40,13 +40,5 @@ public class ReviewController {
         Review review = reviewService.addReview(reviewDto);
         return ResponseEntity.ok(review);
     }
-//    public GetReviewDto convertEntityToDto(Review review, ReviewController reviewController){
-//        return GetReviewDto.builder()
-//                .nickname(reviewController.userService.getNicknameById(review.getUser().getId()))
-//                .date(review.getReview_date())
-//                .rate(review.getRate())
-//                .content(review.getContent())
-//                .avatar(reviewController.userService.getAvatarById(review.getUser().getId()))
-//                .build();
-//    }
+
 }

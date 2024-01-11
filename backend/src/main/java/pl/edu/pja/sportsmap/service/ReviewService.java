@@ -2,7 +2,6 @@ package pl.edu.pja.sportsmap.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.edu.pja.sportsmap.controller.ReviewController;
 import pl.edu.pja.sportsmap.dto.review.AddReviewDto;
 import pl.edu.pja.sportsmap.dto.review.GetReviewDto;
 import pl.edu.pja.sportsmap.persistence.dao.ReviewRepository;
@@ -57,7 +56,7 @@ public class ReviewService {
         review.setContent(reviewDto.content());
         review.setRate(reviewDto.rate());
 
-        Optional<User> userOptional = userRepository.findUserByNickname(reviewDto.nickName());
+        Optional<User> userOptional = userRepository.findUserByNickname(reviewDto.nickname());
         User user = userOptional.orElseThrow(() -> new EntityNotFoundException("User not found"));
         review.setUser(user);
 
