@@ -2,7 +2,8 @@ package pl.edu.pja.sportsmap.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.pja.sportsmap.dto.ReviewDto;
+import pl.edu.pja.sportsmap.dto.review.AddReviewDto;
+import pl.edu.pja.sportsmap.dto.review.GetReviewDto;
 import pl.edu.pja.sportsmap.persistence.model.Review;
 import pl.edu.pja.sportsmap.service.ReviewService;
 import pl.edu.pja.sportsmap.service.UserService;
@@ -25,22 +26,27 @@ public class ReviewController {
 
 
     @GetMapping("/get-reviews-{id}")
-    public ResponseEntity<List<ReviewDto>> getAllSportComplexReviewsById(@PathVariable("id") Long id){
+    public ResponseEntity<List<GetReviewDto>> getAllSportComplexReviewsById(@PathVariable("id") Long id){
         List<Review> reviews = reviewService.getAllReviewsBySportComplexId(id);
-        List<ReviewDto> reviewsDto = new ArrayList<>();
+        List<GetReviewDto> reviewsDto = new ArrayList<>();
         for (Review review : reviews){
-            reviewsDto.add(convertEntityToDto(review));
+            reviewsDto.add(reviewService.convertEntityToDto(review));
         }
         return ResponseEntity.ok(reviewsDto);
     }
 
-    private ReviewDto convertEntityToDto(Review review){
-        return ReviewDto.builder()
-                .nickname(userService.getNicknameById(review.getUser().getId()))
-                .date(review.getReview_date())
-                .rate(review.getRate())
-                .content(review.getContent())
-                .avatar(userService.getAvatarById(review.getUser().getId()))
-                .build();
+    @PostMapping("/add-review")
+    public ResponseEntity<Review> addReview(@RequestBody AddReviewDto reviewDto){
+        Review review = reviewService.addReview(reviewDto);
+        return ResponseEntity.ok(review);
     }
+//    public GetReviewDto convertEntityToDto(Review review, ReviewController reviewController){
+//        return GetReviewDto.builder()
+//                .nickname(reviewController.userService.getNicknameById(review.getUser().getId()))
+//                .date(review.getReview_date())
+//                .rate(review.getRate())
+//                .content(review.getContent())
+//                .avatar(reviewController.userService.getAvatarById(review.getUser().getId()))
+//                .build();
+//    }
 }
