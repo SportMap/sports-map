@@ -44,7 +44,8 @@ CREATE TABLE users (
                       nickname VARCHAR(255) NOT NULL,
                       email VARCHAR(255) NOT NULL,
                       password VARCHAR(255) NOT NULL,
-                      salt CHAR(16) NOT NULL
+                      salt CHAR(16) NOT NULL,
+                      avatar VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE users_events (
@@ -60,6 +61,8 @@ CREATE TABLE reviews (
                         content TEXT,
                         sport_complex_id INT NOT NULL,
                         user_id INT NOT NULL,
+                        rate INT NOT NULL,
+                        review_date DATE NOT NULL,
                         FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id),
                         FOREIGN KEY (user_id) REFERENCES users(id)
 );

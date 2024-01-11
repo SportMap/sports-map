@@ -21,23 +21,23 @@ VALUES (6, '06:27', '06:51', 2),
        (1, '01:09', '03:54', 2),
        (6, '18:11', '04:38', 3);
 
-INSERT INTO users (nickname, email, password, salt)
+INSERT INTO users (nickname, email, password, salt, avatar)
 VALUES
-    ('UserOne', 'userone@example.com', 'password123', 'a1b2c3d4e5f6g7h8'),
-    ('UserTwo', 'usertwo@example.com', 'password456', 'h8g7f6e5d4c3b2a1'),
-    ('UserThree', 'userthree@example.com', 'password789', '1a2b3c4d5e6f7g8h'),
-    ('UserFour', 'userfour@example.com', 'password101', '8h7g6f5e4d3c2b1a'),
-    ('UserFive', 'userfive@example.com', 'password102', '1a1b1c1d1e1f1g1h');
+    ('UserOne', 'userone@example.com', 'password123', 'a1b2c3d4e5f6g7h8', 'https://i.pinimg.com/280x280_RS/87/43/b4/8743b48a013c49d2657be16778abf563.jpg'),
+    ('UserTwo', 'usertwo@example.com', 'password456', 'h8g7f6e5d4c3b2a1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBdgThPUp6LqoHOELlOBKhtOnhinH_u6ymyQ&usqp=CAU'),
+    ('UserThree', 'userthree@example.com', 'password789', '1a2b3c4d5e6f7g8h', 'https://affinity.pt/public/uploads/2020/02/av4.png'),
+    ('UserFour', 'userfour@example.com', 'password101', '8h7g6f5e4d3c2b1a', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxj2cgb3ENj56AZpasUwMEecEvuEkYIMgD9w&usqp=CAU'),
+    ('UserFive', 'userfive@example.com', 'password102', '1a1b1c1d1e1f1g1h', 'https://twojauroczystosc.konin.pl/images/user-m-100x100-(2).png');
 
 
 
-INSERT INTO reviews (content, sport_complex_id, user_id)
+INSERT INTO reviews (content, sport_complex_id, user_id, rate, review_date)
 VALUES
-    ('Great facilities and well-maintained fields.', 1, 1),
-    ('The staff is friendly and the equipment is top-notch.', 2, 2),
-    ('Excellent location for swimming competitions, clean and accessible.', 3, 3),
-    ('The gym has a wide range of equipment and is rarely overcrowded.', 4, 4),
-    ('Perfect for weekend soccer games, the turf is in great condition.', 5, 5);
+    ('Great facilities and well-maintained fields.', 1, 1, 5, '2023-01-15'),
+    ('The staff is friendly and the equipment is top-notch.', 2, 2, 4, '2023-02-20'),
+    ('Excellent location for swimming competitions, clean and accessible.', 3, 3, 5, '2023-03-10'),
+    ('The gym has a wide range of equipment and is rarely overcrowded.', 4, 4, 4, '2023-04-05'),
+    ('Perfect for weekend soccer games, the turf is in great condition.', 5, 5, 5, '2023-05-15');
 
 INSERT INTO events (description, sport_complex_id, start_time, end_time)
 VALUES

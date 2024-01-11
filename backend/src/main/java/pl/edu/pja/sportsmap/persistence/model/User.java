@@ -27,4 +27,7 @@ public class User {
 
     @Column(nullable = false)
     private String salt;
+
+    @Column(nullable = false)
+    private String avatar;
 }
