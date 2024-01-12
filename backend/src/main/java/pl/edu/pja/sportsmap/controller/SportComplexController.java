@@ -1,12 +1,15 @@
 package pl.edu.pja.sportsmap.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.edu.pja.sportsmap.dto.AvailableSportComplexCategoryDto;
+import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pja.sportsmap.dto.AllSportComplexCategoryDto;
+import pl.edu.pja.sportsmap.dto.AvailableSportComplexCategoryDto;
+import pl.edu.pja.sportsmap.dto.SportComplexDetailedDto;
 import pl.edu.pja.sportsmap.dto.SportComplexSimpleDto;
+import pl.edu.pja.sportsmap.exception.NotFoundException;
 import pl.edu.pja.sportsmap.persistence.model.SportComplex;
 import pl.edu.pja.sportsmap.persistence.model.SportComplexCategory;
 import pl.edu.pja.sportsmap.service.EventService;
@@ -15,9 +18,10 @@ import pl.edu.pja.sportsmap.service.SportComplexCategoryService;
 import pl.edu.pja.sportsmap.service.SportComplexService;
 
 import java.util.List;
+import java.util.Optional;
 
 
-@Controller
+@RestController
 @RequestMapping("/sport-complexes")
 public class SportComplexController {
     private final SportComplexService sportComplexService;
@@ -41,8 +45,17 @@ public class SportComplexController {
         return ResponseEntity.ok(sportComplexDtos);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<SportComplexDetailedDto> getSportComplex(@PathVariable Long id) {
+        Optional<SportComplex> sportComplex = sportComplexService.getSportComplex(id);
+        if (sportComplex.isEmpty()) {
+            throw new NotFoundException("Sport Complex not found");
+        }
+        return ResponseEntity.ok(convertToDetailedDto(sportComplex.get()));
+    }
 
-    @GetMapping("/allCategories")
+
+    @GetMapping("/categories")
     public ResponseEntity<List<AllSportComplexCategoryDto>> getAllSportCategories() {
         List<SportComplexCategory> sportCategories = sportComplexCategoryService.getAllSportComplexCategories();
         List<AllSportComplexCategoryDto> sportCategoryDtos = sportCategories.stream()
@@ -52,7 +65,7 @@ public class SportComplexController {
     }
 
 
-    @GetMapping("/availableCategoriesAtThisMoment")
+    @GetMapping("/categories/available-now")
     public ResponseEntity<List<AvailableSportComplexCategoryDto>> getAvailableCategoriesAtThisMoment() {
         List<SportComplexCategory> availableCategories = sportComplexCategoryService.getAvailableComplexCategories();
 
@@ -61,6 +74,22 @@ public class SportComplexController {
         return ResponseEntity.ok(sportCategoryDtos);
     }
 
+    private SportComplexDetailedDto convertToDetailedDto(SportComplex sportComplex) {
+        return SportComplexDetailedDto.builder()
+                .address(sportComplex.getAddress())
+                .category(sportComplex.getCategory())
+                .phoneNumber(sportComplex.getPhoneNumber())
+                .name(sportComplex.getName())
+                .website(sportComplex.getWebsite())
+                .surface(sportComplex.getSurface())
+                .photo(sportComplex.getPhoto())
+                .isOpen(openingHoursService.isSportComplexOpenNow(sportComplex))
+                .isEventNow(eventService.isEventNow(sportComplex))
+                .isEventTomorrow(eventService.isEventTomorrow(sportComplex))
+                .isOpen247(sportComplex.isOpen247())
+                .openingHours(openingHoursService.getOpeningHours(sportComplex.getId()))
+                .build();
+    }
 
     private SportComplexSimpleDto convertEntityToDto(SportComplex sportComplex) {
         return SportComplexSimpleDto.builder()

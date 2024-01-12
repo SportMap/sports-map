@@ -1,20 +1,17 @@
 package pl.edu.pja.sportsmap.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
 import pl.edu.pja.sportsmap.persistence.model.SportComplexCategory;
 
-@Getter
 @Builder
-@AllArgsConstructor
-public class SportComplexSimpleDto {
-    private Long id;
-    private String name;
-    private SportComplexCategory category;
-    private Double latitude;
-    private Double longitude;
-    private boolean isOpen;
-    private boolean isEventNow;
-    private boolean isEventTomorrow;
-}
+public record SportComplexSimpleDto(
+        Long id,
+        String name,
+        SportComplexCategory category,
+        Double latitude,
+        Double longitude,
+        boolean isOpen,
+        boolean isEventNow,
+        boolean isEventTomorrow
+) {}
+

@@ -6,13 +6,14 @@ VALUES ('123 Maple Street', '12345', '10', '2A', 'Springfield'),
        ('789 Pine Road', '11223', '30', '4C', 'Rivertown');
 
 
-INSERT INTO sport_complexes (name, description, website, surface, category, latitude, longitude, address_id, open_24_7) VALUES
-('Olympia Arena', 'A large outdoor stadium suitable for various sports, including running and team sports.', 'www.olympiaarena.com', 'TRAWA', 'LEKKOATLETYKA', 54.361206, 18.658292, 1, FALSE),
-('Aqua Sports Center', 'Indoor aquatic center with Olympic-size pools and diving facilities.', 'www.aquasportscenter.com', 'SZTUCZNA_TRAWA', 'PŁYWANIE', 54.372158, 18.620951, 2, TRUE),
-('Mountain Bike Park', 'Outdoor complex with trails and tracks for mountain biking enthusiasts.', 'www.mountainbikepark.com', 'GLINA', 'SPORTY_SIŁOWE', 54.380570, 18.598446, 3, FALSE),
-('Urban Fitness Hub', 'State-of-the-art fitness center with modern equipment and facilities.', 'www.urbanfitnesshub.com', 'DREWNIANA_PODŁOGA', 'FITNESS', 54.348629, 18.659222, 4, TRUE),
-('Green Field Soccer Complex', 'Spacious outdoor fields suitable for football and other team sports.', 'www.greenfieldsoccer.com', 'TARTAN', 'PIŁKA_NOŻNA', 54.352025, 18.646638, 5, FALSE);
-
+INSERT INTO sport_complexes
+(name, description, website, surface, category, latitude, longitude, address_id, open_24_7, photo, phone_number)
+VALUES
+    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789'),
+    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334'),
+    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556'),
+    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667'),
+    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778');
 
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES (6, '06:27', '06:51', 2),
@@ -53,3 +54,10 @@ INSERT INTO users_events (user_id, event_id) VALUES
 (3, 3),
 (4, 4),
 (5, 5);
+
+-- Setup location in Gdańsk
+UPDATE sport_complexes SET latitude = 54.352025, longitude = 18.646638 WHERE id = 1; -- Central Gdańsk
+UPDATE sport_complexes SET latitude = 54.356805, longitude = 18.658322 WHERE id = 2; -- Near Oliwa Park
+UPDATE sport_complexes SET latitude = 54.341546, longitude = 18.649502 WHERE id = 3; -- Wrzeszcz district
+UPDATE sport_complexes SET latitude = 54.360686, longitude = 18.635629 WHERE id = 4; -- Near Brzeźno Beach
+UPDATE sport_complexes SET latitude = 54.348629, longitude = 18.676230 WHERE id = 5; -- Przymorze area

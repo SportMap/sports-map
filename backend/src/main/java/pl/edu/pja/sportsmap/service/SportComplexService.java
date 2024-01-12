@@ -5,6 +5,7 @@ import pl.edu.pja.sportsmap.persistence.dao.SportComplexRepository;
 import pl.edu.pja.sportsmap.persistence.model.SportComplex;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SportComplexService {
@@ -16,5 +17,9 @@ public class SportComplexService {
 
     public List<SportComplex> getAllSportComplexes() {
         return sportComplexRepository.findAll();
+    }
+
+    public Optional<SportComplex> getSportComplex(Long id) {
+        return sportComplexRepository.findById(id);
     }
 }

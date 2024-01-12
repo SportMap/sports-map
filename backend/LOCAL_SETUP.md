@@ -34,3 +34,14 @@ Dostępne są dwie opcje uruchomienia aplikacji:
 ### Opcja 2: Uruchamianie za pomocą IntelliJ IDEA
 
 1. Po otwarciu projektu w IntelliJ IDEA, główna klasa aplikacji Spring Boot (zazwyczaj nazwana `Application` lub podobnie) może zostać uruchomiona poprzez kliknięcie prawym przyciskiem myszy i wybranie 'Run'.
+
+
+```shell
+Sometimes it is also necessary to manually configure your IDE.
+
+In IntelliJ IDEA, open Settings and add -parameters to the following field.
+
+Build, Execution, Deployment → Compiler → Java Compiler → Additional command line parameters
+
+Then rebuild the project with ctrl + F9
+```

@@ -35,5 +35,5 @@ public class Review {
     private Integer rate;
 
     @Column(name = "review_date")
-    private LocalDate review_date;
+    private LocalDate reviewDate;
 }
