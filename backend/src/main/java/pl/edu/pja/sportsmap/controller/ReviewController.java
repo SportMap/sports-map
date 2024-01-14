@@ -6,26 +6,21 @@ import pl.edu.pja.sportsmap.dto.review.AddReviewDto;
 import pl.edu.pja.sportsmap.dto.review.GetReviewDto;
 import pl.edu.pja.sportsmap.persistence.model.Review;
 import pl.edu.pja.sportsmap.service.ReviewService;
-import pl.edu.pja.sportsmap.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/review")
+@RequestMapping("/reviews")
 public class ReviewController {
 
     private final ReviewService reviewService;
-    private final UserService userService;
 
-    public ReviewController(ReviewService reviewService, UserService userService) {
+    public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
-        this.userService = userService;
     }
 
-
-
-    @GetMapping("/get-reviews-{id}")
+    @GetMapping("{id}")
     public ResponseEntity<List<GetReviewDto>> getAllSportComplexReviewsById(@PathVariable("id") Long id){
         List<Review> reviews = reviewService.getAllReviewsBySportComplexId(id);
         List<GetReviewDto> reviewsDto = new ArrayList<>();
@@ -35,7 +30,7 @@ public class ReviewController {
         return ResponseEntity.ok(reviewsDto);
     }
 
-    @PostMapping("/add-review")
+    @PostMapping()
     public ResponseEntity<Review> addReview(@RequestBody AddReviewDto reviewDto){
         Review review = reviewService.addReview(reviewDto);
         return ResponseEntity.ok(review);

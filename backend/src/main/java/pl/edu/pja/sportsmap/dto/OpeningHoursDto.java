@@ -1,6 +1,15 @@
 package pl.edu.pja.sportsmap.dto;
 
-public class OpeningHoursDto {
-    private TimeRangeDto monday;
-    private TimeRangeDto tuesday;
+import lombok.Builder;
+
+@Builder
+public record OpeningHoursDto(
+        TimeRangeDto monday,
+        TimeRangeDto tuesday,
+        TimeRangeDto wednesday,
+        TimeRangeDto thursday,
+        TimeRangeDto friday,
+        TimeRangeDto saturday,
+        TimeRangeDto sunday
+) {
 }

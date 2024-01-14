@@ -44,4 +44,10 @@ public class SportComplex {
 
     @ManyToOne
     private Address address;
+
+    @Column
+    private String photo;
+
+    @Column
+    private String phoneNumber;
 }

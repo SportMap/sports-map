@@ -1,6 +1,8 @@
 package pl.edu.pja.sportsmap.service;
 
 import org.springframework.stereotype.Service;
+import pl.edu.pja.sportsmap.dto.OpeningHoursDto;
+import pl.edu.pja.sportsmap.dto.TimeRangeDto;
 import pl.edu.pja.sportsmap.persistence.dao.OpeningHoursRepository;
 import pl.edu.pja.sportsmap.persistence.model.OpeningHours;
 import pl.edu.pja.sportsmap.persistence.model.SportComplex;
@@ -11,6 +13,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class OpeningHoursService {
@@ -21,8 +25,9 @@ public class OpeningHoursService {
         this.openingHoursRepository = openingHoursRepository;
     }
 
-    public List<OpeningHours> getOpeningHours(Long complexId) {
-        return openingHoursRepository.findBySportComplexId(complexId);
+    public OpeningHoursDto getOpeningHours(Long complexId) {
+        List<OpeningHours> openingHoursRepositoryBySportComplexId = openingHoursRepository.findBySportComplexId(complexId);
+        return convertToDto(openingHoursRepositoryBySportComplexId);
     }
 
     public boolean isSportComplexOpenNow(SportComplex sportComplex) {
@@ -48,5 +53,24 @@ public class OpeningHoursService {
         return sportComplexes.stream()
                 .filter(sportComplex -> sportComplex.getCategory() == category)
                 .anyMatch(this::isSportComplexOpenNow);
+    }
+
+    public OpeningHoursDto convertToDto(List<OpeningHours> openingHoursList) {
+        Map<DayOfWeek, TimeRangeDto> groupedByDay = openingHoursList.stream()
+                .collect(Collectors.toMap(
+                        OpeningHours::getDayOfWeek,
+                        oh -> new TimeRangeDto(oh.getOpeningTime().toLocalTime(), oh.getClosingTime().toLocalTime()),
+                        (existing, replacement) -> existing
+                ));
+
+        return OpeningHoursDto.builder()
+                .monday(groupedByDay.get(DayOfWeek.MONDAY))
+                .tuesday(groupedByDay.get(DayOfWeek.TUESDAY))
+                .wednesday(groupedByDay.get(DayOfWeek.WEDNESDAY))
+                .thursday(groupedByDay.get(DayOfWeek.THURSDAY))
+                .friday(groupedByDay.get(DayOfWeek.FRIDAY))
+                .saturday(groupedByDay.get(DayOfWeek.SATURDAY))
+                .sunday(groupedByDay.get(DayOfWeek.SUNDAY))
+                .build();
     }
 }

@@ -43,7 +43,7 @@ public class ReviewService {
     public GetReviewDto convertEntityToDto(Review review){
         return GetReviewDto.builder()
                 .nickname(userService.getNicknameById(review.getUser().getId()))
-                .date(review.getReview_date())
+                .date(review.getReviewDate())
                 .rate(review.getRate())
                 .content(review.getContent())
                 .avatar(userService.getAvatarById(review.getUser().getId()))
@@ -64,7 +64,7 @@ public class ReviewService {
         SportComplex sportComplex = sportComplexOptional.orElseThrow(() -> new EntityNotFoundException("Sport Complex not found"));
         review.setSportComplex(sportComplex);
 
-        review.setReview_date(LocalDate.now());
+        review.setReviewDate(LocalDate.now());
         return review;
     }
 
