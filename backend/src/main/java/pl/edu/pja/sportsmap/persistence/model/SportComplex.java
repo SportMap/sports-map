@@ -48,6 +48,6 @@ public class SportComplex {
     @Column
     private String photo;
 
-    @Column
+    @Column(name = "phone_number")
     private String phoneNumber;
 }
