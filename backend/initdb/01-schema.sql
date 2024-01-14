@@ -35,10 +35,13 @@ CREATE TABLE opening_hours (
 
 CREATE TABLE events (
                        id SERIAL PRIMARY KEY,
+                       name VARCHAR(255) NOT NULL,
                        description TEXT,
                        sport_complex_id INT NOT NULL,
                        start_time TIMESTAMP,
                        end_time TIMESTAMP,
+                       interested_people INT NOT NULL,
+                       photo VARCHAR(255),
                        FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id)
 );
 

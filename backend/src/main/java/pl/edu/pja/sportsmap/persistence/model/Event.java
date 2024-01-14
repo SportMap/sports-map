@@ -17,6 +17,9 @@ public class Event {
     private Long id;
 
     @Column
+    private String name;
+
+    @Column
     private String description;
 
     @ManyToOne
@@ -28,4 +31,11 @@ public class Event {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
+
+    @Column(name = "intereste_people")
+    private Integer interestedPeople;
+
+    @Column
+    private String photo;
 }
+
