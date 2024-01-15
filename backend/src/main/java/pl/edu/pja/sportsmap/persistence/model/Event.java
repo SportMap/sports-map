@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -23,19 +23,23 @@ public class Event {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "sport_complex_id")
+    @JoinColumn(nullable = false)
     private SportComplex sportComplex;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
+    private LocalDateTime endTime;
 
-    @Column(name = "intereste_people")
+    @Column(name = "interested_people")
     private Integer interestedPeople;
 
     @Column
     private String photo;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User user;
 }
 

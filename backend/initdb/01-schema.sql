@@ -33,17 +33,7 @@ CREATE TABLE opening_hours (
                                FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id)
 );
 
-CREATE TABLE events (
-                       id SERIAL PRIMARY KEY,
-                       name VARCHAR(255) NOT NULL,
-                       description TEXT,
-                       sport_complex_id INT NOT NULL,
-                       start_time TIMESTAMP,
-                       end_time TIMESTAMP,
-                       interested_people INT NOT NULL,
-                       photo VARCHAR(255),
-                       FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id)
-);
+
 
 CREATE TABLE users (
                       id SERIAL PRIMARY KEY,
@@ -52,6 +42,19 @@ CREATE TABLE users (
                       password VARCHAR(255) NOT NULL,
                       salt CHAR(16) NOT NULL,
                       avatar VARCHAR(255) NOT NULL
+);
+CREATE TABLE events (
+                        id SERIAL PRIMARY KEY,
+                        name VARCHAR(255) NOT NULL,
+                        description TEXT,
+                        sport_complex_id INT NOT NULL,
+                        start_time TIMESTAMP,
+                        end_time TIMESTAMP,
+                        interested_people INT NOT NULL,
+                        photo VARCHAR(255),
+                        user_id INT NOT NULL,
+                        FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id),
+                        FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE users_events (
