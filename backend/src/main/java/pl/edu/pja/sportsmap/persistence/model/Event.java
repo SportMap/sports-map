@@ -1,15 +1,17 @@
 package pl.edu.pja.sportsmap.persistence.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @Entity
 @Table(name = "events")
 @Getter @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Event {
 
     @Id
@@ -17,15 +19,29 @@ public class Event {
     private Long id;
 
     @Column
+    private String name;
+
+    @Column
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "sport_complex_id")
+    @JoinColumn(nullable = false)
     private SportComplex sportComplex;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
+    private LocalDateTime endTime;
+
+    @Column(name = "interested_people")
+    private Integer interestedPeople;
+
+    @Column
+    private String photo;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User user;
 }
+

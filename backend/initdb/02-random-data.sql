@@ -40,13 +40,18 @@ VALUES
     ('The gym has a wide range of equipment and is rarely overcrowded.', 4, 4, 4, '2023-04-05'),
     ('Perfect for weekend soccer games, the turf is in great condition.', 5, 5, 5, '2023-05-15');
 
-INSERT INTO events (description, sport_complex_id, start_time, end_time)
+INSERT INTO events (name, description, sport_complex_id, start_time, end_time, interested_people, photo, user_id)
 VALUES
-    ('City Crossfit Challenge', 1, '2023-07-15 14:00:00', '2023-07-15 17:00:00'),
-    ('National Gymnastics Competition', 2, '2023-08-20 09:00:00', '2023-08-20 18:00:00'),
-    ('Urban Ice Skating Showdown', 3, '2023-09-10 06:00:00', '2023-09-10 14:00:00'),
-    ('Beach Volleyball Summer Cup', 4,'2023-10-05 10:00:00', '2023-10-08 20:00:00'),
-    ('Extreme Sports Expo 2023', 5, '2023-11-15 17:00:00', '2023-11-15 21:00:00');
+    ('City Crossfit Challenge', 'An exciting crossfit competition in the city.', 1, '2023-07-15 14:00:00', '2023-07-15 17:00:00', 50, 'city_crossfit_challenge.jpg', 1),
+    ('aaaaa', 'asda.', 1, '2023-07-15 14:00:00', '2023-07-15 17:00:00', 50, 'city_crossfit_challenge.jpg', 1),
+    ('itStartsInHolidays', 'asda.', 1, '2024-07-15 14:00:00', '2024-07-15 17:00:00', 50, 'city_crossfit_challenge.jpg', 1),
+    ('shouldBeAvailableNow', 'asda.', 1, '2024-01-13 14:00:00', '2024-02-15 17:00:00', 50, 'city_crossfit_challenge.jpg', 1),
+    ('City Crossfit Challenge', 'An exciting crossfit competition in the city.', 1, '2023-07-15 14:00:00', '2023-07-15 17:00:00', 50, 'city_crossfit_challenge.jpg', 1),
+    ('National Gymnastics Competition', 'Watch the best gymnasts compete nationally.', 2, '2023-08-20 09:00:00', '2023-08-20 18:00:00', 80, 'national_gymnastics_competition.jpg', 2),
+    ('Urban Ice Skating Showdown', 'Experience thrilling ice skating performances.', 3, '2023-09-10 06:00:00', '2023-09-10 14:00:00', 30, 'urban_ice_skating_showdown.jpg', 3),
+    ('Beach Volleyball Summer Cup', 'Enjoy beach volleyball action in the summer sun.', 4, '2023-10-05 10:00:00', '2023-10-08 20:00:00', 60, 'beach_volleyball_summer_cup.jpg', 4),
+    ('Extreme Sports Expo 2023', 'Explore the latest trends in extreme sports.', 5, '2023-11-15 17:00:00', '2023-11-15 21:00:00', 100, 'extreme_sports_expo_2023.jpg', 5);
+
 
 INSERT INTO users_events (user_id, event_id) VALUES
 (1, 1),
