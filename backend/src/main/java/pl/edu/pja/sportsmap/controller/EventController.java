@@ -1,13 +1,12 @@
 package pl.edu.pja.sportsmap.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.edu.pja.sportsmap.dto.event.AddEventDto;
 import pl.edu.pja.sportsmap.dto.event.GetSimpleDetailedEventDto;
 import pl.edu.pja.sportsmap.dto.event.GetSimpleShortEventDto;
 import pl.edu.pja.sportsmap.persistence.model.Event;
+import pl.edu.pja.sportsmap.persistence.model.Review;
 import pl.edu.pja.sportsmap.service.EventService;
 import pl.edu.pja.sportsmap.service.SportComplexService;
 import pl.edu.pja.sportsmap.service.UserService;
@@ -29,7 +28,7 @@ public class EventController {
         this.userService = userService;
     }
 
-    @GetMapping("/short/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<List<GetSimpleShortEventDto>> getShortInfoAboutAllAvailableEventsForSportComplex(@PathVariable Long id){
         List<GetSimpleShortEventDto> getSimpleShortEventDtos = eventService.getAllAvailableEventsBySportComplexId(id)
                 .stream()
@@ -47,6 +46,12 @@ public class EventController {
                 .toList();
 
         return ResponseEntity.ok(getSimpleDetailedEventDtos);
+    }
+
+    @PostMapping()
+    public ResponseEntity<Event> addEvent(@RequestBody AddEventDto addEventDto){
+        Event event = eventService.addEvent(addEventDto);
+        return ResponseEntity.ok(event);
     }
 
     public GetSimpleShortEventDto convertEntityToSimpleShortEventDto(Event event){
