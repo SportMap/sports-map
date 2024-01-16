@@ -10,6 +10,7 @@ public record SportComplexSimpleDto(
         SportComplexCategory category,
         Double latitude,
         Double longitude,
+        String photo,
         boolean isOpen,
         boolean isEventNow,
         boolean isEventTomorrow
