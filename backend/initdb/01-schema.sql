@@ -50,7 +50,6 @@ CREATE TABLE events (
                         sport_complex_id INT NOT NULL,
                         start_time TIMESTAMP,
                         end_time TIMESTAMP,
-                        interested_people INT NOT NULL,
                         photo VARCHAR(255),
                         user_id INT NOT NULL,
                         FOREIGN KEY (sport_complex_id) REFERENCES sport_complexes(id),

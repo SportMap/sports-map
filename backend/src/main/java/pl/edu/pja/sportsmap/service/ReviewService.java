@@ -56,7 +56,7 @@ public class ReviewService {
         review.setContent(reviewDto.content());
         review.setRate(reviewDto.rate());
 
-        Optional<User> userOptional = userRepository.findUserByNickname(reviewDto.nickname());
+        Optional<User> userOptional = userRepository.findById(reviewDto.userId());
         User user = userOptional.orElseThrow(() -> new EntityNotFoundException("User not found"));
         review.setUser(user);
 
