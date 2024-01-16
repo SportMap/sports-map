@@ -1,5 +1,6 @@
 package pl.edu.pja.sportsmap.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,7 +55,8 @@ public class SportComplexController {
         return ResponseEntity.ok(convertToDetailedDto(sportComplex.get()));
     }
 
-
+    @Operation(
+            summary = "side panel - returns a list of all categories")
     @GetMapping("/categories")
     public ResponseEntity<List<AllSportComplexCategoryDto>> getAllSportCategories() {
         List<SportComplexCategory> sportCategories = sportComplexCategoryService.getAllSportComplexCategories();
@@ -64,7 +66,9 @@ public class SportComplexController {
         return ResponseEntity.ok(sportCategoryDtos);
     }
 
-
+    @Operation(
+            summary = "side panel - returns a list of available categories",
+            description = "Returns only categories in which any sportsComplex is currently open. (It's 16:00 and any pool is open - the swimming category will be available. It is 23:00 and all pools are closed, the swimming category will be hidden)")
     @GetMapping("/categories/available-now")
     public ResponseEntity<List<AvailableSportComplexCategoryDto>> getAvailableCategoriesAtThisMoment() {
         List<SportComplexCategory> availableCategories = sportComplexCategoryService.getAvailableComplexCategories();

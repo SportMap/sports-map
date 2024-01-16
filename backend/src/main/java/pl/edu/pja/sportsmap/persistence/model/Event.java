@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "events")
-@Getter @Setter
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,8 +35,6 @@ public class Event {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime endTime;
 
-    @Column(name = "interested_people")
-    private Integer interestedPeople;
 
     @Column
     private String photo;
