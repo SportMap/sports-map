@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.pja.sportsmap.dto.SportComplexDetailedDto;
 import pl.edu.pja.sportsmap.dto.SportComplexSimpleDto;
 import pl.edu.pja.sportsmap.exception.NotFoundException;
+import pl.edu.pja.sportsmap.persistence.dao.EventRepository;
 import pl.edu.pja.sportsmap.persistence.dao.SportComplexPaginationRepository;
 import pl.edu.pja.sportsmap.persistence.dao.SportComplexRepository;
 import pl.edu.pja.sportsmap.persistence.model.SportComplex;
@@ -17,13 +18,13 @@ public class SportComplexService {
     private final SportComplexRepository sportComplexRepository;
     private final SportComplexPaginationRepository sportComplexPaginationRepository;
     private final OpeningHoursService openingHoursService;
-    private final EventService eventService;
+    private final EventRepository eventRepository;
 
-    public SportComplexService(SportComplexRepository sportComplexRepository, SportComplexPaginationRepository sportComplexPaginationRepository, OpeningHoursService openingHoursService, EventService eventService) {
+    public SportComplexService(SportComplexRepository sportComplexRepository, SportComplexPaginationRepository sportComplexPaginationRepository, OpeningHoursService openingHoursService, EventRepository eventRepository) {
         this.sportComplexRepository = sportComplexRepository;
         this.sportComplexPaginationRepository = sportComplexPaginationRepository;
         this.openingHoursService = openingHoursService;
-        this.eventService = eventService;
+        this.eventRepository = eventRepository;
     }
 
     public List<SportComplex> getAllSportComplexes() {
@@ -67,8 +68,8 @@ public class SportComplexService {
                 .surface(sportComplex.getSurface())
                 .photo(sportComplex.getPhoto())
                 .isOpen(openingHoursService.isSportComplexOpenNow(sportComplex))
-                .isEventNow(eventService.isEventNow(sportComplex))
-                .isEventTomorrow(eventService.isEventTomorrow(sportComplex))
+                .isEventNow(isEventNow(sportComplex))
+                .isEventTomorrow(isEventTomorrow(sportComplex))
                 .isOpen247(sportComplex.isOpen247())
                 .openingHours(openingHoursService.getOpeningHours(sportComplex.getId()))
                 .build();
@@ -83,8 +84,16 @@ public class SportComplexService {
                 .longitude(sportComplex.getLongitude())
                 .photo(sportComplex.getPhoto())
                 .isOpen(openingHoursService.isSportComplexOpenNow(sportComplex))
-                .isEventNow(eventService.isEventNow(sportComplex))
-                .isEventTomorrow(eventService.isEventTomorrow(sportComplex))
+                .isEventNow(isEventNow(sportComplex))
+                .isEventTomorrow(isEventTomorrow(sportComplex))
                 .build();
+    }
+
+    public boolean isEventNow(SportComplex sportComplex) {
+        return !eventRepository.findCurrentEventsByComplexId(sportComplex.getId()).isEmpty();
+    }
+
+    public boolean isEventTomorrow(SportComplex sportComplex) {
+        return !eventRepository.findEventsStartingNextDayByComplexId(sportComplex.getId()).isEmpty();
     }
 }
