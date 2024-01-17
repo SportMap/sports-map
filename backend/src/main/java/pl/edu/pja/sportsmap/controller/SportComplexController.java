@@ -1,6 +1,7 @@
 package pl.edu.pja.sportsmap.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pja.sportsmap.dto.AllSportComplexCategoryDto;
@@ -31,7 +32,7 @@ public class SportComplexController {
     }
 
     @GetMapping("admin")
-    public ResponseEntity<List<SportComplexDetailedDto>> getAllDetailedSportComplexes(@RequestParam int pageNumber, @RequestParam int pageSize) {
+    public ResponseEntity<Page<SportComplexDetailedDto>> getAllDetailedSportComplexes(@RequestParam int pageNumber, @RequestParam int pageSize) {
         return ResponseEntity.ok(sportComplexService.getAllSportComplexesDetailedDto(pageNumber, pageSize));
     }
 
