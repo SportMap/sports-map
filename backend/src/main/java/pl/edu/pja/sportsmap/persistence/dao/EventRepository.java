@@ -22,5 +22,5 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findAllBySportComplexIdAndEndTimeAfter(Long sportComplexId, LocalDateTime endDate);
 
-
+    List<Event> findAllByUserIdAndEndTimeAfter(Long userId, LocalDateTime endDate);
 }

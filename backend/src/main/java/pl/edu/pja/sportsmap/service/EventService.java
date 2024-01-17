@@ -3,10 +3,7 @@ package pl.edu.pja.sportsmap.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.edu.pja.sportsmap.dto.event.*;
-import pl.edu.pja.sportsmap.persistence.dao.EventRepository;
-import pl.edu.pja.sportsmap.persistence.dao.SportComplexRepository;
-import pl.edu.pja.sportsmap.persistence.dao.UserEventRepository;
-import pl.edu.pja.sportsmap.persistence.dao.UserRepository;
+import pl.edu.pja.sportsmap.persistence.dao.*;
 import pl.edu.pja.sportsmap.persistence.model.*;
 
 import java.time.Duration;
@@ -20,7 +17,7 @@ public class EventService {
     private final UserRepository userRepository;
     private final SportComplexRepository sportComplexRepository;
     private final UserEventRepository userEventRepository;
-    final SportComplexService sportComplexService;
+    private final SportComplexService sportComplexService;
     private final UserService userService;
 
     public EventService(EventRepository eventRepository, UserRepository userRepository, SportComplexRepository sportComplexRepository, UserEventRepository userEventRepository, SportComplexService sportComplexService, UserService userService) {
@@ -35,6 +32,25 @@ public class EventService {
     public List<Event> getAllAvailableEventsBySportComplexId(Long id) {
         LocalDateTime currentTime = LocalDateTime.now();
         return eventRepository.findAllBySportComplexIdAndEndTimeAfter(id, currentTime);
+    }
+
+
+
+
+    public List<Event> getAllAvailableInterestedEventsByUserId(Long userId) {
+        List<UserEvent> userEvents = userEventRepository.findAllByUserId(userId);
+
+        List<Long> events = userEvents.stream()
+                .filter(userEvent -> userEvent.getEvent().getEndTime().isAfter(LocalDateTime.now()))
+                .map(userEvent -> userEvent.getEvent().getId())
+                .toList();
+
+        return eventRepository.findAllById(events);
+    }
+
+    public List<Event> getAllAvailableCreatedEventsByUserId(Long id) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        return eventRepository.findAllByUserIdAndEndTimeAfter(id, currentTime);
     }
 
     public Event addEvent(AddEventDto addEventDto) {
@@ -53,7 +69,7 @@ public class EventService {
 //        }
 //    }
 
-    public JoinEventDto joinEvent(Long eventId, Long userId){
+    public JoinEventDto joinEvent(Long userId, Long eventId){
         Event event = eventRepository.findById(eventId).orElseThrow(() -> new EntityNotFoundException("Event not found"));
         User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found!"));
 
@@ -64,7 +80,6 @@ public class EventService {
         userEventRepository.save(new UserEvent(user,event));
         return new JoinEventDto("user " + user.getNickname() + " joined to " + event.getName() + " event.");
     }
-
 
     public Integer getInterestedPeopleCount(Long eventId) {
         return userEventRepository.countByEventId(eventId);
@@ -87,6 +102,7 @@ public class EventService {
                 .photo(event.getPhoto())
                 .name(event.getName())
                 .sportObjectName(sportComplexService.getSportComplexNameById(event.getSportComplex().getId()))
+                .sportObjectAddress(sportComplexService.getSportComplexAddressById(event.getSportComplex().getId()))
                 .startTime(event.getStartTime())
                 .interested_people(userEventRepository.countByEventId(event.getId()))
                 .build();
@@ -97,6 +113,7 @@ public class EventService {
                 .name(event.getName())
                 .photo(event.getPhoto())
                 .sportObjectName(sportComplexService.getSportComplexNameById(event.getSportComplex().getId()))
+                .sportObjectAddress(sportComplexService.getSportComplexAddressById(event.getSportComplex().getId()))
                 .startTime(event.getStartTime())
                 .endTime(event.getEndTime())
                 .interestedPeople(userEventRepository.countByEventId(event.getId()))
