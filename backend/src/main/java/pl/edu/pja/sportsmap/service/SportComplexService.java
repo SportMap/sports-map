@@ -10,6 +10,7 @@ import pl.edu.pja.sportsmap.exception.NotFoundException;
 import pl.edu.pja.sportsmap.persistence.dao.EventRepository;
 import pl.edu.pja.sportsmap.persistence.dao.SportComplexPaginationRepository;
 import pl.edu.pja.sportsmap.persistence.dao.SportComplexRepository;
+import pl.edu.pja.sportsmap.persistence.model.Address;
 import pl.edu.pja.sportsmap.persistence.model.SportComplex;
 
 import java.util.List;
@@ -63,6 +64,11 @@ public class SportComplexService {
         return sportComplex.map(SportComplex::getName).orElse(null);
     }
 
+    public Address getSportComplexAddressById(Long sportComplexId) {
+        Optional<SportComplex> sportComplex = sportComplexRepository.findById(sportComplexId);
+        return sportComplex.map(SportComplex::getAddress).orElse(null);
+
+    }
     private SportComplexDetailedDto convertToDetailedDto(SportComplex sportComplex) {
         return SportComplexDetailedDto.builder()
                 .address(sportComplex.getAddress())

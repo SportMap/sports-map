@@ -84,7 +84,54 @@ public class EventController {
 //        }
 //    }
 
+    @Operation(
+            summary = "Returns basic information about events of interest to the user",
+            description = "Returns basic information about an events for the given UserId. (only the events that are just in progress or will begin in the future, past events are omitted ")
+    @GetMapping("/interested/{id}")
+    public ResponseEntity<List<GetSimpleShortEventDto>> getShortInfoAboutAllInterestedEventsForUser(@PathVariable Long id){
+        List<GetSimpleShortEventDto> getSimpleShortEventDtos = eventService.getAllAvailableInterestedEventsByUserId(id)
+                .stream()
+                .map(eventService::convertEntityToSimpleShortEventDto)
+                .toList();
 
+        return ResponseEntity.ok(getSimpleShortEventDtos);
+    }
+
+    @Operation(
+            summary = "Returns detailed information about events of interest to the user",
+            description = "Returns detailed information about an events for the given UserId. (only the events that are just in progress or will begin in the future, past events are omitted ")
+    @GetMapping("/detailed/interested/{id}")
+    public ResponseEntity<List<GetSimpleDetailedEventDto>> getDetailedInfoAboutAllInterestedEventsForUser(@PathVariable Long id){
+        List<GetSimpleDetailedEventDto> getSimpleDetailedEventDtos = eventService.getAllAvailableInterestedEventsByUserId(id)
+                .stream()
+                .map(eventService::convertEntityToSimpleDetailedEventDto)
+                .toList();
+
+        return ResponseEntity.ok(getSimpleDetailedEventDtos);
+    }
+    @Operation(
+            summary = "Returns basic information about events created by user",
+            description = "Returns basic information about an created events for the given UserId. (only the events that are just in progress or will begin in the future, past events are omitted ")
+    @GetMapping("/created/{id}")
+    public ResponseEntity<List<GetSimpleShortEventDto>> getShortInfoAboutAllCreatedEventsByUser(@PathVariable Long id){
+        List<GetSimpleShortEventDto> getSimpleShortEventDtos = eventService.getAllAvailableCreatedEventsByUserId(id)
+                .stream()
+                .map(eventService::convertEntityToSimpleShortEventDto)
+                .toList();
+        return ResponseEntity.ok(getSimpleShortEventDtos);
+    }
+    @Operation(
+            summary = "Returns detailed information about events created by user",
+            description = "Returns detailed information about an created events for the given UserId. (only the events that are just in progress or will begin in the future, past events are omitted ")
+    @GetMapping("/detailed/created/{id}")
+    public ResponseEntity<List<GetSimpleDetailedEventDto>> getDetailedInfoAboutAllCreatedEventsByUser(@PathVariable Long id){
+        List<GetSimpleDetailedEventDto> getSimpleDetailedEventDtos = eventService.getAllAvailableCreatedEventsByUserId(id)
+                .stream()
+                .map(eventService::convertEntityToSimpleDetailedEventDto)
+                .toList();
+
+        return ResponseEntity.ok(getSimpleDetailedEventDtos);
+    }
 
 
 
