@@ -20,7 +20,7 @@ public class EventService {
     private final UserRepository userRepository;
     private final SportComplexRepository sportComplexRepository;
     private final UserEventRepository userEventRepository;
-    private final SportComplexService sportComplexService;
+    final SportComplexService sportComplexService;
     private final UserService userService;
 
     public EventService(EventRepository eventRepository, UserRepository userRepository, SportComplexRepository sportComplexRepository, UserEventRepository userEventRepository, SportComplexService sportComplexService, UserService userService) {
@@ -68,15 +68,6 @@ public class EventService {
 
     public Integer getInterestedPeopleCount(Long eventId) {
         return userEventRepository.countByEventId(eventId);
-    }
-
-
-    public boolean isEventNow(SportComplex sportComplex) {
-        return !eventRepository.findCurrentEventsByComplexId(sportComplex.getId()).isEmpty();
-    }
-
-    public boolean isEventTomorrow(SportComplex sportComplex) {
-        return !eventRepository.findEventsStartingNextDayByComplexId(sportComplex.getId()).isEmpty();
     }
 
     public Event convertAddEventDtoToEntity(AddEventDto addEventDto) {

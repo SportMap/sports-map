@@ -17,18 +17,18 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class EventServiceTest {
+class SportComplexServiceTest {
     @Mock
     private EventRepository eventRepository;
     @InjectMocks
-    private EventService eventService;
+    private SportComplexService sportComplexService;
 
     @Test
     void isEventShouldReturnTrue() {
         // given
         when(eventRepository.findCurrentEventsByComplexId(any())).thenReturn(List.of(new Event()));
         // when
-        boolean eventNow = eventService.isEventNow(new SportComplex());
+        boolean eventNow = sportComplexService.isEventNow(new SportComplex());
         // then
         assertTrue(eventNow);
     }
@@ -38,7 +38,7 @@ class EventServiceTest {
         // given
         when(eventRepository.findCurrentEventsByComplexId(any())).thenReturn(List.of());
         // when
-        boolean eventNow = eventService.isEventNow(new SportComplex());
+        boolean eventNow = sportComplexService.isEventNow(new SportComplex());
         // then
         assertFalse(eventNow);
     }
@@ -48,7 +48,7 @@ class EventServiceTest {
         // given
         when(eventRepository.findEventsStartingNextDayByComplexId(any())).thenReturn(List.of(new Event()));
         // when
-        boolean eventTomorrow = eventService.isEventTomorrow(new SportComplex());
+        boolean eventTomorrow = sportComplexService.isEventTomorrow(new SportComplex());
         // then
         assertTrue(eventTomorrow);
     }
@@ -58,7 +58,7 @@ class EventServiceTest {
         // given
         when(eventRepository.findEventsStartingNextDayByComplexId(any())).thenReturn(List.of());
         // when
-        boolean eventTomorrow = eventService.isEventTomorrow(new SportComplex());
+        boolean eventTomorrow = sportComplexService.isEventTomorrow(new SportComplex());
         // then
         assertFalse(eventTomorrow);
     }
