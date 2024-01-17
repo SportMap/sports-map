@@ -1,5 +1,7 @@
 package pl.edu.pja.sportsmap.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.edu.pja.sportsmap.dto.SportComplexDetailedDto;
@@ -39,11 +41,14 @@ public class SportComplexService {
                 .toList();
     }
 
-    public List<SportComplexDetailedDto> getAllSportComplexesDetailedDto(int pageNumber, int pageSize) {
-        return sportComplexPaginationRepository.findAll(PageRequest.of(pageNumber, pageSize))
+    public Page<SportComplexDetailedDto> getAllSportComplexesDetailedDto(int pageNumber, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNumber, pageSize);
+        List<SportComplexDetailedDto> content = sportComplexPaginationRepository.findAll(pageable)
                 .stream()
                 .map(this::convertToDetailedDto)
                 .toList();
+        long count = sportComplexRepository.count();
+        return new PageImpl<>(content, PageRequest.of(pageNumber, pageSize), count);
     }
 
     public SportComplexDetailedDto getSportComplex(Long id) {
