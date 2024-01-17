@@ -2,6 +2,7 @@
 
 <head>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="complex_wrapper.css">
     <link rel="stylesheet" href="logon-box-style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -9,7 +10,7 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="complex_wrapper_engine.js" type="application/javascript"></script>
 </head>
 
 <body>
@@ -35,7 +36,9 @@
         </div>
     </header>
 
-    <div id="map" class="map"></div>
+    <div class="map_container">
+        <div id="map" class="map"></div>
+    </div>
     <div class="sidebar"></div>
 
     <div class="logon-container hidden">
