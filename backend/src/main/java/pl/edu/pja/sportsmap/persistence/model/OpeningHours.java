@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Time;
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 
 
 @Entity
@@ -21,10 +21,10 @@ public class OpeningHours {
     private Long id;
 
     @Column
-    private Time openingTime;
+    private LocalTime openingTime;
 
     @Column
-    private Time closingTime;
+    private LocalTime closingTime;
 
     @Column
     @Enumerated(EnumType.ORDINAL)
