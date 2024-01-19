@@ -1,3 +1,5 @@
+Swagger link: http://localhost:8080/swagger-ui/index.html#/
+
 # Instrukcja Uruchomienia Aplikacji Spring Boot z Bazą Danych wystawianą przez Dokcer Compose
 
 ## Wymagania Wstępne
