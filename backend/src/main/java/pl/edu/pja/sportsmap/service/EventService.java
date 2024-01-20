@@ -78,7 +78,7 @@ public class EventService {
         }
 
         userEventRepository.save(new UserEvent(user,event));
-        return new JoinEventDto("user " + user.getNickname() + " joined to " + event.getName() + " event.");
+        return new JoinEventDto("user " + user.getUsername() + " joined to " + event.getName() + " event.");
     }
 
     public Integer getInterestedPeopleCount(Long eventId) {

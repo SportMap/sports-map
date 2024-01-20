@@ -37,11 +37,11 @@ CREATE TABLE opening_hours (
 
 CREATE TABLE users (
                       id SERIAL PRIMARY KEY,
-                      nickname VARCHAR(255) NOT NULL,
+                      username VARCHAR(255) NOT NULL,
                       email VARCHAR(255) NOT NULL,
                       password VARCHAR(255) NOT NULL,
-                      salt CHAR(16) NOT NULL,
-                      avatar VARCHAR(255) NOT NULL
+                      authority CHAR(16) NOT NULL DEFAULT 'USER',
+                      avatar VARCHAR(255)
 );
 CREATE TABLE events (
                         id SERIAL PRIMARY KEY,
