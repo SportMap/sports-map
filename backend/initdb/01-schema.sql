@@ -20,8 +20,8 @@ CREATE TABLE sport_complexes (
                         open_24_7 BOOLEAN,
                         FOREIGN KEY (address_id) REFERENCES address(id),
                         photo VARCHAR(255),
-                        phone_number VARCHAR(15)
-
+                        phone_number VARCHAR(15),
+                        status VARCHAR(25)
 );
 
 CREATE TABLE opening_hours (
