@@ -98,7 +98,7 @@ $.ajax(settings).done(function (response) {
         var marker = L.marker([obj['latitude'], obj['longitude']]).addTo(map);
         var custom_popup = "<div class='popup-image'></div> \
                         <div class='popup-info'> \
-                        <a class='title'>Polsko Japońska Akademia Technik Komputerowych</a> \
+                        <a class='title'>"+obj['name']+"</a> \
                         <a class='info'><img src='info.svg'>"+obj['category']+"</a> \
                         <a class='info'><img src='distance_ico.svg'> 10m</a> \
                         <div class='popup-buttons-wrapper'> \
