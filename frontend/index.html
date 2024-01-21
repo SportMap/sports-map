@@ -40,7 +40,14 @@
 
     <div id="successMessage">Zalogowano pomyślnie!</div>
     <div id="map" class="map"></div>
-    <div class="sidebar"></div>
+    <div class="sidebar">
+        <div class="sidebar_category_container"></div>
+        <div class="sidebar_category_container_bar"></div>
+        <div class="sidebar_footer">
+            <a href="https://facebook.com"><img src="facebook.png" class="img" alt="facebook"></a>
+            <a href="https://instagram.com"><img src="instagram.png" class="img" alt="instagram"></a>
+        </div>
+    </div>
 
     <script src="script.js" type="application/javascript"></script>
 
@@ -79,7 +86,7 @@
                 <label for='accept_terms'>Akceptuję ogólne <a href="warunki.html">warunki użytkownika</a> i <a href="polityka.html">politykę prywatności</a></label>
             </div>
         </div>
-        <div class="logon-container-button">Zarejestruj się</div>
+        <div class="logon-container-button" onclick="register()">Zarejestruj się</div>
         <div class="register-text-wrapper">
             <a>Masz już konto?</a>
         </div>

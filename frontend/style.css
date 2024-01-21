@@ -319,6 +319,12 @@ header {
     margin-top: 84px;
 }
 
+.map_container {
+    height: calc(100% - 84px);
+    width:100%;
+    margin-top: 84px;
+}
+
 .leaflet-popup-content-wrapper {
     width: 295px;
     height: 300px;
