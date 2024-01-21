@@ -6,18 +6,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.edu.pja.sportsmap.persistence.dao.OpeningHoursRepository;
-import pl.edu.pja.sportsmap.persistence.dao.SportComplexRepository;
 import pl.edu.pja.sportsmap.persistence.model.OpeningHours;
 import pl.edu.pja.sportsmap.persistence.model.SportComplex;
 
-import java.sql.Time;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static pl.edu.pja.sportsmap.service.OpeningHoursService.formatter;
 
 @ExtendWith(MockitoExtension.class)
 class OpeningHoursServiceTest {
@@ -29,8 +26,8 @@ class OpeningHoursServiceTest {
     @Test
     void isSportComplexOpenShouldReturnTrueWhenHoursAreInGivenTimeFrame() {
         // given
-        Time openingTime = Time.valueOf(formatter.format(LocalTime.now().minusSeconds(5)));
-        Time closingTime = Time.valueOf(formatter.format(LocalTime.now().plusSeconds(5)));
+        LocalTime openingTime = LocalTime.now().minusSeconds(5);
+        LocalTime closingTime = LocalTime.now().plusSeconds(5);
         OpeningHours openingHours = new OpeningHours();
         openingHours.setOpeningTime(openingTime);
         openingHours.setClosingTime(closingTime);
@@ -45,8 +42,8 @@ class OpeningHoursServiceTest {
     @Test
     void isSportComplexOpenShouldReturnFalseWhenHoursAreInGivenTimeFrame() {
         // given
-        Time openingTime = Time.valueOf(formatter.format(LocalTime.now().plusSeconds(5)));
-        Time closingTime = Time.valueOf(formatter.format(LocalTime.now().plusSeconds(10)));
+        LocalTime openingTime = LocalTime.now().plusSeconds(5);
+        LocalTime closingTime = LocalTime.now().plusSeconds(15);
         OpeningHours openingHours = new OpeningHours();
         openingHours.setOpeningTime(openingTime);
         openingHours.setClosingTime(closingTime);

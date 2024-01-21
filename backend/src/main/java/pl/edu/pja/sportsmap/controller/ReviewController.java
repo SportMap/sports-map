@@ -1,5 +1,6 @@
 package pl.edu.pja.sportsmap.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pja.sportsmap.dto.review.AddReviewDto;
@@ -20,6 +21,8 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
+    @Operation(
+            summary = "returns a list of reviews about an object with the given id")
     @GetMapping("{id}")
     public ResponseEntity<List<GetReviewDto>> getAllSportComplexReviewsById(@PathVariable("id") Long id){
         List<Review> reviews = reviewService.getAllReviewsBySportComplexId(id);
@@ -30,6 +33,9 @@ public class ReviewController {
         return ResponseEntity.ok(reviewsDto);
     }
 
+    @Operation(
+            summary = "add new review ",
+            description = "Body - UserId and SportComplexId must exists in database")
     @PostMapping()
     public ResponseEntity<Review> addReview(@RequestBody AddReviewDto reviewDto){
         Review review = reviewService.addReview(reviewDto);
