@@ -69,7 +69,7 @@ public class EventService {
 //        }
 //    }
 
-    public JoinEventDto joinEvent(Long userId, Long eventId){
+    public JoinEventResponseDto joinEvent(Long userId, Long eventId){
         Event event = eventRepository.findById(eventId).orElseThrow(() -> new EntityNotFoundException("Event not found"));
         User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found!"));
 
@@ -78,7 +78,17 @@ public class EventService {
         }
 
         userEventRepository.save(new UserEvent(user,event));
-        return new JoinEventDto("user " + user.getNickname() + " joined to " + event.getName() + " event.");
+        return new JoinEventResponseDto("user " + user.getNickname() + " joined to " + event.getName());
+    }
+
+    public UnjoinEventResponseDto unjoinEvent(Long userId, Long eventId){
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EntityNotFoundException("Event not found"));
+
+        if (userEventRepository.existsByUser_IdAndEvent_Id(user.getId(),event.getId())){
+            userEventRepository.delete(userEventRepository.findByUser_IdAndEvent_Id(user.getId(),event.getId()));
+        }
+        return new UnjoinEventResponseDto("user " + user.getNickname() + " unjoined from " + event.getName());
     }
 
     public Integer getInterestedPeopleCount(Long eventId) {

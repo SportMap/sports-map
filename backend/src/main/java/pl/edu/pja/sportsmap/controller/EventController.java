@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pja.sportsmap.dto.event.*;
-import pl.edu.pja.sportsmap.dto.event.request.JoinEventRequestDto;
+import pl.edu.pja.sportsmap.dto.event.JoinEventRequestDto;
 import pl.edu.pja.sportsmap.persistence.model.Event;
 import pl.edu.pja.sportsmap.service.EventService;
 import pl.edu.pja.sportsmap.service.SportComplexService;
@@ -68,10 +68,19 @@ public class EventController {
             description = "Body - eventId and userId must exists in database." +
                     " User cannot join the same event twice - throw new IllegalStateException(\"User is already joined to the event\");")
     @PostMapping("/join")
-    public ResponseEntity<JoinEventDto> joinToEvent(@RequestBody JoinEventRequestDto joinEventRequestDto){
-        JoinEventDto joinEventDto = eventService.joinEvent(joinEventRequestDto.UserId(), joinEventRequestDto.EventId());
+    public ResponseEntity<JoinEventResponseDto> joinToEvent(@RequestBody JoinEventRequestDto joinEventRequestDto){
+        JoinEventResponseDto joinEventResponseDto = eventService.joinEvent(joinEventRequestDto.UserId(), joinEventRequestDto.EventId());
 
-        return ResponseEntity.ok(joinEventDto);
+        return ResponseEntity.ok(joinEventResponseDto);
+    }
+
+    @Operation(summary = "unjoin from the event")
+    @DeleteMapping("/unjoin")
+    public ResponseEntity<UnjoinEventResponseDto> unjoinFromEvent(@RequestBody UnJoinEventRequestDto unJoinEventRequestDto){
+       UnjoinEventResponseDto unjoinEventResponseDto = eventService.unjoinEvent(unJoinEventRequestDto.userId(), unJoinEventRequestDto.EventId());
+
+
+        return ResponseEntity.ok(unjoinEventResponseDto);
     }
 
 //    @PatchMapping("/UserId")
