@@ -53,8 +53,8 @@
         <div class="logon-avatar-background">
             <div class="logon-avatar"></div>
         </div>
-        <input type="text" placeholder="Email / Nazwa użytkownika" class="logon-container-input">
-        <input type="password" placeholder="Hasło" class="logon-container-input">
+        <input type="text" placeholder="Email / Nazwa użytkownika" class="logon-container-input" id="username">
+        <input type="password" placeholder="Hasło" class="logon-container-input" id="password">
         <div class='remember-container'>
             <div class="radio">
                 <input type='radio' id='remember_me'>
@@ -62,7 +62,7 @@
             </div>
             <a href="index.html" class="fixed">Zapomniałeś/aś hasła?</a>
         </div>
-        <div class="logon-container-button">Zaloguj</div>
+        <div class="logon-container-button" onclick="login()">Zaloguj</div>
         <div class="register-text-wrapper">
             <a>Nie masz konta?</a>
         </div>
