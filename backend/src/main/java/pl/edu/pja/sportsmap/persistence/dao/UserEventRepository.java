@@ -9,6 +9,7 @@ public interface UserEventRepository extends JpaRepository<UserEvent, Long> {
     public Integer countByEventId(Long eventId);
 
     public boolean existsByUser_IdAndEvent_Id(Long userId, Long eventId);
+    public UserEvent findByUser_IdAndEvent_Id(Long userId, Long eventId);
 
     public List<UserEvent> findAllByUserId(Long userId);
 }
