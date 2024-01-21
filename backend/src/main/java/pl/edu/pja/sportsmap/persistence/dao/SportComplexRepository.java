@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface SportComplexRepository extends JpaRepository<SportComplex, Long> {
     List<SportComplex> findAllByStatus(SportComplexStatus status);
+    long countByStatus(SportComplexStatus status);
 }
