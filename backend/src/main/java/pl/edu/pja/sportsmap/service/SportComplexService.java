@@ -53,7 +53,8 @@ public class SportComplexService {
                 .stream()
                 .map(this::convertToDetailedDto)
                 .toList();
-        return new PageImpl<>(content, PageRequest.of(pageNumber, pageSize), content.size());
+        long count = sportComplexRepository.countByStatus(SportComplexStatus.APPROVED);
+        return new PageImpl<>(content, PageRequest.of(pageNumber, pageSize), count);
     }
 
     public Page<SportComplexDetailedDto> getAwaitingApprovalSportComplexesDetailedDto(int pageNumber, int pageSize) {
@@ -63,7 +64,8 @@ public class SportComplexService {
                 .stream()
                 .map(this::convertToDetailedDto)
                 .toList();
-        return new PageImpl<>(content, PageRequest.of(pageNumber, pageSize), content.size());
+        long count = sportComplexRepository.countByStatus(SportComplexStatus.AWAITING_APPROVAL);
+        return new PageImpl<>(content, PageRequest.of(pageNumber, pageSize), count);
     }
 
     public SportComplexDetailedDto getSportComplex(Long id) {
