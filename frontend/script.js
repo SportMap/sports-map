@@ -70,6 +70,16 @@ function displayRegisterBox() {
     register_blur.addEventListener("click", hideRegisterBox);
 }
 
+function goToLoginBox() {
+    hideRegisterBox();
+    displayLoginBox();
+}
+
+function goToRegisterBox() {
+    hideLoginBox();
+    displayRegisterBox();
+}
+
 //====================================================================================
 // Sekcja obsługi mapy
 
