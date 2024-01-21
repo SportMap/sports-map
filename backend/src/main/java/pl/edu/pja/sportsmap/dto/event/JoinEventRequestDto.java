@@ -1,4 +1,4 @@
 package pl.edu.pja.sportsmap.dto.event;
 
-public record JoinEventRequestDto (Long UserId, Long EventId){
+public record JoinEventRequestDto (Long userId, Long eventId){
 }
