@@ -50,4 +50,8 @@ public class SportComplex {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private SportComplexStatus status;
 }

@@ -14,6 +14,7 @@ import pl.edu.pja.sportsmap.persistence.dao.SportComplexPaginationRepository;
 import pl.edu.pja.sportsmap.persistence.dao.SportComplexRepository;
 import pl.edu.pja.sportsmap.persistence.model.Address;
 import pl.edu.pja.sportsmap.persistence.model.SportComplex;
+import pl.edu.pja.sportsmap.persistence.model.SportComplexStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,16 +39,28 @@ public class SportComplexService {
         return sportComplexRepository.findAll();
     }
 
-    public List<SportComplexSimpleDto> getAllSportComplexesSimpleDto() {
-        return sportComplexRepository.findAll()
+    public List<SportComplexSimpleDto> getApprovedSportComplexesSimpleDto() {
+        return sportComplexRepository.findAllByStatus(SportComplexStatus.APPROVED)
                 .stream()
                 .map(this::convertToSimpleDto)
                 .toList();
     }
 
-    public Page<SportComplexDetailedDto> getAllSportComplexesDetailedDto(int pageNumber, int pageSize) {
+    public Page<SportComplexDetailedDto> getApprovedSportComplexesDetailedDto(int pageNumber, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNumber, pageSize);
-        List<SportComplexDetailedDto> content = sportComplexPaginationRepository.findAll(pageable)
+        List<SportComplexDetailedDto> content = sportComplexPaginationRepository
+                .findAllByStatus(SportComplexStatus.APPROVED, pageable)
+                .stream()
+                .map(this::convertToDetailedDto)
+                .toList();
+        long count = sportComplexRepository.count();
+        return new PageImpl<>(content, PageRequest.of(pageNumber, pageSize), count);
+    }
+
+    public Page<SportComplexDetailedDto> getAwaitingApprovalSportComplexesDetailedDto(int pageNumber, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNumber, pageSize);
+        List<SportComplexDetailedDto> content = sportComplexPaginationRepository
+                .findAllByStatus(SportComplexStatus.AWAITING_APPROVAL, pageable)
                 .stream()
                 .map(this::convertToDetailedDto)
                 .toList();
@@ -68,9 +81,17 @@ public class SportComplexService {
         return sportComplex.map(SportComplex::getName).orElse(null);
     }
 
+    public void approveSportComplex(Long id) {
+        SportComplex sportComplex = sportComplexRepository.getReferenceById(id);
+        sportComplex.setStatus(SportComplexStatus.APPROVED);
+        sportComplexRepository.save(sportComplex);
+    }
+
     @Transactional
     public SportComplex createSportComplex(AddSportComplexDto sportComplexDto) {
-        SportComplex sportComplex = sportComplexRepository.saveAndFlush(convertDtoToEntity(sportComplexDto));
+        SportComplex entity = convertDtoToEntity(sportComplexDto);
+        entity.setStatus(SportComplexStatus.AWAITING_APPROVAL);
+        SportComplex sportComplex = sportComplexRepository.saveAndFlush(entity);
         openingHoursService.addOpeningHours(sportComplexDto.openingHours(), sportComplex);
         return sportComplex;
     }
@@ -90,6 +111,7 @@ public class SportComplexService {
     }
     private SportComplexDetailedDto convertToDetailedDto(SportComplex sportComplex) {
         return SportComplexDetailedDto.builder()
+                .id(sportComplex.getId())
                 .address(sportComplex.getAddress())
                 .description(sportComplex.getDescription())
                 .category(sportComplex.getCategory())
@@ -127,6 +149,7 @@ public class SportComplexService {
                 .category(sportComplexDto.category())
                 .longitude(sportComplexDto.longitude())
                 .latitude(sportComplexDto.latitude())
+                .website(sportComplexDto.website())
                 .isOpen247(sportComplexDto.isOpen247())
                 .photo(sportComplexDto.photo())
                 .address(addressService.addAddress(sportComplexDto.address()))
