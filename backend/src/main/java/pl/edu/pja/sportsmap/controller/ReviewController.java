@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pja.sportsmap.dto.review.AddReviewDto;
+import pl.edu.pja.sportsmap.dto.review.GetRatesDto;
 import pl.edu.pja.sportsmap.dto.review.GetReviewDto;
 import pl.edu.pja.sportsmap.persistence.model.Review;
 import pl.edu.pja.sportsmap.service.ReviewService;
@@ -40,6 +41,13 @@ public class ReviewController {
     public ResponseEntity<Review> addReview(@RequestBody AddReviewDto reviewDto){
         Review review = reviewService.addReview(reviewDto);
         return ResponseEntity.ok(review);
+    }
+
+    @Operation(summary = "returns a detailed information about rates of sportComplex")
+    @GetMapping("/rates/{id}")
+    public ResponseEntity<GetRatesDto> getSportComplexRatesById(@PathVariable("id") Long id){
+        GetRatesDto rates = reviewService.getSportComplexRatesById(id);
+        return ResponseEntity.ok(rates);
     }
 
 }
