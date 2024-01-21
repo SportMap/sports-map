@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="complex_wrapper.css">
     <link rel="stylesheet" href="logon-box-style.css">
@@ -37,17 +38,11 @@
         </div>
     </header>
 
-    <div class="map_container">
-        <div id="map" class="map"></div>
-    </div>
-    <div class="sidebar">
-        <div class="sidebar_category_container"></div>
-        <div class="sidebar_category_container_bar"></div>
-        <div class="sidebar_footer">
-            <a href="https://facebook.com"><img src="facebook.png" class="img" alt="facebook"></a>
-            <a href="https://instagram.com"><img src="instagram.png" class="img" alt="instagram"></a>
-        </div>
-    </div>
+    <div id="successMessage">Zalogowano pomyślnie!</div>
+    <div id="map" class="map"></div>
+    <div class="sidebar"></div>
+
+    <script src="script.js" type="application/javascript"></script>
 
     <div class="logon-container hidden">
         <div class="logon-avatar-background">
@@ -66,7 +61,7 @@
         <div class="register-text-wrapper">
             <a>Nie masz konta?</a>
         </div>
-        <div class="logon-container-button">Zarejestruj się</div>
+        <div class="logon-container-button" onclick="goToRegisterBox()">Zarejestruj się</div>
     </div>
 
     <div class="logon-container register-container hidden">
@@ -88,10 +83,11 @@
         <div class="register-text-wrapper">
             <a>Masz już konto?</a>
         </div>
-        <div class="logon-container-button">Zaloguj się</div>
+        <div class="logon-container-button" onclick="goToLoginBox()">Zaloguj się</div>
     </div>
 
-    <script src="script.js" type="application/javascript"></script>
+    
+    <script src="login_register_engine.js" type="application/javascript"></script>
 </body>
 
 </html>
