@@ -69,7 +69,7 @@ public class EventController {
                     " User cannot join the same event twice - throw new IllegalStateException(\"User is already joined to the event\");")
     @PostMapping("/join")
     public ResponseEntity<JoinEventResponseDto> joinToEvent(@RequestBody JoinEventRequestDto joinEventRequestDto){
-        JoinEventResponseDto joinEventResponseDto = eventService.joinEvent(joinEventRequestDto.UserId(), joinEventRequestDto.EventId());
+        JoinEventResponseDto joinEventResponseDto = eventService.joinEvent(joinEventRequestDto.userId(), joinEventRequestDto.eventId());
 
         return ResponseEntity.ok(joinEventResponseDto);
     }
@@ -77,7 +77,7 @@ public class EventController {
     @Operation(summary = "unjoin from the event")
     @DeleteMapping("/unjoin")
     public ResponseEntity<UnjoinEventResponseDto> unjoinFromEvent(@RequestBody UnJoinEventRequestDto unJoinEventRequestDto){
-       UnjoinEventResponseDto unjoinEventResponseDto = eventService.unjoinEvent(unJoinEventRequestDto.userId(), unJoinEventRequestDto.EventId());
+       UnjoinEventResponseDto unjoinEventResponseDto = eventService.unjoinEvent(unJoinEventRequestDto.userId(), unJoinEventRequestDto.eventId());
 
 
         return ResponseEntity.ok(unjoinEventResponseDto);
