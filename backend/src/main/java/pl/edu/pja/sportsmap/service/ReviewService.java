@@ -62,7 +62,7 @@ public class ReviewService {
         }else return null;
     }
 
-    public Double getMediumRateForSportComplex(Long id){
+    public String getMediumRateForSportComplex(Long id){
         Long totalCount = reviewRepository.countReviewsBySportComplexId(id);
         Long oneCount = reviewRepository.countReviewsBySportComplexIdAndRate(getSportComplexId(id), 1);
         Long twoCount = reviewRepository.countReviewsBySportComplexIdAndRate(getSportComplexId(id),2);
@@ -70,7 +70,10 @@ public class ReviewService {
         Long fourCount = reviewRepository.countReviewsBySportComplexIdAndRate(getSportComplexId(id),4);
         Long fiveCount = reviewRepository.countReviewsBySportComplexIdAndRate(getSportComplexId(id),5);
         Double result = (double) (oneCount + twoCount * 2 + threeCount * 3 + fourCount * 4 + fiveCount * 5) / totalCount;
-        return result;
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        String resultString = decimalFormat.format(result);
+        return resultString;
     }
 
 
