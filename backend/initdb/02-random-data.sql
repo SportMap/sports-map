@@ -48,7 +48,8 @@ VALUES
     ('UserTwo', 'usertwo@example.com', 'password123', 'USER', 'avatar4.jpg'),
     ('UserThree', 'userthree@example.com', 'password123', 'USER', 'avatar2.jpg'),
     ('UserFour', 'userfour@example.com', 'password123', 'USER', 'avatar3.jpg'),
-    ('UserFive', 'userfive@example.com', 'password123', 'USER', 'avatar5.jpg');
+    ('UserFive', 'userfive@example.com', 'password123', 'USER', 'avatar5.jpg'),
+    ('admin', 'admin@test', '{bcrypt}$2a$10$1CjUGw14jTjULfj5WO66YOQMBsKe2Mh3dbhoT0DH23.1ECpBM5ViS', 'ADMIN', 'avatar5.jpg'); -- password: admin
 
 
 INSERT INTO reviews (content, sport_complex_id, user_id, rate, review_date)
