@@ -1,3 +1,7 @@
+var start_long;
+var start_lat;
+var routeGeometry;
+
 function openMenu() {
     function delay(milliseconds){
         return new Promise(resolve => {
@@ -75,47 +79,14 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-var settings = {
-    'cache': false,
-    'dataType': "json", // Użyj "json" zamiast "jsonp" w przypadku CORS
-    "async": true,
-    "crossDomain": true,
-    "url": "http://localhost:8080/sport-complexes",
-    "method": "GET",
-    "xhrFields": {
-        "withCredentials": true  // Dla obsługi cookies i innych danych uwierzytelniających
-    },
-    "headers": {
-        "Content-Type": "application/json",
-    }
-};
+function start_navigating(lat, long) {
+    map.eachLayer(function (layer) {
+        if (layer === routeGeometry) {
+            map.removeLayer(layer);
+        }
+    });
 
-$.ajax(settings).done(function (response) {
-    complexes = Object.values(response);
-    console.log(complexes);
-    for (var i = 0; i < complexes.length; i++){
-        var obj = complexes[i];
-        var marker = L.marker([obj['latitude'], obj['longitude']]).addTo(map);
-        var custom_popup = "<div class='popup-image'></div> \
-                        <div class='popup-info'> \
-                        <a class='title'>"+obj['name']+"</a> \
-                        <a class='info'><img src='info.svg'>"+obj['category']+"</a> \
-                        <a class='info'><img src='distance_ico.svg'> 10m</a> \
-                        <div class='popup-buttons-wrapper'> \
-                        <div class='popup-button'>Nawiguj</div> \
-                        <div class='popup-button'>Więcej</div> \
-                        <div class='popup-category'></div> \
-                        </div>";
-        marker.bindPopup(custom_popup);
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    var startPoint = L.latLng(54.361206, 18.658292);
-    var endPoint = L.latLng(54.348629, 18.659222);
-
-    // Pobierz trasę za pomocą openrouteservice
-    var url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf62483b4d3610616a4dd3b538024b1a3224cc&start=${startPoint.lng},${startPoint.lat}&end=${endPoint.lng},${endPoint.lat}`;
+    var url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf62483b4d3610616a4dd3b538024b1a3224cc&start=${start_long},${start_lat}&end=${long},${lat}`;
     console.log(url);
 
     fetch(url)
@@ -127,17 +98,60 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then(data => {
         // Pobierz geometrię trasy
-        var routeGeometry = L.geoJSON(data.features[0].geometry);
+        routeGeometry = L.geoJSON(data.features[0].geometry);
 
         // Dodaj trasę do mapy
         routeGeometry.addTo(map);
     })
     .catch(error => console.error('Błąd pobierania trasy:', error));
+}
+
+var settings = {
+    'cache': false,
+    'dataType': "json", // użyj "json" zamiast "jsonp" w przypadku CORS
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost:8080/sport-complexes",
+    "method": "GET",
+    "xhrFields": {
+        "withCredentials": true  // dla obsługi cookies i innych danych uwierzytelniających
+    },
+    "headers": {
+        "Content-Type": "application/json",
+    }
+};
+
+$.ajax(settings).done(function (response) {
+    complexes = Object.values(response);
+    console.log(complexes);
+    for (var i = 0; i < complexes.length; i++){
+        var obj = complexes[i];
+        var category = obj['category'].charAt(0).toUpperCase() + obj['category'].slice(1).toLowerCase();
+        var marker = L.marker([obj['latitude'], obj['longitude']]).addTo(map);
+        var custom_popup = "<div class='popup-image'><img src='images/"+obj['photo']+"'></div> \
+                        <div class='popup-info'> \
+                            <a class='title'>"+obj['name']+"</a> \
+                            <a class='info'><img src='info.svg'>"+category+"</a> \
+                            <a class='info'><img src='distance_ico.svg'>10m</a> \
+                            <div class='popup-buttons-wrapper'> \
+                            <div class='popup-button' onclick='start_navigating("+obj['latitude']+", "+obj['longitude']+")'>Nawiguj</div> \
+                            <div class='popup-button' onclick='open_complex_wrapper("+obj['id']+")'>Więcej</div> \
+                            <div class='popup-category'></div> \
+                        </div>";
+        marker.bindPopup(custom_popup);
+    }
 });
 
-map.locate({setView: true})
-    console.log()
-    .on('locationerror', function(e){
-        console.log(e);
-        alert("Location access has been denied.");
+document.addEventListener('DOMContentLoaded', function () {
+    map.locate({setView: true})
+        .on('locationerror', function(e) {
+            console.log(e);
+            alert("Location access has been denied.");
+        });
+    navigator.geolocation.getCurrentPosition(function (position) {
+        start_lat = position.coords.latitude;
+        start_long = position.coords.longitude;
+
+        console.log('Aktualne współrzędne: ', start_lat, start_long);
     });
+});
