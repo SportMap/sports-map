@@ -20,8 +20,8 @@ CREATE TABLE sport_complexes (
                         open_24_7 BOOLEAN,
                         FOREIGN KEY (address_id) REFERENCES address(id),
                         photo VARCHAR(255),
-                        phone_number VARCHAR(15)
-
+                        phone_number VARCHAR(15),
+                        status VARCHAR(25)
 );
 
 CREATE TABLE opening_hours (
@@ -37,11 +37,11 @@ CREATE TABLE opening_hours (
 
 CREATE TABLE users (
                       id SERIAL PRIMARY KEY,
-                      nickname VARCHAR(255) NOT NULL,
+                      username VARCHAR(255) NOT NULL,
                       email VARCHAR(255) NOT NULL,
                       password VARCHAR(255) NOT NULL,
-                      salt CHAR(16) NOT NULL,
-                      avatar VARCHAR(255) NOT NULL
+                      authority CHAR(16) NOT NULL DEFAULT 'USER',
+                      avatar VARCHAR(255)
 );
 CREATE TABLE events (
                         id SERIAL PRIMARY KEY,

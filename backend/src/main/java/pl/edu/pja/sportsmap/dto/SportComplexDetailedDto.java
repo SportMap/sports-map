@@ -7,7 +7,9 @@ import pl.edu.pja.sportsmap.persistence.model.SportComplexSurface;
 
 @Builder
 public record SportComplexDetailedDto(
+        Long id,
         String name,
+        String description,
         SportComplexCategory category,
         SportComplexSurface surface,
         String website,

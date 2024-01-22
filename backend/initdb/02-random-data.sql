@@ -7,33 +7,33 @@ VALUES ('123 Maple Street', '12345', '10', '2A', 'Springfield'),
 
 
 INSERT INTO sport_complexes
-(name, description, website, surface, category, latitude, longitude, address_id, open_24_7, photo, phone_number)
+(name, description, website, surface, category, latitude, longitude, address_id, open_24_7, photo, phone_number, status)
 VALUES
-    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789'),
-    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334'),
-    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556'),
-    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667'),
-    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778'),
-    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789'),
-    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334'),
-    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556'),
-    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667'),
-    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778'),
-    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789'),
-    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334'),
-    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556'),
-    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667'),
-    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778'),
-    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789'),
-    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334'),
-    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556'),
-    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667'),
-    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778'),
-    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789'),
-    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334'),
-    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556'),
-    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667'),
-    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778');
+    ('New awaiting approval Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789', 'AWAITING_APPROVAL'),
+    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334', 'APPROVED'),
+    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556', 'APPROVED'),
+    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667', 'APPROVED'),
+    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778', 'APPROVED'),
+    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789', 'APPROVED'),
+    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334', 'APPROVED'),
+    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556', 'APPROVED'),
+    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667', 'APPROVED'),
+    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778', 'APPROVED'),
+    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789', 'APPROVED'),
+    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334', 'APPROVED'),
+    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556', 'APPROVED'),
+    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667', 'APPROVED'),
+    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778', 'APPROVED'),
+    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789', 'APPROVED'),
+    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334', 'APPROVED'),
+    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556', 'APPROVED'),
+    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667', 'APPROVED'),
+    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778', 'APPROVED'),
+    ('New Olympic Fitness Center', 'An advanced fitness center with top-tier equipment and diverse training options.', 'http://www.newolympicfitness.com', 'ASFALT', 'BIEGANIE', 54.352025, 18.646638, 1, FALSE, 'new_olympic_fitness.jpg', '+48123456789', 'APPROVED'),
+    ('Green Park Wellness Center', 'Comprehensive wellness center offering various health and fitness services.', 'http://www.greenparkwellness.com', 'TRAWA', 'CROSSFIT', 54.356805, 18.658322, 2, TRUE, 'green_park_wellness.jpg', '+48111222334', 'APPROVED'),
+    ('Mountain Peak Ski Lodge', 'Exclusive ski lodge with beginner to expert slopes and luxurious amenities.', 'http://www.mountainpeakski.com', 'LÓD', 'FITNESS', 54.341546, 18.649502, 3, FALSE, 'mountain_peak_ski.jpg', '+48123444556', 'APPROVED'),
+    ('Sunset Yoga Retreat', 'Serene yoga retreat offering a variety of classes and wellness programs.', 'http://www.sunsetyoga.com', 'DREWNIANA_PODŁOGA', 'KOSZYKÓWKA', 54.360686, 18.635629, 4, FALSE, 'sunset_yoga.jpg', '+48123455667', 'APPROVED'),
+    ('River Edge Tennis Academy', 'State-of-the-art tennis academy with professional training and facilities.', 'http://www.riveredgetennis.com', 'ASFALT', 'LEKKOATLETYKA', 54.348629, 18.676230, 5, TRUE, 'river_edge_tennis.jpg', '+48123466778', 'APPROVED');
 
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES (6, '06:27', '06:51', 2),
@@ -42,14 +42,14 @@ VALUES (6, '06:27', '06:51', 2),
        (1, '01:09', '03:54', 2),
        (6, '18:11', '04:38', 3);
 
-INSERT INTO users (nickname, email, password, salt, avatar)
+INSERT INTO users (username, email, password, authority, avatar)
 VALUES
-    ('UserOne', 'userone@example.com', 'password123', 'a1b2c3d4e5f6g7h8', 'https://i.pinimg.com/280x280_RS/87/43/b4/8743b48a013c49d2657be16778abf563.jpg'),
-    ('UserTwo', 'usertwo@example.com', 'password456', 'h8g7f6e5d4c3b2a1', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBdgThPUp6LqoHOELlOBKhtOnhinH_u6ymyQ&usqp=CAU'),
-    ('UserThree', 'userthree@example.com', 'password789', '1a2b3c4d5e6f7g8h', 'https://affinity.pt/public/uploads/2020/02/av4.png'),
-    ('UserFour', 'userfour@example.com', 'password101', '8h7g6f5e4d3c2b1a', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxj2cgb3ENj56AZpasUwMEecEvuEkYIMgD9w&usqp=CAU'),
-    ('UserFive', 'userfive@example.com', 'password102', '1a1b1c1d1e1f1g1h', 'https://twojauroczystosc.konin.pl/images/user-m-100x100-(2).png');
-
+    ('UserOne', 'userone@example.com', 'password123', 'USER', 'avatar1.jpg'),
+    ('UserTwo', 'usertwo@example.com', 'password123', 'USER', 'avatar4.jpg'),
+    ('UserThree', 'userthree@example.com', 'password123', 'USER', 'avatar2.jpg'),
+    ('UserFour', 'userfour@example.com', 'password123', 'USER', 'avatar3.jpg'),
+    ('UserFive', 'userfive@example.com', 'password123', 'USER', 'avatar5.jpg'),
+    ('admin', 'admin@test', '{bcrypt}$2a$10$1CjUGw14jTjULfj5WO66YOQMBsKe2Mh3dbhoT0DH23.1ECpBM5ViS', 'ADMIN', 'avatar5.jpg'); -- password: admin
 
 
 INSERT INTO reviews (content, sport_complex_id, user_id, rate, review_date)

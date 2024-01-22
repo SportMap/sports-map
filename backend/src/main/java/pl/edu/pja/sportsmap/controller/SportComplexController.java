@@ -4,14 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.pja.sportsmap.dto.AllSportComplexCategoryDto;
-import pl.edu.pja.sportsmap.dto.AvailableSportComplexCategoryDto;
-import pl.edu.pja.sportsmap.dto.SportComplexDetailedDto;
-import pl.edu.pja.sportsmap.dto.SportComplexSimpleDto;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pl.edu.pja.sportsmap.dto.*;
+import pl.edu.pja.sportsmap.persistence.model.SportComplex;
 import pl.edu.pja.sportsmap.persistence.model.SportComplexCategory;
 import pl.edu.pja.sportsmap.service.SportComplexCategoryService;
 import pl.edu.pja.sportsmap.service.SportComplexService;
 
+import java.net.URI;
 import java.util.List;
 
 
@@ -27,18 +27,39 @@ public class SportComplexController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SportComplexSimpleDto>> getAllSportComplexes() {
-        return ResponseEntity.ok(sportComplexService.getAllSportComplexesSimpleDto());
+    public ResponseEntity<List<SportComplexSimpleDto>> getAllApprovedSportComplexes() {
+        return ResponseEntity.ok(sportComplexService.getApprovedSportComplexesSimpleDto());
     }
 
     @GetMapping("admin")
-    public ResponseEntity<Page<SportComplexDetailedDto>> getAllDetailedSportComplexes(@RequestParam int pageNumber, @RequestParam int pageSize) {
-        return ResponseEntity.ok(sportComplexService.getAllSportComplexesDetailedDto(pageNumber, pageSize));
+    public ResponseEntity<Page<SportComplexDetailedDto>> getApprovedDetailedSportComplexes(@RequestParam int pageNumber, @RequestParam int pageSize) {
+        return ResponseEntity.ok(sportComplexService.getApprovedSportComplexesDetailedDto(pageNumber, pageSize));
+    }
+
+    @GetMapping("admin/awaiting-approval")
+    public ResponseEntity<Page<SportComplexDetailedDto>> getAwaitingApprovalDetailedSportComplexes(@RequestParam int pageNumber, @RequestParam int pageSize) {
+        return ResponseEntity.ok(sportComplexService.getAwaitingApprovalSportComplexesDetailedDto(pageNumber, pageSize));
+    }
+
+    @PatchMapping("admin/approve/{id}")
+    public ResponseEntity<Void> getAwaitingApprovalDetailedSportComplexes(@PathVariable Long id) {
+        sportComplexService.approveSportComplex(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("{id}")
     public ResponseEntity<SportComplexDetailedDto> getSportComplex(@PathVariable Long id) {
         return ResponseEntity.ok(sportComplexService.getSportComplex(id));
+    }
+
+    @PostMapping()
+    public ResponseEntity<SportComplexDetailedDto> getSportComplex(@RequestBody AddSportComplexDto newSportComplex) {
+        SportComplex sportComplex = sportComplexService.createSportComplex(newSportComplex);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(sportComplex.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
 
     @Operation(summary = "side panel - returns a list of all categories")
