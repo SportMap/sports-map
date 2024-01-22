@@ -78,7 +78,7 @@ public class EventService {
         }
 
         userEventRepository.save(new UserEvent(user,event));
-        return new JoinEventResponseDto("user " + user.getNickname() + " joined to " + event.getName());
+        return new JoinEventResponseDto("user " + user.getUsername() + " joined to " + event.getName());
     }
 
     public UnjoinEventResponseDto unjoinEvent(Long userId, Long eventId){
@@ -88,7 +88,7 @@ public class EventService {
         if (userEventRepository.existsByUser_IdAndEvent_Id(user.getId(),event.getId())){
             userEventRepository.delete(userEventRepository.findByUser_IdAndEvent_Id(user.getId(),event.getId()));
         }
-        return new UnjoinEventResponseDto("user " + user.getNickname() + " unjoined from " + event.getName());
+        return new UnjoinEventResponseDto("user " + user.getUsername() + " unjoined from " + event.getName());
     }
 
     public Integer getInterestedPeopleCount(Long eventId) {
