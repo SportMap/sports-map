@@ -39,7 +39,10 @@
     </header>
 
     <div id="successMessage">Zalogowano pomyślnie!</div>
-    <div id="map" class="map"></div>
+    <div id="successMessageReg">Zarejestrowano pomyślnie!</div>
+    <div class="map_container">
+        <div id="map" class="map"></div>
+    </div>
     <div class="sidebar">
         <div class="sidebar_category_container"></div>
         <div class="sidebar_category_container_bar"></div>
@@ -75,11 +78,11 @@
         <div class="logon-avatar-background">
             <div class="logon-avatar"></div>
         </div>
-        <input type="text" placeholder="Nazwa użytkownika" class="logon-container-input">
-        <input type="email" placeholder="Email" class="logon-container-input">
-        <input type="email" placeholder="Powtórz email" class="logon-container-input">
-        <input type="password" placeholder="Hasło" class="logon-container-input">
-        <input type="password" placeholder="Powtórz hasło" class="logon-container-input">
+        <input type="text" placeholder="Nazwa użytkownika" class="logon-container-input" id="username_reg">
+        <input type="email" placeholder="Email" class="logon-container-input" id="email">
+        <input type="email" placeholder="Powtórz email" class="logon-container-input" id="email_repeat">
+        <input type="password" placeholder="Hasło" class="logon-container-input" id="password_reg">
+        <input type="password" placeholder="Powtórz hasło" class="logon-container-input" id="password_reg_repeat">
         <div class='remember-container'>
             <div class="radio">
                 <input type='radio' id='accept_terms'>
