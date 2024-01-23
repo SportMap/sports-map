@@ -138,7 +138,7 @@ $.ajax(settings).done(function (response) {
         var obj = complexes[i];
         var category = obj['category'].charAt(0).toUpperCase() + obj['category'].slice(1).toLowerCase();
         var marker = L.marker([obj['latitude'], obj['longitude']]).addTo(map);
-        var custom_popup = "<div class='popup-image'><img src='images/"+obj['photo']+"'></div> \
+        var custom_popup = "<div class='popup-image'><img src='zdjecia/"+obj['photo']+"'></div> \
                         <div class='popup-info'> \
                             <a class='title'>"+obj['name']+"</a> \
                             <a class='info'><img src='info.svg'>"+category+"</a> \

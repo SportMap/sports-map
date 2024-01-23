@@ -70,7 +70,9 @@ function get_complex_opinions(id, container) {
         }
 
         else {
+            var x = 0;
             opinions.forEach(opinion => {
+                x++;
                 const opinionDiv = document.createElement("div");
                 opinionDiv.classList.add("opinion");
                 opinionDiv.innerHTML = `<div class='opinion_rate'>
@@ -78,13 +80,13 @@ function get_complex_opinions(id, container) {
                                             <div class='opinion_rate_rating'>
                                                 <nick>${opinion.nickname}</nick>
                                                 <date>${opinion.date[2]}.${opinion.date[1]}.${opinion.date[0]}</date>
-                                                <div class='complex_rating' id='opinionRating'></div>
+                                                <div class='complex_rating' id='opinionRating${x}'></div>
                                             </div>
                                         </div>
                                         <div class='opinion_comment'>${opinion.content}</div>`;
                 container.appendChild(opinionDiv);
 
-                var ratingDiv = document.getElementById('opinionRating');
+                var ratingDiv = document.getElementById('opinionRating'+x);
                 for(var i = 1; i <= opinion.rate; i++) {
                     const star_rate = "<span class='star active'>&#9733;</span>"
                     ratingDiv.insertAdjacentHTML('beforeend', star_rate);
@@ -204,7 +206,7 @@ function get_complex_total_rate_bar(id, container, num) {
     $.ajax(settings).done(function (response) {
         ratings = Object.values(response);
 
-        let perc = ratings[num]/ratings[1];
+        let perc = (ratings[num]/ratings[1])*100;
         container.style.width = `${perc}%`;
     });    
 }
@@ -270,7 +272,7 @@ function open_complex_wrapper(id) {
         console.log(formattedData.openingHours);
         var complex_wrapper = "<div class='complex_wrapper'> \
                                 <div class='complex_wrapper_img'> \
-                                    <img src='images/"+formattedData.photo+"'> \
+                                    <img src='zdjecia/"+formattedData.photo+"'> \
                                     <div class='exit_button' onclick='exit_from_complex_wrapper()'> \
                                         <img src='x_letter.svg'> \
                                     </div> \
@@ -340,7 +342,7 @@ function open_complex_wrapper(id) {
                                 </div> \
                                 <div class='complex_wrapper_menu_container complex_wydarzenia_container hidden'> \
                                     <div class='complex_wydarzenia_container_add'> \
-                                        <a href='dodawanie_wydarzenia.php?obiekt="+formattedData.i+"'><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
+                                        <a href='dodawanie_wydarzenia.php?obiekt="+formattedData.id+"'><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
                                     </div> \
                                     <hr/> \
                                     <div class='complex_wydarzenia_container_all'></div> \

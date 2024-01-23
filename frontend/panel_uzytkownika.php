@@ -146,6 +146,7 @@
                             }
                         
                             function loadEventDetails(eventId) {
+                                var userID = getCookie('userId');
                                 fetch(`http://localhost:8080/events/detailed/interested/${userID}`)
                                     .then(response => response.json())
                                     .then(data => {

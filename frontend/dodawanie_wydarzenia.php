@@ -109,7 +109,7 @@
                             name: getStringInputValue('event-name'),
                             description: getStringInputValue('event-description'),
                             startTime: startTime,
-                            endtime: endTime,
+                            endTime: endTime,
                             sportComplexId: obiektValue
                         };
 
