@@ -1,5 +1,22 @@
 var mapContainer = document.getElementsByClassName('map')[0];
 
+function getDisplayOpeningHours(dayHours, complex) {
+    if (complex.isOpen247) {
+        return "Otwarte 24/7";
+    }
+    if (!dayHours) {
+        return "Zamknięte";
+    }
+
+    const openTime = dayHours.openTime;
+    const closeTime = dayHours.closeTime;
+
+    const formattedOpenTime = `${openTime[0].toString().padStart(2, '0')}:${openTime[1].toString().padStart(2, '0')}`;
+    const formattedCloseTime = `${closeTime[0].toString().padStart(2, '0')}:${closeTime[1].toString().padStart(2, '0')}`;
+
+    return `${formattedOpenTime} - ${formattedCloseTime}`;
+}
+
 function show_complex_menu(id) {
     var info = document.getElementsByClassName('complex_info')[0];
     var opinie = document.getElementsByClassName('complex_opinie')[0];
@@ -298,17 +315,23 @@ function open_complex_wrapper(id) {
                                 <div class='complex_wrapper_menu_container complex_info_container'> \
                                     <div class='main_info'><img src='phone.svg'>"+formattedData.phoneNumber+"</div> \
                                     <div class='main_info'><img src='markup.svg'>"+formattedData.address.postalCode+" "+formattedData.address.city+", "+formattedData.address.street+" "+formattedData.address.buildingNumber+"</div> \
-                                    <div class='main_info_opening_hours_container'><img src='clock.svg'> \
-                                        <div class='main_info_opening_hours'><g> Poniedziałek: "+formattedData.openingHours.monday+"</g> \
-                                            <g>Wtorek: "+formattedData.openingHours.tuesday+"</g> \
-                                            <g>Środa: "+formattedData.openingHours.wednesday+"</g> \
-                                            <g>Czwartek: "+formattedData.openingHours.thursday+"</g> \
-                                            <g>Piątek: "+formattedData.openingHours.friday+"</g> \
-                                            <g>Sobota: "+formattedData.openingHours.saturday+"</g> \
-                                            <g>Niedziela: "+formattedData.openingHours.sunday+"</g> \
-                                        </div> \
-                                    </div> \
-                                    <div class='main_info'><img src='info.svg'>"+formattedData.category+", "+isopennow+"</div> \
+                                    <div class='main_info_opening_hours_container'><img src='clock.svg'>";
+
+        if(formattedData.isOpen247) {
+            complex_wrapper = complex_wrapper + "<div class='main_info_opening_hours'><g> Otwarte 24/7</g></div>";
+        }
+        else {
+            complex_wrapper = complex_wrapper + "<div class='main_info_opening_hours'><g> Poniedziałek: "+getDisplayOpeningHours(formattedData.openingHours.monday, formattedData)+"</g> \
+                                    <g>Wtorek: "+getDisplayOpeningHours(formattedData.openingHours.tuesday, formattedData)+"</g> \
+                                    <g>Środa: "+getDisplayOpeningHours(formattedData.openingHours.wednesday, formattedData)+"</g> \
+                                    <g>Czwartek: "+getDisplayOpeningHours(formattedData.openingHours.thursday, formattedData)+"</g> \
+                                    <g>Piątek: "+getDisplayOpeningHours(formattedData.openingHours.friday, formattedData)+"</g> \
+                                    <g>Sobota: "+getDisplayOpeningHours(formattedData.openingHours.saturday, formattedData)+"</g> \
+                                    <g>Niedziela: "+getDisplayOpeningHours(formattedData.openingHours.sunday, formattedData)+"</g> \
+                                </div> ";
+        }
+                                        
+        complex_wrapper = complex_wrapper + "</div><div class='main_info'><img src='info.svg'>"+formattedData.category+", "+isopennow+"</div> \
                                     <div class='main_info'><img src='planet.svg'><a href='"+formattedData.website+"'>"+formattedData.website+"</a></div> \
                                 </div> \
                                 <div class='complex_wrapper_menu_container complex_opinie_container hidden'> \

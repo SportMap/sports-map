@@ -207,6 +207,7 @@
     </div>
 
     <script src="script.js" type="application/javascript"></script>
+    <script src="profile_popup.js" type="application/javascript"></script>
 </body>
 
 </html>
