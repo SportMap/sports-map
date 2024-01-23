@@ -1,5 +1,6 @@
 package pl.edu.pja.sportsmap.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class OpeningHours {
     private LocalTime openingTime;
 
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm a z")
     private LocalTime closingTime;
 
     @Column
