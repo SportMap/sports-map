@@ -165,6 +165,47 @@ function get_complex_total_rate(id, container) {
         var x = parseFloat(ratings[7]);
         bigRateDiv.innerHTML = `${x}`;
         container.appendChild(bigRateDiv);
+
+
+        for(var i = 2; i < 7; i++) {
+            let perc = (ratings[i]/ratings[1])*100;
+            console.log(perc);
+            let y = 7-i;
+            let boxId = "bar_"+y;
+            let box = document.getElementById(boxId);
+            let perc_txt = perc.toString() + "%";
+            console.log(perc_txt);
+            box.style.width = perc_txt;
+            box.style.borderRadius = "5px";
+            box.style.backgroundColor = "#F8B84E";
+            box.style.height = "100%";
+        }
+    });    
+}
+
+function get_complex_total_rate_bar(id, container, num) {
+    
+    var url_address = "http://localhost:8080/reviews/rates/"+id;
+    var settings = {
+        'cache': false,
+        'dataType': "json", // użyj "json" zamiast "jsonp" w przypadku CORS
+        "async": true,
+        "crossDomain": true,
+        "url": url_address,
+        "method": "GET",
+        "xhrFields": {
+            "withCredentials": false  // dla obsługi cookies i innych danych uwierzytelniających
+        },
+        "headers": {
+            "Content-Type": "application/json",
+        }
+    };
+
+    $.ajax(settings).done(function (response) {
+        ratings = Object.values(response);
+
+        let perc = ratings[num]/ratings[1];
+        container.style.width = `${perc}%`;
     });    
 }
 
@@ -226,6 +267,7 @@ function open_complex_wrapper(id) {
         else {
             var isopennow = "zamknięta";
         }
+        console.log(formattedData.openingHours);
         var complex_wrapper = "<div class='complex_wrapper'> \
                                 <div class='complex_wrapper_img'> \
                                     <img src='images/"+formattedData.photo+"'> \
@@ -254,7 +296,16 @@ function open_complex_wrapper(id) {
                                 <div class='complex_wrapper_menu_container complex_info_container'> \
                                     <div class='main_info'><img src='phone.svg'>"+formattedData.phoneNumber+"</div> \
                                     <div class='main_info'><img src='markup.svg'>"+formattedData.address.postalCode+" "+formattedData.address.city+", "+formattedData.address.street+" "+formattedData.address.buildingNumber+"</div> \
-                                    <div class='main_info'><img src='clock.svg'>"+formattedData.openingHours+"</div> \
+                                    <div class='main_info_opening_hours_container'><img src='clock.svg'> \
+                                        <div class='main_info_opening_hours'><g> Poniedziałek: "+formattedData.openingHours.monday+"</g> \
+                                            <g>Wtorek: "+formattedData.openingHours.tuesday+"</g> \
+                                            <g>Środa: "+formattedData.openingHours.wednesday+"</g> \
+                                            <g>Czwartek: "+formattedData.openingHours.thursday+"</g> \
+                                            <g>Piątek: "+formattedData.openingHours.friday+"</g> \
+                                            <g>Sobota: "+formattedData.openingHours.saturday+"</g> \
+                                            <g>Niedziela: "+formattedData.openingHours.sunday+"</g> \
+                                        </div> \
+                                    </div> \
                                     <div class='main_info'><img src='info.svg'>"+formattedData.category+", "+isopennow+"</div> \
                                     <div class='main_info'><img src='planet.svg'><a href='"+formattedData.website+"'>"+formattedData.website+"</a></div> \
                                 </div> \
@@ -289,7 +340,7 @@ function open_complex_wrapper(id) {
                                 </div> \
                                 <div class='complex_wrapper_menu_container complex_wydarzenia_container hidden'> \
                                     <div class='complex_wydarzenia_container_add'> \
-                                        <a href='dodawanie_wydarzenia.html?obiekt="+formattedData.name+"'><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
+                                        <a href='dodawanie_wydarzenia.php?obiekt="+formattedData.i+"'><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
                                     </div> \
                                     <hr/> \
                                     <div class='complex_wydarzenia_container_all'></div> \
@@ -307,5 +358,12 @@ function open_complex_wrapper(id) {
 
         const eventContainer = document.getElementsByClassName('complex_wydarzenia_container_all')[0];
         get_complex_events(id, eventContainer);
+
+        for(var i = 2; i < 7; i++) {
+            let y = 7-i;
+            let boxId = "bar_"+y;
+            var box = document.getElementById(boxId);
+            get_complex_total_rate_bar(id, box, i);
+        }
     });
 }

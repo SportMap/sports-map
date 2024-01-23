@@ -117,6 +117,7 @@
     border-bottom: 3px solid #DC1B77;
 }
 
+
 .tab-button:not(:last-child)::after {
     content: ''; 
     position: absolute;
@@ -161,11 +162,12 @@
 }
 
 /* PAGE 2 */
+
 #content-wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    position: relative;
+    position: relative; /* For positioning the detailed event view */
 }
 
 .content-item {
@@ -237,6 +239,7 @@
     background-color: #c4186b;
 }
 
+/* Detailed event styles */
 .detailed-event {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -244,7 +247,8 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    z-index: 10;
+    /* max-width: 600px; */
+    z-index: 10; /* Make sure it's above other content */
     height: 1px;
 }
 
@@ -266,16 +270,16 @@
     box-shadow: 0 0px 8px rgb(0, 0, 0);
 
     cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0; /* Remove padding if not needed */
+    display: flex; /* To center the image inside the button */
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
     
 }
 
 .close-btn img {
-    width: 20px;
-    height: 20px;
+    width: 20px; /* Or the size you want your close icon to be */
+    height: 20px; /* Or the size you want your close icon to be */
     padding: 10px;
 }
 
@@ -295,6 +299,7 @@
 
 .detailed-event-name {
     font-size: 30px;
+    /* font-weight: bold; */
     margin-bottom: -8px;
 }
 
@@ -396,26 +401,30 @@
 }
 
 .detailed-event-creatorNickname-info img {
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent the image from being resized */
     border-radius: 50%;
     width: 25px;
     height: 25px;
     margin-right: 10px;
 }
 
+
+
 .detailed-event-description-info{
-    max-width: calc(100% - 40px);
+    max-width: calc(100% - 40px); /* Assuming the avatar + margin is 40px */
     overflow: hidden;
     word-wrap: break-word;
 }
+
 /* PAGE 2 END */
 
 /* PAGE 3 */
+
 #created-content-wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    position: relative;
+    position: relative; /* For positioning the detailed event view */
 }
 
 .created-content-item {
@@ -487,6 +496,7 @@
     background-color: #c4186b;
 }
 
+/* Detailed event styles */
 .created-detailed-event {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -494,7 +504,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    z-index: 10;
+    z-index: 10; /* Make sure it's above other content */
 }
 
 .created-detailed-event>button{
@@ -514,9 +524,9 @@
     border-radius: 20px;
     box-shadow: 0 0px 8px rgb(0, 0, 0);
     cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
+    padding: 0; /* Remove padding if not needed */
+    display: flex; /* To center the image inside the button */
+    align-items: center; /* Vertically center */
     justify-content: center;
 }
 
@@ -635,7 +645,7 @@
 }
 
 .created-detailed-event-creatorNickname-info img {
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent the image from being resized */
     border-radius: 50%;
     width: 25px;
     height: 25px;
@@ -647,6 +657,8 @@
     overflow: hidden;
     word-wrap: break-word;
 }
+
+
 /* PAGE 3 END */
 
 /* MODERATOR */
@@ -711,9 +723,15 @@
 #moderatorPage1 {
     display: block;
 }
+
+#moderatorPage2 {
+
+}
+
 /* MODERATOR END */
 
 /* OBIEKTY */
+
 .arrowBG{
     border: solid 1px #727272;
     box-shadow: 0px 0px 11.5px #00000025;
@@ -734,11 +752,6 @@
     border-bottom: solid 1px #B8B8B8;
 }
 
-.dropdown-content>img{
-    width: 100%;
-    height: 300px;
-}
-
 .dropdown-content h1{
     font-weight: 100;
     font-size: 25px;
@@ -749,7 +762,7 @@
     padding: 10px;
 }
 
-.deleteButton {
+.dropdown-content button {
     width: 90%;
     margin-left: 5%;
     padding: 10px;
@@ -761,24 +774,8 @@
     margin-bottom: 20px;
 }
 
-.deleteButton:hover{
+.dropdown-content button:hover{
     background-color: rgb(199, 5, 5);
-}
-
-.approveButton{
-    width: 90%;
-    margin-left: 5%;
-    padding: 10px;
-    background-color: green;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.approveButton:hover{
-    background-color: rgb(12, 87, 12);
 }
 
 .info-row {
@@ -821,28 +818,32 @@
 }
 
 .dropdown-header p {
-    margin: 0;
+    margin: 0; /* Remove default margin from <p> */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    flex-grow: 1;
+    flex-grow: 1; /* Allow <p> to grow as needed */
     margin-left: 10px;
     padding: 20px;
 }
 
+/* First <p> might need a max-width to prevent it from pushing other elements too much */
 .dropdown-header p:first-child {
-    max-width: 20%;
+    max-width: 20%; /* Adjust as needed */
 }
 
 .dropdown-header p + p {
-    text-align: left;
-    flex-grow: 2;
+    text-align: left; /* Center text if desired */
+    flex-grow: 2; /* Adjust the growth rate as needed */
     max-width: 60%;
     border-left: solid 1px #B8B8B8;
 }
 
 .dropdown-header .arrow {
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent the arrow from shrinking */
     transition: transform 0.3s ease;
 }
+
+
+
 /* OBIEKTY END */

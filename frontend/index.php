@@ -11,7 +11,6 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="complex_wrapper_engine.js" type="application/javascript"></script>
     <script src="sidebar_category.js" type="application/javascript"></script>
 </head>
 
@@ -32,7 +31,7 @@
             <div class="button" id="login" onclick="displayLoginBox()">Zaloguj się</div>
             <div class="button" id="register" onclick="displayRegisterBox()">Zarejestruj się</div>
             <div class="text">
-                <a href="polityka.html">Polityka prywatności</a>
+                <a href="polityka.html" id='insertBefore'>Polityka prywatności</a>
                 <a href="warunki.html">Warunki usługi</a>
             </div>
         </div>
@@ -65,7 +64,7 @@
                 <input type='radio' id='remember_me'>
                 <label for='remember_me'>Zapamiętaj mnie</label>
             </div>
-            <a href="index.html" class="fixed">Zapomniałeś/aś hasła?</a>
+            <a href="index.php" class="fixed">Zapomniałeś/aś hasła?</a>
         </div>
         <div class="logon-container-button" onclick="login()">Zaloguj</div>
         <div class="register-text-wrapper">
@@ -78,7 +77,7 @@
         <div class="logon-avatar-background">
             <div class="logon-avatar"></div>
         </div>
-        <input type="text" placeholder="Nazwa użytkownika" class="logon-container-input" id="username_reg">
+        <input type="text" placeholder="Nazwa użytkownika" class="logon-container-input" id="username_reg" required>
         <input type="email" placeholder="Email" class="logon-container-input" id="email">
         <input type="email" placeholder="Powtórz email" class="logon-container-input" id="email_repeat">
         <input type="password" placeholder="Hasło" class="logon-container-input" id="password_reg">
@@ -98,6 +97,8 @@
 
     
     <script src="login_register_engine.js" type="application/javascript"></script>
+    <script src="profile_popup.js" type="application/javascript"></script>
+    <script src="complex_wrapper_engine.js" type="application/javascript"></script>
 </body>
 
 </html>

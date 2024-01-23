@@ -149,6 +149,7 @@
     position: absolute;
     top: 500px;
     min-height: 345px;
+    overflow-y: auto;
 }
 
 .complex_wrapper_menu_container .main_info {
@@ -160,6 +161,46 @@
     font-weight: 400;
     color: black;
     line-height: 32px;
+    display: flex;
+    flex-direction: row;
+}
+
+.complex_wrapper_menu_container .main_info_opening_hours_container {
+    height: 140px;
+    align-content: left;
+    margin-left: 30px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color: black;
+    line-height: 32px;
+    display: flex;
+    flex-direction: row;
+}
+
+.complex_wrapper_menu_container .main_info_opening_hours {
+    height: 140px;
+    width:auto;
+    align-content: left;
+    margin-left: 9px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color: black;
+    line-height: 32px;
+    display: flex;
+    flex-direction: column;
+
+    g {
+        height: 20px;
+    }
+}
+
+.complex_wrapper_menu_container .main_info_opening_hours img {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    margin-bottom: -4px;
 }
 
 .complex_wrapper_menu_container .main_info img {
@@ -197,8 +238,6 @@
 .complex_opinie_container {
     overflow-y: auto;
 }
-
-
 
 .rating_bar_wrapper {
     width: 300px;

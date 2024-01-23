@@ -24,6 +24,7 @@ function login() {
             document.cookie = `username=${username}; expires=${expires}; path=/;`;
             window.location.reload();
         } else {
+            alert("Błąd logowania");
             throw new Error('Błąd logowania');
         }
     })
@@ -62,6 +63,8 @@ function register() {
             const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toUTCString();
             document.cookie = `justRegistered=true; expires=${expires}; path=/;`;
             document.cookie = `username=${username}; expires=${expires}; path=/;`;
+            let isAdmin = document.cookie.includes("isAdmin=");
+            document.cookie = `isAdmin=${isAdmin}; expires=${expires}; path=/;`;
             window.location.reload();
         } else {
             throw new Error('Błąd rejestracji');
