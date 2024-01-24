@@ -1,4 +1,22 @@
 var mapContainer = document.getElementsByClassName('map')[0];
+newRating;
+
+function getCookie(cookieName) {
+    var name = cookieName + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var cookieArray = decodedCookie.split(';');
+
+    for(var i = 0; i < cookieArray.length; i++) {
+        var cookie = cookieArray[i];
+        while (cookie.charAt(0) == ' ') {
+            cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(name) == 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return null;
+}
 
 function getDisplayOpeningHours(dayHours, complex) {
     if (complex.isOpen247) {
@@ -58,6 +76,80 @@ function exit_from_complex_wrapper() {
     for(var i = 0; i < divs.length; i++) {
         divs[0].parentNode.removeChild(divs[0]);
     }
+}
+
+function addNewOpinion(complexId) {
+    var userId = getCookie('userId');
+    var rate = newRating;
+    var sportComplexId = complexId;
+    var content = document.getElementById('new_opinion_content').value;
+
+    const data = {
+        userId: parseInt(userId, 10),
+        rate: rate,
+        content: content,
+        sportComplexId: sportComplexId
+    };
+
+    console.log('Sending POST request with data:', data);
+
+    fetch('http://localhost:8080/reviews', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        document.getElementById('successMessageOpinion').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('successMessageOpinion').style.display = 'none';
+        }, 2000);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function set_stars(id) {
+    const stars = document.getElementsByClassName('rating_star');
+    for(var i = 0; i < id; i++) {
+        stars[i].classList.add("activeStar");
+    }
+    newRating=id;
+}
+
+function print_complex_opinion_input(container, complexId) {
+    var username = getCookie("username");
+    var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1;
+    var day = currentDate.getDate(); 
+    var today = day+"-"+month+"-"+year;
+
+    const opinionDiv = document.createElement("div");
+                opinionDiv.classList.add("opinion");
+                opinionDiv.innerHTML = `<div class='opinion_rate'>
+                                            <div class='opinion_rate_avatar'><img src='users/avatars/'></div>
+                                            <div class='opinion_rate_rating'>
+                                                <nick>${username}</nick>
+                                                <date>${today}</date>
+                                                <div class='complex_rating' id='opinionRating0'>
+                                                    <div class="rating-container">
+                                                        <span class="star rating_star" data-rating="1" onclick='set_stars(1)'>&#9733;</span>
+                                                        <span class="star rating_star" data-rating="2" onclick='set_stars(2)'>&#9733;</span>
+                                                        <span class="star rating_star" data-rating="3" onclick='set_stars(3)'>&#9733;</span>
+                                                        <span class="star rating_star" data-rating="4" onclick='set_stars(4)'>&#9733;</span>
+                                                        <span class="star rating_star" data-rating="5" onclick='set_stars(5)'>&#9733;</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <textarea type='text' maxlength='254' class='opinion_comment' style=' width: 100%' placeholder='Komentarz' id='new_opinion_content'></textarea>
+                                        <div class='popup-button' style='margin-top: 13px;' onclick='addNewOpinion(${complexId})'>Zapisz</div>`;
+    container.appendChild(opinionDiv);
 }
 
 function get_complex_opinions(id, container) {
@@ -363,11 +455,14 @@ function open_complex_wrapper(id) {
                                     </div> \
                                     <div class='complex_opinie_container_opinions'></div> \
                                 </div> \
-                                <div class='complex_wrapper_menu_container complex_wydarzenia_container hidden'> \
-                                    <div class='complex_wydarzenia_container_add'> \
-                                        <a href='dodawanie_wydarzenia.php?obiekt="+formattedData.id+"'><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
-                                    </div> \
-                                    <hr/> \
+                                <div class='complex_wrapper_menu_container complex_wydarzenia_container hidden'>";
+        if(getCookie("userId") != null) {
+            complex_wrapper = complex_wrapper + "<div class='complex_wydarzenia_container_add'> \
+                                                    <a href='dodawanie_wydarzenia.php?obiekt="+formattedData.id+"'><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
+                                                </div>";
+        }
+                                    
+        complex_wrapper = complex_wrapper + "<hr/> \
                                     <div class='complex_wydarzenia_container_all'></div> \
                                 </div> \
                             </div>";
@@ -376,6 +471,9 @@ function open_complex_wrapper(id) {
         mapContainer.insertAdjacentHTML('beforeend', complex_wrapper);
 
         const opinionsContainer = document.getElementsByClassName('complex_opinie_container_opinions')[0];
+        if(getCookie('userId') != null) {
+            print_complex_opinion_input(opinionsContainer, formattedData.id);
+        }
         get_complex_opinions(id, opinionsContainer);
 
         const totalRateContainer = document.getElementsByClassName('total_rate')[0];
@@ -391,4 +489,5 @@ function open_complex_wrapper(id) {
             get_complex_total_rate_bar(id, box, i);
         }
     });
+
 }

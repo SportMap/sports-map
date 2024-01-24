@@ -373,6 +373,10 @@
                             </div>
 
                             <script>
+                                let currentPage = 0;
+                                const pageSize = 7;
+                                const totalPagesElement = document.getElementById('totalPages');
+                                let totalPages = 0;
                                 document.addEventListener('DOMContentLoaded', function() {
                                     fetchComplexes(currentPage);
                                 });
@@ -397,6 +401,25 @@
 
                                 function updatePageDisplay(totalPages, currentPage) {
                                     document.getElementById('totalPages').textContent = totalPages;
+                                    document.getElementById('currentPage').textContent = currentPage + 1; // +1 because pages are usually 1-indexed in UI
+                                }
+
+                                function previousPage() {
+                                    if (currentPage > 0) {
+                                        currentPage--;
+                                        fetchComplexes(currentPage);
+                                    }
+                                }
+
+                                function nextPage() {
+                                    if (currentPage < totalPages - 1) {
+                                        currentPage++;
+                                        fetchComplexes(currentPage);
+                                    }
+                                }
+
+                                function reloadContent() {
+                                    fetchComplexes(currentPage);
                                     document.getElementById('currentPage').textContent = currentPage + 1;
                                 }
 
