@@ -6,7 +6,8 @@ import pl.edu.pja.sportsmap.persistence.model.Address;
 import java.time.LocalDateTime;
 
 @Builder
-public record GetSimpleShortEventDto(String photo,
+public record GetSimpleShortEventDto(Long id,
+                                     String photo,
                                      String name,
                                      String sportObjectName,
                                      Address sportObjectAddress,
