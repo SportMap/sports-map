@@ -109,6 +109,7 @@ public class EventService {
 
     public GetSimpleShortEventDto convertEntityToSimpleShortEventDto(Event event) {
         return GetSimpleShortEventDto.builder()
+                .id(event.getId())
                 .photo(event.getPhoto())
                 .name(event.getName())
                 .sportObjectName(sportComplexService.getSportComplexNameById(event.getSportComplex().getId()))
