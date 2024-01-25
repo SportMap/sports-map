@@ -109,7 +109,7 @@
                             name: getStringInputValue('event-name'),
                             description: getStringInputValue('event-description'),
                             startTime: startTime,
-                            endtime: endTime,
+                            endTime: endTime,
                             sportComplexId: obiektValue
                         };
 
@@ -207,6 +207,7 @@
     </div>
 
     <script src="script.js" type="application/javascript"></script>
+    <script src="profile_popup.js" type="application/javascript"></script>
 </body>
 
 </html>

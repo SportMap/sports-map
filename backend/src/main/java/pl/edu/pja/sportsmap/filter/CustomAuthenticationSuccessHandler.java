@@ -17,11 +17,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         User user = (User) authentication.getPrincipal();
         Long userId = user.getId();
         Cookie userIdCookie = new Cookie("userId", userId.toString());
-        userIdCookie.setHttpOnly(true);
+        userIdCookie.setHttpOnly(false);
         userIdCookie.setPath("/");
         if (user.getAuthorities().contains(Authority.ADMIN)) {
             Cookie isAdminCookie = new Cookie("isAdmin", "true");
-            isAdminCookie.setHttpOnly(true);
+            isAdminCookie.setHttpOnly(false);
             isAdminCookie.setPath("/");
             response.addCookie(isAdminCookie);
         }

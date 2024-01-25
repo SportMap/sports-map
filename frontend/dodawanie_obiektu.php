@@ -12,13 +12,7 @@
 <body>
 
     <header>
-        <div class="side_menu" onclick="openMenu()">
-            <div class="beam animate"></div>
-            <div class="beam animate"></div>
-            <div class="beam-top hidden animate"></div>
-            <div class="beam-bottom hidden animate"></div>
-            <div class="short_beam animate"></div>
-        </div>
+        <div class="side_menu"></div>
         <div class="header_logo"></div>
         <div class="profile_icon"></div>
         <div class="profile_menu hidden">
@@ -470,6 +464,7 @@
     </div>
 
     <script src="script.js" type="application/javascript"></script>
+    <script src="profile_popup.js" type="application/javascript"></script>
 </body>
 
 </html>

@@ -12,7 +12,7 @@
 <body>
 
     <header>
-        <div class="side_menu">
+        <div class="side_menu" onclick="openMenu()">
         </div>
         <div class="header_logo"></div>
         <div class="profile_icon"></div>
@@ -44,71 +44,67 @@
             </div>
             
             <script>
+                var isAdmin = getCookie("isAdmin");
+
+                if(isAdmin == "true") {
+                    const btn4 = document.getElementById("btn-page4");
+                    btn4.style.display = "block";
+                }
+
                 function changeContent(pageId, buttonId) {
-                // Hide all pages
+
                 var pages = document.getElementsByClassName('page');
                 for (var i = 0; i < pages.length; i++) {
                     pages[i].style.display = 'none';
                 }
 
-                // Remove the active class from all buttons
                 var buttons = document.getElementsByClassName('tab-button');
                 for (var i = 0; i < buttons.length; i++) {
                     buttons[i].classList.remove('active');
                 }
 
-                // Show the selected page
                 document.getElementById(pageId).style.display = 'block';
-
-                // Add the active class to the clicked button
                 document.getElementById(buttonId).classList.add('active');
+            }
+
+            function getCookie(cookieName) {
+                var name = cookieName + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var cookieArray = decodedCookie.split(';');
+
+                for(var i = 0; i < cookieArray.length; i++) {
+                    var cookie = cookieArray[i];
+                    while (cookie.charAt(0) == ' ') {
+                        cookie = cookie.substring(1);
+                    }
+                    if (cookie.indexOf(name) == 0) {
+                        return cookie.substring(name.length, cookie.length);
+                    }
+                }
+                return null;
             }
             </script>
             <div class="main-container">
-            <div id="page1" class="page">
-                <input class="input" type="text" id="username" placeholder="Nazwa uzytkownika"></input>
-                <input class="input" type="password" id="password" placeholder="Hasło"></input>
-                <input class="input" type="password" id="password_new" placeholder="Powtórz nowe hasło"></input>
-                <button class="action-button">Zapisz</button>
-                <!-- <button class="action-button">Zgłoś błąd</button> -->
-            </div>
+                <div id="page1" class="page">
+                    <input class="input" type="text" id="username" placeholder="Nazwa uzytkownika" value="Kamil"></input>
+                    <input class="input" type="text" id="email" placeholder="Email" value="email@gmail.com"></input>
+                    <input class="input" type="password" id="password" placeholder="Hasło" value="******************"></input>
+                    <input class="input" type="password" id="password_new" placeholder="Powtórz nowe hasło"></input>
+                    <button class="action-button">Zapisz</button>
+                    <!-- <button class="action-button">Zgłoś błąd</button> -->
+                </div>
 
                 <div id="page2" class="page" style="display: none;">
                     <div id="content-wrapper">
 
                         <script>
-                            function getCookie(cookieName) {
-                                var name = cookieName + "=";
-                                var decodedCookie = decodeURIComponent(document.cookie);
-                                var cookieArray = decodedCookie.split(';');
-
-                                for(var i = 0; i < cookieArray.length; i++) {
-                                    var cookie = cookieArray[i];
-                                    while (cookie.charAt(0) == ' ') {
-                                        cookie = cookie.substring(1);
-                                    }
-                                    if (cookie.indexOf(name) == 0) {
-                                        return cookie.substring(name.length, cookie.length);
-                                    }
-                                }
-                                return null;
-                            }
+                            var userID = getCookie('userId');
 
                             document.addEventListener('DOMContentLoaded', function() {
-                                var userId = getCookie('userId');
-                                var username = getCookie('username');
-                                fetchEvents(userId);
-                                
-                                var moderatorButton = document.getElementById('btn-page4');
-                                if (document.cookie.includes('isAdmin=')) {
-                                    moderatorButton.style.display = 'block';
-                                } else {
-                                    moderatorButton.style.display = 'none';
-                                }
-                                document.getElementById('username').value = username;
+                                fetchEvents();
                             });
                         
-                            function fetchEvents(userID) {
+                            function fetchEvents() {
                                 fetch(`http://localhost:8080/events/interested/${userID}`)
                                     .then(response => response.json())
                                     .then(data => {
@@ -144,8 +140,9 @@
                                 `;
                                 return div;
                             }
-                        
+                            
                             function loadEventDetails(eventId) {
+                                let userID = getCookie('userId');
                                 fetch(`http://localhost:8080/events/detailed/interested/${userID}`)
                                     .then(response => response.json())
                                     .then(data => {
@@ -157,7 +154,7 @@
                                 const detailedEventHTML = `
                                     <div class="detailed-event">
                                         <button class="close-btn" onclick="closeDetailedView()">
-                                            <img src="Ikony/X.svg" alt="Close" />
+                                            <img src="../Ikony/X.svg" alt="Close" />
                                         </button>
 
                                         <img src="https://www.gry-online.pl/i/h/22/431209879.jpg" alt="Event Image" class="detailed-event-image">
@@ -177,17 +174,17 @@
                                                 </p>
 
                                                 <p class="detailed-event-creatorNickname-info">
-                                                    <img src="Ikony/user.svg" alt="Creator Avatar" class="detailed-event-avatar-info">
+                                                    <img src="../Ikony/user.svg" alt="Creator Avatar" class="detailed-event-avatar-info">
                                                     <span class="detailed-event-creatorNickname-text">${event.interestedPeople} osób zainteresowanych</span>
                                                 </p>
 
                                                 <p class="detailed-event-creatorNickname-info">
-                                                    <img src="Ikony/gps.svg" alt="Creator Avatar" class="detailed-event-avatar-info">
+                                                    <img src="../Ikony/gps.svg" alt="Creator Avatar" class="detailed-event-avatar-info">
                                                     <span class="detailed-event-creatorNickname-text">${event.sportObjectAddress.postalCode} ${event.sportObjectAddress.city} ${event.sportObjectAddress.street}</span>
                                                 </p>
 
                                                 <p class="detailed-event-creatorNickname-info">
-                                                    <img src="Ikony/clock.svg" alt="Creator Avatar" class="detailed-event-avatar-info">
+                                                    <img src="../Ikony/clock.svg" alt="Creator Avatar" class="detailed-event-avatar-info">
                                                     <span class="detailed-event-creatorNickname-text">Czas trwania: ${event.duration.hours} godzin</span>
                                                 </p>
 
@@ -216,7 +213,6 @@
                                 return `${endTime[3]}:${String(endTime[4]).padStart(2, '0')}`;
                             }
 
-                        
                             function toggleInterest(button) {
                             if (button.textContent === "Zainteresowany(a)") {
                                 button.textContent = "Zainteresuj się";
@@ -233,14 +229,13 @@
                    
                     <div id="created-content-wrapper">
                         <script>
-                            var userId = getCookie('userId');
-                            console.log(userId);
                     
                             document.addEventListener('DOMContentLoaded', function() {
-                                fetchCreatedEvents(userId);
+                                fetchCreatedEvents();
                             });
                     
-                            function fetchCreatedEvents(userID) {
+                            function fetchCreatedEvents() {
+                                let userID = getCookie('userId');
                                 fetch(`http://localhost:8080/events/created/${userID}`)
                                     .then(response => response.json())
                                     .then(data => {
@@ -288,7 +283,7 @@
                                 const detailedEventHTML = `
                                     <div class="created-detailed-event">
                                         <button class="created-close-btn" onclick="closeCreatedDetailedView()">
-                                            <img src="Ikony/X.svg" alt="Close" />
+                                            <img src="../Ikony/X.svg" alt="Close" />
                                         </button>
                     
                                         <img src="https://www.gry-online.pl/i/h/22/431209879.jpg" alt="Event Image" class="created-detailed-event-image">
@@ -307,17 +302,17 @@
                                                 </p>
                     
                                                 <p class="created-detailed-event-creatorNickname-info">
-                                                    <img src="Ikony/user.svg" alt="Creator Avatar" class="created-detailed-event-avatar-info">
+                                                    <img src="../Ikony/user.svg" alt="Creator Avatar" class="created-detailed-event-avatar-info">
                                                     <span class="created-detailed-event-creatorNickname-text">${event.interestedPeople} osób zainteresowanych</span>
                                                 </p>
                     
                                                 <p class="created-detailed-event-creatorNickname-info">
-                                                    <img src="Ikony/gps.svg" alt="Creator Avatar" class="created-detailed-event-avatar-info">
+                                                    <img src="../Ikony/gps.svg" alt="Creator Avatar" class="created-detailed-event-avatar-info">
                                                     <span class="created-detailed-event-creatorNickname-text">${event.sportObjectAddress.postalCode} ${event.sportObjectAddress.city} ${event.sportObjectAddress.street}</span>
                                                 </p>
                     
                                                 <p class="created-detailed-event-creatorNickname-info">
-                                                    <img src="Ikony/clock.svg" alt="Creator Avatar" class="created-detailed-event-avatar-info">
+                                                    <img src="../Ikony/clock.svg" alt="Creator Avatar" class="created-detailed-event-avatar-info">
                                                     <span class="created-detailed-event-creatorNickname-text">Czas trwania: ${event.duration.hours} godzin</span>
                                                 </p>
                     
@@ -345,9 +340,6 @@
                             }
                         </script>
                     </div>
-                    
-
-                    
                 </div>
 
                 <div id="page4" class="page" style="display: none;">
@@ -361,14 +353,14 @@
 
                         <div class="moderator-controls">
                             <button class="control-btn" onclick="previousPage()">
-                                <img class="leftArrow" src="Ikony/arrow.svg" alt="Previous" />
+                                <img class="leftArrow" src="../Ikony/arrow.svg" alt="Previous" />
                             </button>
                             <span id="currentPage">1</span> z <span id="totalPages">10</span>
                             <button class="control-btn" onclick="nextPage()">
-                                <img class="rightArrow" src="Ikony/arrow.svg" alt="Next" />
+                                <img class="rightArrow" src="../Ikony/arrow.svg" alt="Next" />
                             </button>
                             <button class="control-btn" onclick="reloadContent()">
-                            <img src="Ikony/reload.svg" alt="Reload" />
+                            <img src="../Ikony/reload.svg" alt="Reload" />
                             </button>
                         </div>
                         
@@ -376,19 +368,15 @@
                     
                     <div id="moderator-content-area">
                         <div id="moderatorPage1" class="moderator-content-page">
-                            <!-- Content for Obiekty -->
-
                             <div id="dropdown-container">
                                 <!-- Dropdowns will be dynamically inserted here -->
                             </div>
 
                             <script>
-
                                 let currentPage = 0;
                                 const pageSize = 7;
                                 const totalPagesElement = document.getElementById('totalPages');
                                 let totalPages = 0;
-
                                 document.addEventListener('DOMContentLoaded', function() {
                                     fetchComplexes(currentPage);
                                 });
@@ -398,9 +386,8 @@
                                         .then(response => response.json())
                                         .then(data => {
                                             const container = document.getElementById('dropdown-container');
-                                            container.innerHTML = ''; // Clear existing content
+                                            container.innerHTML = '';
 
-                                            // Update to iterate over the content array
                                             data.content.forEach(complex => {
                                                 createDropdown(complex, container);
                                             });
@@ -408,12 +395,11 @@
                                             totalPages = data.totalPages;
 
                                             setUpEventListeners();
-                                            updatePageDisplay(data.totalPages, pageNumber); // Pass totalPages and pageNumber to the function
+                                            updatePageDisplay(data.totalPages, pageNumber);
                                         });
                                 }
 
                                 function updatePageDisplay(totalPages, currentPage) {
-                                    // Update the total pages and current page in the UI
                                     document.getElementById('totalPages').textContent = totalPages;
                                     document.getElementById('currentPage').textContent = currentPage + 1; // +1 because pages are usually 1-indexed in UI
                                 }
@@ -434,6 +420,7 @@
 
                                 function reloadContent() {
                                     fetchComplexes(currentPage);
+                                    document.getElementById('currentPage').textContent = currentPage + 1;
                                 }
 
                                 function createDropdown(complex, container) {
@@ -455,7 +442,7 @@
                                     arrowBG.className = 'arrowBG';
 
                                     const img = document.createElement('img');
-                                    img.src = 'Ikony/arrow.svg';
+                                    img.src = '../Ikony/arrow.svg';
                                     img.alt = 'Expand';
                                     img.className = 'arrow';
 
@@ -468,33 +455,35 @@
                                     const content = document.createElement('div');
                                     content.className = 'dropdown-content';
                                     content.innerHTML = `
+                                        <img src="Photos/${complex.photo}">
+
                                         <h1>Szczegóły</h1>
                                         <div class="info-row"><span class="info-label">Nazwa obiektu:</span><span class="info-value">${complex.name}</span></div>
                                         <div class="info-row"><span class="info-label">Nawierzchnia:</span><span class="info-value">${complex.surface}</span></div>
                                         <div class="info-row"><span class="info-label">Kategoria:</span><span class="info-value">${complex.category}</span></div>
-                                        <div class="info-row"><span class="info-label">Strona internetowa:</span><span class="info-value">${complex.website}</span></div>
-                                        <div class="info-row"><span class="info-label">Numer telefonu:</span><span class="info-value">${complex.phoneNumber}</span></div>
+                                        <div class="info-row"><span class="info-label">Strona internetowa:</span><span class="info-value">${getDisplayData(complex.website)}</span></div>
+                                        <div class="info-row"><span class="info-label">Numer telefonu:</span><span class="info-value">${getDisplayData(complex.phoneNumber)}</span></div>
+
+                                        <h1>Opis</h1>
+                                        <div class="info-row"><span class="info-label">Opis:</span><span class="info-value">${complex.description}</span></div>
 
                                         <h1>Adres</h1>
                                         <div class="info-row"><span class="info-label">Miasto:</span><span class="info-value">${complex.address.city}</span></div>
-                                        <div class="info-row"><span class="info-label">Kod pocztowy:</span><span class="info-value">${complex.address.postalCode}</span></div>
-                                        <div class="info-row"><span class="info-label">Ulica:</span><span class="info-value">${complex.address.street}</span></div>
-                                        <div class="info-row"><span class="info-label">Nr budynku:</span><span class="info-value">${complex.address.buildingNumber}</span></div>
-                                        <div class="info-row"><span class="info-label">Nr lokalu:</span><span class="info-value">${complex.address.apartmentNumber}</span></div>
+                                        <div class="info-row"><span class="info-label">Kod pocztowy:</span><span class="info-value">${getDisplayData(complex.address.postalCode)}</span></div>
+                                        <div class="info-row"><span class="info-label">Ulica:</span><span class="info-value">${getDisplayData(complex.address.street)}</span></div>
+                                        <div class="info-row"><span class="info-label">Nr budynku:</span><span class="info-value">${getDisplayData(complex.address.buildingNumber)}</span></div>
+                                        <div class="info-row"><span class="info-label">Nr lokalu:</span><span class="info-value">${getDisplayData(complex.address.apartmentNumber)}</span></div>
 
                                         <h1>Godziny otwarcia</h1>
-                                        <div class="info-row"><span class="info-label">Poniedziałek:</span><span class="info-value">${complex.openingHours.monday}</span></div>
-                                        <div class="info-row"><span class="info-label">Wtorek:</span><span class="info-value">${complex.openingHours.tuesday}</span></div>
-                                        <div class="info-row"><span class="info-label">Środa:</span><span class="info-value">${complex.openingHours.wednesday}</span></div>
-                                        <div class="info-row"><span class="info-label">Czwartek:</span><span class="info-value">${complex.openingHours.thursday}</span></div>
-                                        <div class="info-row"><span class="info-label">Piątek:</span><span class="info-value">${complex.openingHours.friday}</span></div>
-                                        <div class="info-row"><span class="info-label">Sobota:</span><span class="info-value">${complex.openingHours.saturday}</span></div>
-                                        <div class="info-row"><span class="info-label">Niedziela:</span><span class="info-value">${complex.openingHours.sunday}</span></div>
+                                        <div class="info-row"><span class="info-label">Poniedziałek:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.monday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Wtorek:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.tuesday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Środa:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.wednesday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Czwartek:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.thursday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Piątek:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.friday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Sobota:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.saturday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Niedziela:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.sunday, complex)}</span></div>
 
-                                        <h1>Opis</h1>
-                                        <div class="info-row"><span class="info-label">Opis:</span><span class="info-value">${complex.id}fsdbfksdbfjksdbfjksdbfkdbfkjsdbfjkdsbfkjbdsfkjbdskfbsdjkfbsdkfbsjfbsdkfbfsdbfksdbfjksdbfjksdbfkdbfkjsdbfjkdsbfkjbdsfkjbdskfbsdjkfbsdkfbsjfbsdkfbfsdbfksdbfjksdbfjksdbfkdbfkjsdbfjkdsbfkjbdsfkjbdskfbsdjkfbsdkfbsjfbsdkfb</span></div>
-
-                                        <button>Usuń</button>
+                                        <button class="deleteButton">Usuń</button>
                                     `;
                                     dropdown.appendChild(content);
 
@@ -523,23 +512,228 @@
                               
                         </div>
                         <div id="moderatorPage2" class="moderator-content-page" style="display:none;">
-                            <!-- Content for Zgłoszenia -->
-                            Content for Zgłoszenia will go here.
+                            <div id="dropdown-container-approval">
+                                <!-- Dropdowns will be dynamically inserted here -->
+                            </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    fetchComplexesApproval(currentPage);
+                                });
+
+                                function fetchComplexesApproval(pageNumber) {
+                                    fetch(`http://localhost:8080/sport-complexes/admin/awaiting-approval?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            const container = document.getElementById('dropdown-container-approval');
+                                            container.innerHTML = '';
+
+                                            data.content.forEach(complex => {
+                                                createDropdownApproval(complex, container);
+                                            });
+
+                                            totalPages = data.totalPages;
+
+                                            setUpEventListenersApproval();
+                                            updatePageDisplayApproval(data.totalPages, pageNumber);
+                                        });
+                                }
+
+                                function updatePageDisplayApproval(totalPages, currentPage) {
+                                    document.getElementById('totalPages').textContent = totalPages;
+                                    document.getElementById('currentPage').textContent = currentPage + 1;
+                                }
+
+                                function createDropdownApproval(complex, container) {
+                                    const dropdown = document.createElement('div');
+                                    dropdown.className = 'dropdown';
+
+                                    const header = document.createElement('div');
+                                    header.className = 'dropdown-header';
+
+                                    const titleName = document.createElement('p');
+                                    titleName.className = 'titleDrop';
+                                    titleName.textContent = complex.name;
+
+                                    const titleCategory = document.createElement('p');
+                                    titleCategory.className = 'titleDrop';
+                                    titleCategory.textContent = complex.category;
+
+                                    const arrowBG = document.createElement('div');
+                                    arrowBG.className = 'arrowBG';
+
+                                    const img = document.createElement('img');
+                                    img.src = '../Ikony/arrow.svg';
+                                    img.alt = 'Expand';
+                                    img.className = 'arrow';
+
+                                    arrowBG.appendChild(img);
+                                    header.appendChild(titleName);
+                                    header.appendChild(titleCategory);
+                                    header.appendChild(arrowBG);
+                                    dropdown.appendChild(header);
+
+                                    const content = document.createElement('div');
+                                    content.className = 'dropdown-content';
+                                    content.innerHTML = `
+                                        <img src="Photos/${complex.photo}">
+
+                                        <h1>Szczegóły</h1>
+                                        <div class="info-row"><span class="info-label">Nazwa obiektu:</span><span class="info-value">${complex.name}</span></div>
+                                        <div class="info-row"><span class="info-label">Nawierzchnia:</span><span class="info-value">${complex.surface}</span></div>
+                                        <div class="info-row"><span class="info-label">Kategoria:</span><span class="info-value">${complex.category}</span></div>
+                                        <div class="info-row"><span class="info-label">Strona internetowa:</span><span class="info-value">${getDisplayData(complex.website)}</span></div>
+                                        <div class="info-row"><span class="info-label">Numer telefonu:</span><span class="info-value">${getDisplayData(complex.phoneNumber)}</span></div>
+
+                                        <h1>Opis</h1>
+                                        <div class="info-row"><span class="info-label">Opis:</span><span class="info-value">${complex.description}</span></div>
+
+                                        <h1>Adres</h1>
+                                        <div class="info-row"><span class="info-label">Miasto:</span><span class="info-value">${complex.address.city}</span></div>
+                                        <div class="info-row"><span class="info-label">Kod pocztowy:</span><span class="info-value">${getDisplayData(complex.address.postalCode)}</span></div>
+                                        <div class="info-row"><span class="info-label">Ulica:</span><span class="info-value">${getDisplayData(complex.address.street)}</span></div>
+                                        <div class="info-row"><span class="info-label">Nr budynku:</span><span class="info-value">${getDisplayData(complex.address.buildingNumber)}</span></div>
+                                        <div class="info-row"><span class="info-label">Nr lokalu:</span><span class="info-value">${getDisplayData(complex.address.apartmentNumber)}</span></div>
+
+                                        <h1>Godziny otwarcia</h1>
+                                        <div class="info-row"><span class="info-label">Poniedziałek:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.monday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Wtorek:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.tuesday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Środa:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.wednesday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Czwartek:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.thursday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Piątek:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.friday, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Sobota:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.saturda, complex)}</span></div>
+                                        <div class="info-row"><span class="info-label">Niedziela:</span><span class="info-value">${getDisplayOpeningHours(complex.openingHours.sunday, complex)}</span></div>
+
+                                        <button class="approveButton" onclick="approveComplex(${complex.id})">Zatwierdź</button>
+                                    `;
+                                    dropdown.appendChild(content);
+
+                                    updateTotalPagesApproval(totalPages);
+
+                                    container.appendChild(dropdown);
+                                }
+
+                                function approveComplex(complexId, complex) {
+                                    
+                                    console.log(complexId);
+                                    fetch(`http://localhost:8080/sport-complexes/admin/approve/${complexId}`, {
+                                        method: 'PATCH'
+                                    })
+                                    .then(response => {
+                                        if (response.ok) {
+                                            alert('Obiekt został zatwierdzony.');
+                                            reloadContent();
+                                        } else {
+                                            alert('Wystąpił błąd podczas zatwierdzania obiektu.');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        alert('Wystąpił błąd: ' + error);
+                                    });
+                                }
+
+                                function getDisplayData(displayedData) {
+                                    return displayedData ? displayedData : "Brak";
+                                }
+
+                                function getDisplayOpeningHours(dayHours, complex) {
+                                    if (complex.isOpen247) {
+                                        return "Otwarte 24/7";
+                                    }
+                                    if (!dayHours) {
+                                        return "Zamknięte";
+                                    }
+
+                                    const openTime = dayHours.openTime;
+                                    const closeTime = dayHours.closeTime;
+
+                                    const formattedOpenTime = `${openTime[0].toString().padStart(2, '0')}:${openTime[1].toString().padStart(2, '0')}`;
+                                    const formattedCloseTime = `${closeTime[0].toString().padStart(2, '0')}:${closeTime[1].toString().padStart(2, '0')}`;
+
+                                    return `${formattedOpenTime} - ${formattedCloseTime}`;
+                                }
+
+                                function updateTotalPagesApproval(newTotalPages) {
+                                    const totalPagesElement = document.getElementById('totalPages');
+                                    totalPagesElement.textContent = newTotalPages;
+                                }
+
+                                function setUpEventListenersApproval() {
+                                    const arrows = document.querySelectorAll('.dropdown-header .arrowBG');
+                                    arrows.forEach(arrow => {
+                                        arrow.addEventListener('click', function() {
+                                        const dropdownContent = this.parentNode.parentNode.querySelector('.dropdown-content');
+                                        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+                                        this.classList.toggle('rotate');
+                                });
+                                });
+                                }
+
+                            </script>
                         </div>
                     </div>
 
                     <script>
+                        let currentPage = 0;
+                        let totalPages = 0;
+                        const pageSize = 8;
+
                         function changeContentModerator() {
-                            window.onload = function() {
-                                changeContentModerator();
-                            };
-                            var selectedValue = document.getElementById('moderator-select').value;
-                            var pages = document.getElementsByClassName('moderator-content-page');
-                            for (var i = 0; i < pages.length; i++) {
+                            const selectedValue = document.getElementById('moderator-select').value;
+                            currentPage = 0;
+
+                            if (selectedValue === 'moderatorPage1') {
+                                fetchComplexes(currentPage);
+                            } else if (selectedValue === 'moderatorPage2') {
+                                fetchComplexesApproval(currentPage);
+                            }
+
+                            const pages = document.getElementsByClassName('moderator-content-page');
+                            for (let i = 0; i < pages.length; i++) {
                                 pages[i].style.display = 'none';
                             }
+
                             document.getElementById(selectedValue).style.display = 'block';
                         }
+
+                        function nextPage() {
+                            const selectedValue = document.getElementById('moderator-select').value;
+                            if (currentPage < totalPages - 1) {
+                                currentPage++;
+                                if (selectedValue === 'moderatorPage1') {
+                                    fetchComplexes(currentPage);
+                                } else if (selectedValue === 'moderatorPage2') {
+                                    fetchComplexesApproval(currentPage);
+                                }
+                            }
+                        }
+
+                        function previousPage() {
+                            const selectedValue = document.getElementById('moderator-select').value;
+                            if (currentPage > 0) {
+                                currentPage--;
+                                if (selectedValue === 'moderatorPage1') {
+                                    fetchComplexes(currentPage);
+                                } else if (selectedValue === 'moderatorPage2') {
+                                    fetchComplexesApproval(currentPage);
+                                }
+                            }
+                        }
+
+                        function reloadContent() {
+                            const selectedValue = document.getElementById('moderator-select').value;
+
+                            if (selectedValue === 'moderatorPage1') {
+                                fetchComplexes(currentPage);
+                            } else if (selectedValue === 'moderatorPage2') {
+                                fetchComplexesApproval(currentPage);
+                            }
+                        }
+
+                        document.addEventListener('DOMContentLoaded', function() {
+                            changeContentModerator();
+                        });
                     </script>
 
                     
@@ -553,49 +747,6 @@
         </div>
     </div>
    
-
-    <div class="logon-container hidden">
-        <div class="logon-avatar-background">
-            <div class="logon-avatar"></div>
-        </div>
-        <input type="text" placeholder="Email / Nazwa użytkownika" class="logon-container-input">
-        <input type="password" placeholder="Hasło" class="logon-container-input">
-        <div class='remember-container'>
-            <div class="radio">
-                <input type='radio' id='remember_me'>
-                <label for='remember_me'>Zapamiętaj mnie</label>
-            </div>
-            <a href="index.html" class="fixed">Zapomniałeś/aś hasła?</a>
-        </div>
-        <div class="logon-container-button">Zaloguj</div>
-        <div class="register-text-wrapper">
-            <a>Nie masz konta?</a>
-        </div>
-        <div class="logon-container-button">Zarejestruj się</div>
-    </div>
-
-    <div class="logon-container register-container hidden">
-        <div class="logon-avatar-background">
-            <div class="logon-avatar"></div>
-        </div>
-        <input type="text" placeholder="Nazwa użytkownika" class="logon-container-input">
-        <input type="email" placeholder="Email" class="logon-container-input">
-        <input type="email" placeholder="Powtórz email" class="logon-container-input">
-        <input type="password" placeholder="Hasło" class="logon-container-input">
-        <input type="password" placeholder="Powtórz hasło" class="logon-container-input">
-        <div class='remember-container'>
-            <div class="radio">
-                <input type='radio' id='accept_terms'>
-                <label for='accept_terms'>Akceptuję ogólne <a href="warunki.html">warunki użytkownika</a> i <a href="polityka.html">politykę prywatności</a></label>
-            </div>
-        </div>
-        <div class="logon-container-button">Zarejestruj się</div>
-        <div class="register-text-wrapper">
-            <a>Masz już konto?</a>
-        </div>
-        <div class="logon-container-button">Zaloguj się</div>
-    </div>
-
     <script src="script.js" type="application/javascript"></script>
     <script src="profile_popup.js" type="application/javascript"></script>
 </body>

@@ -38,7 +38,7 @@
 
 .complex_wrapper_img {
     width: 651px;
-    min-height: 325px;
+    height: 325px;
 }
 
 .complex_wrapper_img img {
@@ -251,7 +251,8 @@
 .complex_opinie_container_opinions {
     width: 650px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     row-gap: 25px;
     justify-content: center;
     align-content: flex-start;
@@ -458,4 +459,14 @@ hr {
     font-weight: 400;
     padding: 0 10px 0 10px;
     cursor: pointer;
+}
+
+.rating-container {
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+
+.activeStar {
+    color: #ffcc00;
 }

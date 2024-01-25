@@ -61,144 +61,140 @@ INSERT INTO sport_complexes (
 ;
 --godziny wyplute z chatu:
 -- Obiekt 1
+-- Sport Complex 1
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '06:00', '22:00', 1),
     (1, '06:00', '22:00', 1),
     (2, '06:00', '22:00', 1),
     (3, '06:00', '22:00', 1),
     (4, '06:00', '22:00', 1),
-    (5, '06:00', '22:00', 1),
-    (6, '07:00', '21:00', 1),
-    (7, '07:00', '21:00', 1);
+    (5, '07:00', '21:00', 1),
+    (6, '07:00', '21:00', 1);
 
--- Obiekt 2
+-- Sport Complex 2
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '08:00', '22:00', 2),
     (1, '08:00', '22:00', 2),
     (2, '08:00', '22:00', 2),
     (3, '08:00', '22:00', 2),
     (4, '08:00', '22:00', 2),
     (5, '08:00', '22:00', 2),
-    (6, '08:00', '22:00', 2),
-    (7, '08:00', '22:00', 2);
+    (6, '08:00', '22:00', 2);
 
--- Obiekt 3
+-- Sport Complex 3
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '08:00', '16:00', 3),
     (1, '08:00', '16:00', 3),
     (2, '08:00', '16:00', 3),
     (3, '08:00', '16:00', 3),
-    (4, '08:00', '16:00', 3),
-    (5, '08:00', '16:00', 3);
+    (4, '08:00', '16:00', 3);
 
--- Obiekt 5
+-- Sport Complex 5
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '10:00', '00:00', 5),
     (1, '10:00', '00:00', 5),
     (2, '10:00', '00:00', 5),
     (3, '10:00', '00:00', 5),
     (4, '10:00', '00:00', 5),
     (5, '10:00', '01:00', 5),
-    (6, '10:00', '01:00', 5),
-    (7, '10:00', '01:00', 5);
+    (6, '10:00', '01:00', 5);
 
--- Obiekt 6
+-- Sport Complex 6
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '10:00', '18:00', 6),
     (1, '10:00', '18:00', 6),
     (2, '10:00', '18:00', 6),
     (3, '10:00', '18:00', 6),
     (4, '10:00', '18:00', 6),
     (5, '10:00', '18:00', 6),
-    (6, '10:00', '18:00', 6),
-    (7, '10:00', '18:00', 6);
+    (6, '10:00', '18:00', 6);
 
--- Obiekt 8
+-- Sport Complex 8
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '00:00', '00:00', 8),
     (1, '00:00', '00:00', 8),
     (2, '00:00', '00:00', 8),
     (3, '00:00', '00:00', 8),
     (4, '00:00', '00:00', 8),
     (5, '00:00', '00:00', 8),
-    (6, '00:00', '00:00', 8),
-    (7, '00:00', '00:00', 8);
+    (6, '00:00', '00:00', 8);
 
--- Obiekt 9
+-- Sport Complex 9
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '05:30', '10:00', 9),
     (1, '05:30', '10:00', 9),
-    (1, '13:00', '21:00', 9),
     (2, '05:30', '10:00', 9),
-    (2, '13:00', '21:00', 9),
     (3, '05:30', '10:00', 9),
-    (3, '13:00', '21:00', 9),
     (4, '05:30', '10:00', 9),
-    (4, '13:00', '21:00', 9),
-    (5, '05:30', '10:00', 9),
-    (5, '13:00', '20:00', 9),
-    (6, '08:30', '13:30', 9),
-    (7, '08:30', '13:30', 9);
+    (5, '08:30', '13:30', 9),
+    (6, '08:30', '13:30', 9);
 
--- Obiekt 10
+-- Sport Complex 10
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (1, '12:00', '20:00', 10),
     (2, '12:00', '20:00', 10),
     (3, '12:00', '20:00', 10),
     (4, '12:00', '20:00', 10),
-    (5, '12:00', '20:00', 10),
-    (6, '12:00', '20:00', 10);
+    (5, '12:00', '20:00', 10);
 
--- Obiekt 11
+-- Sport Complex 11
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '00:00', '00:00', 11),
     (1, '00:00', '00:00', 11),
     (2, '00:00', '00:00', 11),
     (3, '00:00', '00:00', 11),
     (4, '00:00', '00:00', 11),
     (5, '00:00', '00:00', 11),
-    (6, '00:00', '00:00', 11),
-    (7, '00:00', '00:00', 11);
+    (6, '00:00', '00:00', 11);
 
--- Obiekt 12
+-- Sport Complex 12
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '07:30', '15:30', 12),
     (1, '07:30', '15:30', 12),
     (2, '07:30', '15:30', 12),
     (3, '07:30', '15:30', 12),
-    (4, '07:30', '15:30', 12),
-    (5, '07:30', '15:30', 12);
+    (4, '07:30', '15:30', 12);
 
--- Obiekt 13
+-- Sport Complex 13
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
+    (0, '07:00', '22:00', 13),
     (1, '07:00', '22:00', 13),
     (2, '07:00', '22:00', 13),
     (3, '07:00', '22:00', 13),
     (4, '07:00', '22:00', 13),
-    (5, '07:00', '22:00', 13),
-    (6, '09:00', '21:00', 13),
-    (7, '09:00', '21:00', 13);
+    (5, '09:00', '21:00', 13),
+    (6, '09:00', '21:00', 13);
 
--- Obiekt 15
+-- Sport Complex 15
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
-    (1, '16:00', '22:00', 15),  -- Poniedziałek
-    (2, '16:00', '22:00', 15),  -- Wtorek
-    (3, '16:00', '22:00', 15),  -- Środa
-    (4, '16:00', '22:00', 15),  -- Czwartek
-    (5, '10:00', '22:00', 15),  -- Piątek
-    (6, '10:00', '22:00', 15),  -- Sobota
-    (7, '10:00', '22:00', 15);  -- Niedziela
+    (0, '16:00', '22:00', 15),  -- Monday
+    (1, '16:00', '22:00', 15),  -- Tuesday
+    (2, '16:00', '22:00', 15),  -- Wednesday
+    (3, '16:00', '22:00', 15),  -- Thursday
+    (4, '10:00', '22:00', 15),  -- Friday
+    (5, '10:00', '22:00', 15),  -- Saturday
+    (6, '10:00', '22:00', 15);  -- Sunday
 
--- Obiekt 18
+-- Sport Complex 18
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
 VALUES
-    (1, '13:00', '21:00', 18),  -- Poniedziałek
-    (2, '13:00', '21:00', 18),  -- Wtorek
-    (3, '13:00', '21:00', 18),  -- Środa
-    (4, '13:00', '21:00', 18),  -- Czwartek
-    (5, '13:00', '21:00', 18);  -- Piątek
+    (0, '13:00', '21:00', 18),  -- Monday
+    (1, '13:00', '21:00', 18),  -- Tuesday
+    (2, '13:00', '21:00', 18),  -- Wednesday
+    (3, '13:00', '21:00', 18),  -- Thursday
+    (4, '13:00', '21:00', 18);  -- Friday
 
 
 INSERT INTO users (username, email, password, authority, avatar)

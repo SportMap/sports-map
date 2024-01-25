@@ -39,6 +39,7 @@
 
     <div id="successMessage">Zalogowano pomyślnie!</div>
     <div id="successMessageReg">Zarejestrowano pomyślnie!</div>
+    <div id="successMessageOpinion">Opinia dodana! Odśwież obiekt aby zobaczyć</div>
     <div class="map_container">
         <div id="map" class="map"></div>
     </div>
@@ -95,7 +96,6 @@
         <div class="logon-container-button" onclick="goToLoginBox()">Zaloguj się</div>
     </div>
 
-    
     <script src="login_register_engine.js" type="application/javascript"></script>
     <script src="profile_popup.js" type="application/javascript"></script>
     <script src="complex_wrapper_engine.js" type="application/javascript"></script>
