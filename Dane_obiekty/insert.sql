@@ -69,7 +69,7 @@ INSERT INTO sport_complexes (
 (16, 'Stadion im. Zbigniewa Podleckiego', 'Początki żużla w Gdańsku sięgają pierwszych lat powojennych. Pierwszym obiektem z prawdziwego zdarzenia był stadion przy ul. Marynarki Polskiej. Obiekt, który wówczas służył również piłkarzom, teraz jest tylko wykorzystywany przez futbolistów Polonii Gdańsk. ', 'https://www.wybrzezegdansk.pl/stadion', 'TRAWA', 'PIŁKA_NOŻNA', '54.34615', '18.67157', '16', '1', '16.jpg', '58 346 30 27', 'APPROVED'),
 (17, 'KS Polonia', 'Polski klub piłkarski z siedzibą w Gdańsku, powstały 27 września 1945. Obecnie występuje w rozgrywkach Klasy okręgowej w Grupie Gdańskiej I', 'http://www.90minut.pl/skarb.php?id_klub=309&id_sezon=', 'TRAWA', 'PIŁKA_NOŻNA', '54.37396', '18.63485', '17', '1', '17.jpg', '795003803', 'APPROVED'),
 (18, 'FitYard', 'FitYard, kameralna siłownia dla ludzi lubiących przyjemną atmosferę i spokój. Na wyposażeniu profesjonalny sprzęt z pomocą którego zrobisz co chcesz, a nawet więcej.', 'https://fityard.pl/', 'DREWNIANA_PODŁOGA', 'SPORTY_SIŁOWE', '54.37211', '18.63409', '18', '0', '18.jpg', '48506602995', 'APPROVED'),
-(19, 'Pomorskie Centrum Hokejowe', 'Profesjonalne treningi hokejowe oraz ostrzenie łyżew optymalizowane pod wagę sportowca. Hala z lodowiskiem syntetycznym o wymiarach 8x24m pozwalającym rozgrywać mecze 3x3 plus bramkarze.', 'https://centrumhokejowe.pl/', 'LÓD', 'LYŻWIARSTWO', '54.37574', '18.63453', '19', '1', '19.jpg', '48504796999', 'APPROVED'),
+(19, 'Pomorskie Centrum Hokejowe', 'Profesjonalne treningi hokejowe oraz ostrzenie łyżew optymalizowane pod wagę sportowca. Hala z lodowiskiem syntetycznym o wymiarach 8x24m pozwalającym rozgrywać mecze 3x3 plus bramkarze.', 'https://centrumhokejowe.pl/', 'LÓD', 'LYŻWIARSTWO', '54.37574', '18.63453', '19', '0', '19.jpg', '48504796999', 'APPROVED'),
 (20, 'Siłownia zewnętrzna', 'Siłownia zewnętrzna', 'brak', 'TRAWA', 'SPORTY_SIŁOWE', '54.34660', '18.64269', '20', '1', '20.jpg', '-', 'APPROVED'),
 (21, 'Boiska do koszykówki', 'Boiska do koszykówki', 'brak', 'SZTUCZNA_TRAWA', 'KOSZYKÓWKA', '54.34567', '18.64267', '21', '1', '21.jpg', '-', 'APPROVED'),
 (22, 'Pływalnia Chełm', 'Pływalnia CHEŁM przy ul. Chałubińskiego na gdańskim Chełmie jest ważnym ośrodkiem rekreacyjnym na mapie miasta. Już od 18 lat służy gdańszczanom, jako kompleks basenów o szerokim profilu działalności.Jest czynna przez 7 dni w tygodniu od godzin wczesnorannych, aż do godziny 22. Cieszy się bardzo dużą popularnością użytkowników w różnym wieku, ma opinię jednej z najlepszych w Gdańsku. Korzystają z niej zarówno klienci indywidualni, jak też zorganizowane grupy. W ciągu dnia do użytkowników pływalni należą szkoły miasta Gdańska. Dzieci i młodzież pod okiem instruktorów i nauczycieli oswajają się z wodą oraz doskonalą umiejętności pływackie. Dodatkowo, podczas ferii zimowych, GOS zaprasza młodych mieszkańców Gdańska na zajęcia, za które uczestnicy płacą zaledwie jedną złotówkę.', 'https://plywalniegdansk.pl/plywalnia-chelm/', 'TARTAN', 'PŁYWANIE', '54.33968', '18.62087', '22', '0', '22.jpg', '58 320 74 31', 'APPROVED'),
@@ -373,6 +373,17 @@ VALUES
     (2, '13:00', '21:00', 18),  -- Wednesday
     (3, '13:00', '21:00', 18),  -- Thursday
     (4, '13:00', '21:00', 18);  -- Friday
+
+-- Sport Complex 19
+INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
+VALUES
+    (0, '07:00', '23:00', 19),
+    (1, '07:00', '23:00', 19),
+    (2, '07:00', '23:00', 19),
+    (3, '07:00', '23:00', 19),
+    (4, '07:00', '23:00', 19),
+    (5, '07:00', '23:00', 19),
+    (6, '07:00', '23:00', 19);
 
 -- Sport Complex 22
 INSERT INTO opening_hours (day_of_week, opening_time, closing_time, sport_complex_id)
