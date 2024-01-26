@@ -4,7 +4,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="logon-box-style.css">
     <link rel="stylesheet" href="dodawanie_obiektu.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
@@ -107,9 +110,37 @@
                     </div>
 
                     <div class="row">
+                    <div id="mapid" style="width: 95%; height: 200px; margin-left:2.5%; margin-bottom: 10px; border-radius: 10px;"></div>
                         <input class="input" type="text" id="complex-latitude" placeholder="Szerokość geograficzna" required>
-                        <input class="input" type="text" id="complex-longitude" placeholder="Długość geograficzna" required>
+                    <input class="input" type="text" id="complex-longitude" placeholder="Długość geograficzna" required>
                     </div>
+
+                    <script>
+                        // Initialize the map
+                        var map = L.map('mapid').setView([54.35245, 18.64799], 16);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    var marker;
+
+                    function onMapClick(e) {
+                        var lat = e.latlng.lat.toFixed(5);
+                        var lng = e.latlng.lng.toFixed(5);
+
+                        document.getElementById('complex-latitude').value = lat;
+                        document.getElementById('complex-longitude').value = lng;
+
+                        if (marker) {
+                        map.removeLayer(marker);
+                        }
+
+                        marker = L.marker([lat, lng]).addTo(map);
+                    }
+
+                    map.on('click', onMapClick);
+                    </script>
 
                     <p class="title-main">Godziny otwarcia:</p>
                     <label class="weekdays">Dostępność:</label>
@@ -413,54 +444,11 @@
                 
             
                 <div class="footer">
-                    <a href="index.html">Wróć do strony głównej</a>
+                    <a href="index.php">Wróć do strony głównej</a>
                 </div>
             </div>
 
         </div>
-    </div>
-   
-
-    <div class="logon-container hidden">
-        <div class="logon-avatar-background">
-            <div class="logon-avatar"></div>
-        </div>
-        <input type="text" placeholder="Email / Nazwa użytkownika" class="logon-container-input">
-        <input type="password" placeholder="Hasło" class="logon-container-input">
-        <div class='remember-container'>
-            <div class="radio">
-                <input type='radio' id='remember_me'>
-                <label for='remember_me'>Zapamiętaj mnie</label>
-            </div>
-            <a href="index.html" class="fixed">Zapomniałeś/aś hasła?</a>
-        </div>
-        <div class="logon-container-button">Zaloguj</div>
-        <div class="register-text-wrapper">
-            <a>Nie masz konta?</a>
-        </div>
-        <div class="logon-container-button">Zarejestruj się</div>
-    </div>
-
-    <div class="logon-container register-container hidden">
-        <div class="logon-avatar-background">
-            <div class="logon-avatar"></div>
-        </div>
-        <input type="text" placeholder="Nazwa użytkownika" class="logon-container-input">
-        <input type="email" placeholder="Email" class="logon-container-input">
-        <input type="email" placeholder="Powtórz email" class="logon-container-input">
-        <input type="password" placeholder="Hasło" class="logon-container-input">
-        <input type="password" placeholder="Powtórz hasło" class="logon-container-input">
-        <div class='remember-container'>
-            <div class="radio">
-                <input type='radio' id='accept_terms'>
-                <label for='accept_terms'>Akceptuję ogólne <a href="warunki.html">warunki użytkownika</a> i <a href="polityka.html">politykę prywatności</a></label>
-            </div>
-        </div>
-        <div class="logon-container-button">Zarejestruj się</div>
-        <div class="register-text-wrapper">
-            <a>Masz już konto?</a>
-        </div>
-        <div class="logon-container-button">Zaloguj się</div>
     </div>
 
     <script src="script.js" type="application/javascript"></script>

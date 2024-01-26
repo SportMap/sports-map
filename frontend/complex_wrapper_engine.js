@@ -152,6 +152,35 @@ function print_complex_opinion_input(container, complexId) {
     container.appendChild(opinionDiv);
 }
 
+function join_event(eventId) {
+    if(getCookie('userId') != null) {
+        var userId = parseInt(getCookie('userId'), 10);
+        const data = {
+            userId: userId,
+            eventId: eventId
+        };
+    
+        console.log('Sending POST request with data:', data);
+    
+        fetch('http://localhost:8080/events/join', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            var eventButton = document.getElementById('event_button_x');
+            eventButton.innerHTML = "Dołączono!";
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+}
+
 function get_complex_opinions(id, container) {
     var url_address = "http://localhost:8080/reviews/"+id;
     var settings = {
@@ -240,8 +269,7 @@ function get_complex_events(id, container) {
                                     <div class='event_info_title'>${event.name}</div>
                                     <div class='event_info_grey'>${event.interested_people} osób zainteresowanych</div>
                                     <div class='event_button_wrapper'>
-                                        <div class='event_button'>Zainteresowany/a</div>
-                                        <a href='event.html?event=${event.sportObjectAddress.id}'><div class='event_button'>Więcej</div></a>
+                                        <div class='event_button' onclick='join_event(${event.id})' id='event_button_x'>Zainteresowany/a</div>
                                     </div>
                                 </div>`;
             container.appendChild(eventDiv);

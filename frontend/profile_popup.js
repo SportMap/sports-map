@@ -26,6 +26,19 @@ function deleteAllCookies() {
     }
 }
 
+function goToAddComplex() {
+    window.location.href = "dodawanie_obiektu.php";
+}
+
+function print_add_event_button() {
+    const eventButton = document.createElement("div");
+    eventButton.classList.add("add_complex");
+    eventButton.innerHTML = "+";
+    eventButton.addEventListener('click', goToAddComplex);
+    var mapBox = document.getElementsByClassName("map_container")[0];
+    mapBox.appendChild(eventButton);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     if (document.cookie.includes('username=')) {
         const profileMenuLoginButton = document.getElementById("login");
@@ -67,6 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
         profileMenuBox.appendChild(logoutButton);
         profileMenuBoxLink.insertAdjacentElement("beforebegin", profileButton);
         profileMenuBoxLink.insertAdjacentElement("beforebegin", logoutButton);
+
+        print_add_event_button();
     }
 
     else {

@@ -36,6 +36,7 @@
             </div>
 
             <div class="main-container">
+                <div id='addEventSuccess'>Pomyślnie dodano wydarzenie! Za chwilę zostaniesz przekierowany na stronę główną.</div>
 
                 <div id="add-sport-complex" class="page">
                     <div id="image-upload-container" class="image-upload-container">
@@ -125,6 +126,13 @@
                         .then(response => response.json())
                         .then(data => {
                             console.log('Success:', data);
+                            var successBox = document.getElementById('addEventSuccess');
+                            successBox.style.display = 'block';
+                            setTimeout(() => {
+                                document.getElementById('addEventSuccess').style.display = 'none';
+                                window.location.href = 'index.php';
+                            }, 2000);
+                            
                         })
                         .catch((error) => {
                             console.error('Error:', error);
