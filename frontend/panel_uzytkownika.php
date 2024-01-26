@@ -338,6 +338,24 @@
                             function formatDateEnd(endTime) {
                                 return `${endTime[3]}:${String(endTime[4]).padStart(2, '0')}`;
                             }
+
+                            function changeContentModerator() {
+                            const selectedValue = document.getElementById('moderator-select').value;
+                            currentPage = 0;
+
+                            if (selectedValue === 'moderatorPage1') {
+                                fetchComplexes(currentPage);
+                            } else if (selectedValue === 'moderatorPage2') {
+                                fetchComplexesApproval(currentPage);
+                            }
+
+                            const pages = document.getElementsByClassName('moderator-content-page');
+                            for (let i = 0; i < pages.length; i++) {
+                                pages[i].style.display = 'none';
+                            }
+
+                            document.getElementById(selectedValue).style.display = 'block';
+                        }
                         </script>
                     </div>
                 </div>
@@ -455,7 +473,7 @@
                                     const content = document.createElement('div');
                                     content.className = 'dropdown-content';
                                     content.innerHTML = `
-                                        <img src="Photos/${complex.photo}">
+                                        <img src="zdjecia/${complex.photo}">
 
                                         <h1>Szczegóły</h1>
                                         <div class="info-row"><span class="info-label">Nazwa obiektu:</span><span class="info-value">${complex.name}</span></div>
@@ -679,23 +697,7 @@
                         let totalPages = 0;
                         const pageSize = 8;
 
-                        function changeContentModerator() {
-                            const selectedValue = document.getElementById('moderator-select').value;
-                            currentPage = 0;
-
-                            if (selectedValue === 'moderatorPage1') {
-                                fetchComplexes(currentPage);
-                            } else if (selectedValue === 'moderatorPage2') {
-                                fetchComplexesApproval(currentPage);
-                            }
-
-                            const pages = document.getElementsByClassName('moderator-content-page');
-                            for (let i = 0; i < pages.length; i++) {
-                                pages[i].style.display = 'none';
-                            }
-
-                            document.getElementById(selectedValue).style.display = 'block';
-                        }
+                        
 
                         function nextPage() {
                             const selectedValue = document.getElementById('moderator-select').value;

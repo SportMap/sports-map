@@ -437,7 +437,7 @@ function open_complex_wrapper(id) {
                                     <div class='main_info'><img src='markup.svg'>"+formattedData.address.postalCode+" "+formattedData.address.city+", "+formattedData.address.street+" "+formattedData.address.buildingNumber+"</div> \
                                     <div class='main_info_opening_hours_container'><img src='clock.svg'>";
 
-        if(formattedData.isOpen247) {
+        if(formattedData.isOpen247 == true) {
             complex_wrapper = complex_wrapper + "<div class='main_info_opening_hours'><g> Otwarte 24/7</g></div>";
         }
         else {
