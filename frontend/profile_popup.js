@@ -27,7 +27,7 @@ function deleteAllCookies() {
 }
 
 function goToAddComplex() {
-    window.location.href = "dodawanie_obiektu.html";
+    window.location.href = "add_sport_complex.html";
 }
 
 function print_add_event_button() {
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         profileButton.classList.add("button");
         profileButton.textContent = "Profil";
         profileButton.addEventListener("click", function() {
-            window.location.href = "panel_uzytkownika.html";
+            window.location.href = "user_dashboard.html";
         });
 
         var logoutButton = document.createElement("div");

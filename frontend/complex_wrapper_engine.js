@@ -486,7 +486,7 @@ function open_complex_wrapper(id) {
                                 <div class='complex_wrapper_menu_container complex_wydarzenia_container hidden'>";
         if(getCookie("userId") != null) {
             complex_wrapper = complex_wrapper + "<div class='complex_wydarzenia_container_add'> \
-                                                    <a href="+formattedData.id+"'dodawanie_wydarzenia.html?obiekt='><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
+                                                    <a href="+formattedData.id+"'add_event.html?obiekt='><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
                                                 </div>";
         }
                                     
