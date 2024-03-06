@@ -26,6 +26,15 @@ services:
     depends_on:
       db:
         condition: service_healthy
+  nginx:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      spring-app:
+        condition: service_started
 
 
 volumes:
