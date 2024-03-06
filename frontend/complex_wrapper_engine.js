@@ -409,7 +409,7 @@ function open_complex_wrapper(id) {
         console.log(formattedData.openingHours);
         var complex_wrapper = "<div class='complex_wrapper'> \
                                 <div class='complex_wrapper_img'> \
-                                    <img src='zdjecia/"+formattedData.photo+"'> \
+                                    <img src="+formattedData.photo+"'../photos/zdjecia/'> \
                                     <div class='exit_button' onclick='exit_from_complex_wrapper()'> \
                                         <img src='x_letter.svg'> \
                                     </div> \
