@@ -32,6 +32,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
     depends_on:
       spring-app:
         condition: service_started
