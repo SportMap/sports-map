@@ -27,9 +27,7 @@ services:
       db:
         condition: service_healthy
   nginx:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: nginx:1.25.4-alpine
     ports:
       - "80:80"
     volumes:
@@ -37,7 +35,6 @@ services:
     depends_on:
       spring-app:
         condition: service_started
-
 
 volumes:
   postgres_data:

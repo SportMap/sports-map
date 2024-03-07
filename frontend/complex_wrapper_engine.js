@@ -409,7 +409,7 @@ function open_complex_wrapper(id) {
         console.log(formattedData.openingHours);
         var complex_wrapper = "<div class='complex_wrapper'> \
                                 <div class='complex_wrapper_img'> \
-                                    <img src="+formattedData.photo+"'../photos/zdjecia/'> \
+                                    <img src='./photos/"+formattedData.photo+"'> \
                                     <div class='exit_button' onclick='exit_from_complex_wrapper()'> \
                                         <img src='x_letter.svg'> \
                                     </div> \
@@ -486,7 +486,7 @@ function open_complex_wrapper(id) {
                                 <div class='complex_wrapper_menu_container complex_wydarzenia_container hidden'>";
         if(getCookie("userId") != null) {
             complex_wrapper = complex_wrapper + "<div class='complex_wydarzenia_container_add'> \
-                                                    <a href="+formattedData.id+"'add_event.html?obiekt='><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
+                                                    <a href='add_event.html?obiekt="+formattedData.id+"'><div class='add_button'>+ Utwórz nowe wydarzenie</div></a> \
                                                 </div>";
         }
                                     
