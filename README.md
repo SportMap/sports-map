@@ -18,7 +18,7 @@ This group project was undertaken as part of a university course, with the goal 
 - Development: **Docker Compose** for easy project setup 
 ## Documentation
 
-The project comes with detailed documentation, all part of the course work. You'll find diagrams, pictures, and system requirements in the /docs folder, all in Polish. We put this together to practice how real-world project discussions and planning with a client might go.
+The project comes with detailed documentation, all part of the course work. You'll find diagrams, pictures, and system requirements in the [/docs](docs) folder, all in Polish. We put this together to practice how real-world project discussions and planning with a client might go.
 
 ## Development Methodology
 Adopting the Scrum methodology, the development process was structured around 2-week sprints. Each sprint review was conducted in front of our tutor, demonstrating our progress and receiving valuable feedback. The Agile board, is accessible in the project's GitHub Projects tab.
