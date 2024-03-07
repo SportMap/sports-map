@@ -32,3 +32,8 @@ To run the project locally:
 - Access the application through your web browser at the `http://localhost:80/` address.
 
 ## Screenshots
+![Screenshot_20240307_141016](https://github.com/SportMap/sports-map/assets/87483058/fb30ce10-f44c-4578-9a4d-217e99bb109c)
+![Screenshot_20240307_141458](https://github.com/SportMap/sports-map/assets/87483058/204483c5-3f11-4ee6-affc-453ca7a4ded8)
+![Screenshot_20240307_141735](https://github.com/SportMap/sports-map/assets/87483058/b0dd22ec-80ed-4146-b5be-4f2e821d7485)
+![Screenshot_20240307_141831-1](https://github.com/SportMap/sports-map/assets/87483058/3cbf8f00-9d13-4b35-b89e-79ba3fb1ccbe)
+![Screenshot_20240307_142155](https://github.com/SportMap/sports-map/assets/87483058/9d12c150-6393-4bf8-bf3d-1ef96bdcc159)
